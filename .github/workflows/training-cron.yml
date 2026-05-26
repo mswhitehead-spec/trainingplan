@@ -21,11 +21,16 @@ on:
   workflow_dispatch:
     inputs:
       send_email:
-        description: 'Also send the daily email (default: no)'
+        description: 'Also send the daily email'
         required: false
-        default: 'false'
-        type: choice
-        options: ['true', 'false']
+        default: false
+        type: boolean
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/training-cron.yml'
+      - 'scripts/**'
+      - 'src/**'
 
 # Allow the job to commit state changes back.
 permissions:
@@ -77,7 +82,7 @@ jobs:
 
       - name: Send morning email
         # Only at the 05:00 CEST slot, or when manually dispatched with send_email=true.
-        if: github.event.schedule == '0 3 * * *' || github.event.inputs.send_email == 'true'
+        if: github.event.schedule == '0 3 * * *' || github.event.inputs.send_email == true
         env:
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: python scripts/send_daily_email.py
