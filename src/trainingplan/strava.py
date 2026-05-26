@@ -129,11 +129,16 @@ def get_client(client_id: str | None = None, client_secret: str | None = None) -
             save_tokens(access, refresh, expires)
             tok = load_tokens()
         else:
-            # Cloud run — no writable persistent disk. Warn if Strava rotated
+            # Cloud run — no writable persistent disk. Notify if Strava rotated
             # the refresh token so the user knows to update the GH Secret.
+            # DO NOT print the new token value here — workflow logs are public
+            # on public repos, and a rotated token is NOT yet registered as a
+            # Secret, so GitHub's log redaction wouldn't catch it.
             if refresh != tok["refresh_token"]:
-                print("WARNING: Strava rotated the refresh token. Update the "
-                      "STRAVA_REFRESH_TOKEN GitHub Secret to:", refresh)
+                print("WARNING: Strava rotated the refresh token. The new "
+                      "value is in this process's memory only; the next cron "
+                      "run will fail until you locally run scripts/auth_strava.py "
+                      "and update the STRAVA_REFRESH_TOKEN GitHub Secret.")
             tok = {
                 "access_token": access,
                 "refresh_token": refresh,
