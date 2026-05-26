@@ -74,6 +74,13 @@ jobs:
         # propose.py is offline (no Strava needed; reads plan.yaml only).
         run: python scripts/propose.py
 
+      - name: Auto-apply proposal
+        # Accepts every proposed change without prompting.
+        # adapt.py filters out changes already applied to a session (same
+        # rule_id + field_path), so the same rule never fires twice on the
+        # same session target. No-op if there are no pending changes.
+        run: python scripts/apply_proposal.py --yes
+
       - name: Regenerate plan.ics
         run: python scripts/publish_calendar.py
 

@@ -89,20 +89,26 @@ sessions:
 - id: 2026-05-26_tue_easy-run
   date: '2026-05-26'
   discipline: running
-  type: easy_run
+  type: recovery
   targets:
     duration_min: 30
     distance_km: 5
     avg_hr_zone: Z2
   notes: Easy conversational pace. Not a workout — general aerobic only.
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: duration_overreach
+    field: type
+    from: easy_run
+    to: recovery
+    reason: last session (2026-05-25) overreached planned duration by 355% — supercompensation needs a
+      recovery day (Friel CTB Ch. 6).
 - id: 2026-05-27_wed_z2-endurance
   date: '2026-05-27'
   discipline: cycling
-  type: endurance_z2
+  type: recovery
   targets:
     duration_min: 90
     distance_km_min: 30
@@ -110,10 +116,28 @@ sessions:
     avg_hr_range: *id001
   notes: 'Steady Z2 for 90 min. Practice the race fueling: 60 g carb/hr starting from minute 20. Don''t
     go above Z2 even on climbs.'
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: duration_overreach
+    field: type
+    from: endurance_z2
+    to: recovery
+    reason: last session (2026-05-25) overreached planned duration by 355% — supercompensation needs a
+      recovery day (Friel CTB Ch. 6).
+  - rule_id: duration_overreach
+    field: type
+    from: endurance_z2
+    to: recovery
+    reason: last session (2026-05-25) overreached planned duration by 355% — supercompensation needs a
+      recovery day (Friel CTB Ch. 6).
+  - rule_id: duration_overreach
+    field: type
+    from: endurance_z2
+    to: recovery
+    reason: last session (2026-05-25) overreached planned duration by 355% — supercompensation needs a
+      recovery day (Friel CTB Ch. 6).
 - id: 2026-05-28_thu_strength
   date: '2026-05-28'
   discipline: strength
@@ -144,7 +168,7 @@ sessions:
   discipline: cycling
   type: long_endurance
   targets:
-    duration_min: 240
+    duration_min: 180
     distance_km: 80
     avg_hr_zone: Z2
     avg_hr_range: *id001
@@ -162,10 +186,16 @@ sessions:
 
     Bail criteria: if HR drift exceeds +10% in the last hour, or you can''t maintain Z2 power on flats,
     cut the ride short. The point is time-on-bike, not heroics.'
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: duration_overreach
+    field: targets.duration_min
+    from: 240
+    to: 180
+    reason: overreached by 355% on 2026-05-25 — long ride stimulus already absorbed; trim next long by
+      25% to avoid stacking fatigue.
 - id: 2026-05-31_sun_recovery-walk
   date: '2026-05-31'
   discipline: walking

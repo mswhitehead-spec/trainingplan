@@ -7,7 +7,7 @@ X-WR-CALNAME:Training plan
 X-WR-CALDESC:Auto-generated training schedule
 BEGIN:VEVENT
 UID:2026-05-25_mon_easy-spin@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
 SUMMARY:[Bike] easy endurance · 45m · Z2
 DESCRIPTION:Session: 2026-05-25_mon_easy-spin\nType: easy_endurance  ·  St
@@ -22,32 +22,32 @@ DTEND:20260525T074500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-05-26_tue_easy-run@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
-SUMMARY:[Run] easy run · 30m · 5km · Z2
-DESCRIPTION:Session: 2026-05-26_tue_easy-run\nType: easy_run  ·  Status: p
- lanned\n\nTargets:\n  - duration_min: 30\n  - distance_km: 5\n  - avg_hr_z
- one: Z2\n\nNotes:\nEasy conversational pace. Not a workout — general aer
- obic only.
+SUMMARY:[Run] recovery · 30m · 5km · Z2
+DESCRIPTION:Session: 2026-05-26_tue_easy-run\nType: recovery  ·  Status: a
+ djusted\n\nTargets:\n  - duration_min: 30\n  - distance_km: 5\n  - avg_hr_
+ zone: Z2\n\nNotes:\nEasy conversational pace. Not a workout — general ae
+ robic only.
 DTSTART:20260526T070000
 DTEND:20260526T073000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-05-27_wed_z2-endurance@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
-SUMMARY:[Bike] endurance z2 · 1h30m · 30km+ · Z2
-DESCRIPTION:Session: 2026-05-27_wed_z2-endurance\nType: endurance_z2  ·  S
- tatus: planned\n\nTargets:\n  - duration_min: 90\n  - distance_km_min: 30\
- n  - avg_hr_zone: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nSteady Z2 f
- or 90 min. Practice the race fueling: 60 g carb/hr starting from minute 20
- . Don't go above Z2 even on climbs.
+SUMMARY:[Bike] recovery · 1h30m · 30km+ · Z2
+DESCRIPTION:Session: 2026-05-27_wed_z2-endurance\nType: recovery  ·  Statu
+ s: adjusted\n\nTargets:\n  - duration_min: 90\n  - distance_km_min: 30\n  
+ - avg_hr_zone: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nSteady Z2 for 
+ 90 min. Practice the race fueling: 60 g carb/hr starting from minute 20. D
+ on't go above Z2 even on climbs.
 DTSTART:20260527T070000
 DTEND:20260527T083000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-05-28_thu_strength@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
 SUMMARY:[Strength] strength · 40m
 DESCRIPTION:Session: 2026-05-28_thu_strength\nType: strength  ·  Status: p
@@ -59,7 +59,7 @@ DTEND:20260528T074000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-05-29_fri_easy-run@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
 SUMMARY:[Run] easy run · 25m · 4km · Z2
 DESCRIPTION:Session: 2026-05-29_fri_easy-run\nType: easy_run  ·  Status: p
@@ -70,26 +70,26 @@ DTEND:20260529T072500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-05-30_sat_long-ride@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
-SUMMARY:[Bike] long endurance · 4h · 80km · Z2
+SUMMARY:[Bike] long endurance · 3h · 80km · Z2
 DESCRIPTION:Session: 2026-05-30_sat_long-ride\nType: long_endurance  ·  St
- atus: planned\n\nTargets:\n  - duration_min: 240\n  - distance_km: 80\n  -
-  avg_hr_zone: Z2\n  - avg_hr_range: [121\, 133]\n  - elevation_gain_m: 600
- \n\nNotes:\n*** KEY SESSION ***\n4 hours Z2 — your longest ride in month
- s. This is the ONLY real endurance stimulus you'll get before the race.\nP
- acing: stay in Z2 (121-133) even when fresh. If HR drifts above\, slow dow
- n or shorten — don't push through.\nFueling: 80 g carb/hr from minute 30
- . Real-food + bottle rehearsal — exactly what you'll do on race day.\nBa
- il criteria: if HR drift exceeds +10% in the last hour\, or you can't main
- tain Z2 power on flats\, cut the ride short. The point is time-on-bike\, n
- ot heroics.
+ atus: adjusted\n\nTargets:\n  - duration_min: 180\n  - distance_km: 80\n  
+ - avg_hr_zone: Z2\n  - avg_hr_range: [121\, 133]\n  - elevation_gain_m: 60
+ 0\n\nNotes:\n*** KEY SESSION ***\n4 hours Z2 — your longest ride in mont
+ hs. This is the ONLY real endurance stimulus you'll get before the race.\n
+ Pacing: stay in Z2 (121-133) even when fresh. If HR drifts above\, slow do
+ wn or shorten — don't push through.\nFueling: 80 g carb/hr from minute 3
+ 0. Real-food + bottle rehearsal — exactly what you'll do on race day.\nB
+ ail criteria: if HR drift exceeds +10% in the last hour\, or you can't mai
+ ntain Z2 power on flats\, cut the ride short. The point is time-on-bike\, 
+ not heroics.
 DTSTART:20260530T070000
-DTEND:20260530T110000
+DTEND:20260530T100000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-05-31_sun_recovery-walk@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
 SUMMARY:[Walk] recovery · 45m
 DESCRIPTION:Session: 2026-05-31_sun_recovery-walk\nType: recovery  ·  Stat
@@ -100,7 +100,7 @@ DTEND:20260531T074500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-06-01_mon_rest@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-06-01_mon_rest\nType: rest  ·  Status: planned\n
@@ -111,7 +111,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-06-02_tue_easy-spin@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
 SUMMARY:[Bike] easy endurance · 1h · Z2
 DESCRIPTION:Session: 2026-06-02_tue_easy-spin\nType: easy_endurance  ·  St
@@ -123,7 +123,7 @@ DTEND:20260602T080000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-06-03_wed_tempo-opener@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
 SUMMARY:[Bike] tempo · 45m · Z2
 DESCRIPTION:Session: 2026-06-03_wed_tempo-opener\nType: tempo  ·  Status: 
@@ -136,7 +136,7 @@ DTEND:20260603T074500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-06-04_thu_easy-run@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
 SUMMARY:[Run] easy run · 30m · 5km · Z2
 DESCRIPTION:Session: 2026-06-04_thu_easy-run\nType: easy_run  ·  Status: p
@@ -148,7 +148,7 @@ DTEND:20260604T073000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-06-05_fri_easy-spin@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
 SUMMARY:[Bike] easy endurance · 45m · Z2
 DESCRIPTION:Session: 2026-06-05_fri_easy-spin\nType: easy_endurance  ·  St
@@ -159,7 +159,7 @@ DTEND:20260605T074500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-06-06_sat_medium-ride@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
 SUMMARY:[Bike] endurance z2 · 2h30m · 50km · Z2
 DESCRIPTION:Session: 2026-06-06_sat_medium-ride\nType: endurance_z2  ·  St
@@ -172,7 +172,7 @@ DTEND:20260606T093000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-06-07_sun_recovery-walk@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
 SUMMARY:[Walk] recovery · 30m
 DESCRIPTION:Session: 2026-06-07_sun_recovery-walk\nType: recovery  ·  Stat
@@ -182,7 +182,7 @@ DTEND:20260607T073000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-06-08_mon_rest@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-06-08_mon_rest\nType: rest  ·  Status: planned\n
@@ -193,7 +193,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-06-09_tue_easy-spin@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
 SUMMARY:[Bike] easy endurance · 45m · Z2
 DESCRIPTION:Session: 2026-06-09_tue_easy-spin\nType: easy_endurance  ·  St
@@ -205,7 +205,7 @@ DTEND:20260609T074500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-06-10_wed_openers@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
 SUMMARY:[Bike] openers · 35m
 DESCRIPTION:Session: 2026-06-10_wed_openers\nType: openers  ·  Status: pla
@@ -217,7 +217,7 @@ DTEND:20260610T073500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-06-11_thu_rest@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-06-11_thu_rest\nType: rest  ·  Status: planned\n
@@ -229,7 +229,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-06-12_fri_vatternrundan@trainingplan.local
-DTSTAMP:20260526T131346Z
+DTSTAMP:20260526T215914Z
 STATUS:CONFIRMED
 SUMMARY:[Race] Vatternrundan · 315km
 DESCRIPTION:Session: 2026-06-12_fri_vatternrundan\nType: race  ·  Status: 

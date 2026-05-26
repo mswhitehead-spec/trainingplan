@@ -60,6 +60,29 @@ class Proposal:
     citations: list[str] = field(default_factory=list)
 
 
+def _filter_already_applied(changes: list[ProposedChange], plan: dict) -> list[ProposedChange]:
+    """Drop changes where the same rule already applied the same field on that session.
+
+    Prevents a rule from firing repeatedly once auto-apply is active. For example,
+    duration_overreach trims the May-30 long ride once; it should not propose
+    another trim on the next cron run, because the session's adaptations[] list
+    will already contain an entry for (rule_id=duration_overreach, field=targets.duration_min).
+    """
+    session_map = {s["id"]: s for s in plan.get("sessions", [])}
+    out: list[ProposedChange] = []
+    for c in changes:
+        s = session_map.get(c.session_id)
+        if s is None:
+            out.append(c)
+            continue
+        already = s.get("adaptations", [])
+        if any(a.get("rule_id") == c.rule_id and a.get("field") == c.field_path
+               for a in already):
+            continue   # already applied — skip re-proposal
+        out.append(c)
+    return out
+
+
 def _dedup(changes: list[ProposedChange]) -> list[ProposedChange]:
     """Collapse duplicate (session_id, field_path) into the more conservative one.
     Reasons of all merged-away changes are appended to the surviving one's reason."""
@@ -110,6 +133,7 @@ def generate_proposal(
 
     raw_changes = run_all(heuristics, ctx)
     changes = _dedup(raw_changes)
+    changes = _filter_already_applied(changes, plan)
 
     # Gather citations from rules that actually fired.
     fired_rule_ids = {c.rule_id for c in changes}

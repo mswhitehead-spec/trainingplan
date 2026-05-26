@@ -25,7 +25,7 @@ Design rules (per user preference):
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 from typing import Callable
 
@@ -363,23 +363,37 @@ def rule_duration_overreach(ctx: RuleContext, params: dict) -> list[ProposedChan
     changes: list[ProposedChange] = []
 
     # Change 1: promote first upcoming non-race session to recovery.
-    next_up = next(
-        (s for s in ctx.upcoming if s.get("type") not in {"race", "recovery"}),
-        None,
+    # Guard: if this rule already inserted a recovery day within 3 days of the
+    # overreach (visible in the session's adaptations[]), don't cascade to the
+    # next non-recovery day. One recovery insertion per overreach event is enough.
+    overreach_date = date.fromisoformat(last["date"])
+    recovery_window_end = overreach_date + timedelta(days=3)
+    recovery_already_inserted = any(
+        any(a.get("rule_id") == "duration_overreach" and a.get("field") == "type"
+            for a in s.get("adaptations", []))
+        for s in ctx.upcoming
+        if date.fromisoformat(s["date"]) <= recovery_window_end
     )
-    if next_up:
-        changes.append(ProposedChange(
-            session_id=next_up["id"],
-            field_path="type",
-            old_value=next_up["type"],
-            new_value="recovery",
-            reason=(
-                f"last session ({last['date']}) overreached planned duration by "
-                f"{overreach_pct}% — supercompensation needs a recovery day "
-                f"(Friel CTB Ch. 6)."
-            ),
-            rule_id="duration_overreach",
-        ))
+
+    next_up = None  # used below in Change 2 guard regardless of branch taken
+    if not recovery_already_inserted:
+        next_up = next(
+            (s for s in ctx.upcoming if s.get("type") not in {"race", "recovery"}),
+            None,
+        )
+        if next_up:
+            changes.append(ProposedChange(
+                session_id=next_up["id"],
+                field_path="type",
+                old_value=next_up["type"],
+                new_value="recovery",
+                reason=(
+                    f"last session ({last['date']}) overreached planned duration by "
+                    f"{overreach_pct}% — supercompensation needs a recovery day "
+                    f"(Friel CTB Ch. 6)."
+                ),
+                rule_id="duration_overreach",
+            ))
 
     # Change 2: trim next long_endurance — the big stimulus already happened.
     next_long = _next_session_of_type(ctx.upcoming, "long_endurance")

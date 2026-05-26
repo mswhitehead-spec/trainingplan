@@ -1,5 +1,70 @@
 {
-  "last_sync_at": "2026-05-26T13:13:46",
-  "last_proposal_id": null,
-  "applied_adaptations": []
+  "last_sync_at": "2026-05-26T21:00:08",
+  "last_proposal_id": "2026-05-26T23-57",
+  "applied_adaptations": [
+    {
+      "proposal_id": "2026-05-26T21-00",
+      "accepted_at": "2026-05-26T23:56:57",
+      "changes": [
+        {
+          "session_id": "2026-05-26_tue_easy-run",
+          "field_path": "type",
+          "old_value": "easy_run",
+          "new_value": "recovery",
+          "rule_id": "duration_overreach",
+          "reason": "last session (2026-05-25) overreached planned duration by 355% — supercompensation needs a recovery day (Friel CTB Ch. 6)."
+        },
+        {
+          "session_id": "2026-05-30_sat_long-ride",
+          "field_path": "targets.duration_min",
+          "old_value": 240,
+          "new_value": 180,
+          "rule_id": "duration_overreach",
+          "reason": "overreached by 355% on 2026-05-25 — long ride stimulus already absorbed; trim next long by 25% to avoid stacking fatigue."
+        }
+      ]
+    },
+    {
+      "proposal_id": "2026-05-26T23-57",
+      "accepted_at": "2026-05-26T23:57:02",
+      "changes": [
+        {
+          "session_id": "2026-05-27_wed_z2-endurance",
+          "field_path": "type",
+          "old_value": "endurance_z2",
+          "new_value": "recovery",
+          "rule_id": "duration_overreach",
+          "reason": "last session (2026-05-25) overreached planned duration by 355% — supercompensation needs a recovery day (Friel CTB Ch. 6)."
+        }
+      ]
+    },
+    {
+      "proposal_id": "2026-05-26T23-57",
+      "accepted_at": "2026-05-26T23:58:17",
+      "changes": [
+        {
+          "session_id": "2026-05-27_wed_z2-endurance",
+          "field_path": "type",
+          "old_value": "endurance_z2",
+          "new_value": "recovery",
+          "rule_id": "duration_overreach",
+          "reason": "last session (2026-05-25) overreached planned duration by 355% — supercompensation needs a recovery day (Friel CTB Ch. 6)."
+        }
+      ]
+    },
+    {
+      "proposal_id": "2026-05-26T23-57",
+      "accepted_at": "2026-05-26T23:58:38",
+      "changes": [
+        {
+          "session_id": "2026-05-27_wed_z2-endurance",
+          "field_path": "type",
+          "old_value": "endurance_z2",
+          "new_value": "recovery",
+          "rule_id": "duration_overreach",
+          "reason": "last session (2026-05-25) overreached planned duration by 355% — supercompensation needs a recovery day (Friel CTB Ch. 6)."
+        }
+      ]
+    }
+  ]
 }
