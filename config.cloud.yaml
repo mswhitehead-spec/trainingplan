@@ -1,0 +1,35 @@
+# Cloud config used by GitHub Actions runs.
+# Paths are relative to the repo root, secrets come from env vars.
+# Differences vs config.yaml: relative artifacts_dir, no Drive mirror,
+# no CSV sources (cloud doesn't have those files).
+
+artifacts_dir: artifacts-local
+
+# CSV sources don't exist on the GH runner; CSV import is a local-only
+# one-time job, not something the cron does.
+sources:
+  strava_export_csv: ""
+  garmin_csv:        ""
+
+athlete:
+  name: Michael
+  age: 51
+  max_hr: 168
+  vo2max: 50
+  resting_hr: 50
+  primary_sport: cycling
+  secondary_sport: running
+
+zone_method: karvonen
+
+# plan.ics written to artifacts-local/plan.ics, then committed back to git.
+# Google Calendar subscribes to raw.githubusercontent.com/<owner>/<repo>/main/artifacts-local/plan.ics
+calendar:
+  drive_mirror_path: ""        # empty => publish_calendar.py skips the mirror step
+  default_start_time: "07:00"
+
+email:
+  from: "mswhitehead@gmail.com"
+  to:   "mswhitehead@gmail.com"
+  smtp_host: "smtp.gmail.com"
+  smtp_port: 587

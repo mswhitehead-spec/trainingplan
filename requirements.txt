@@ -1,0 +1,12 @@
+# Pinned dependencies. Versions chosen for Python 3.11+; should also resolve
+# on 3.12/3.13/3.14. If a pin fails on your Python version, loosen the pin
+# (replace == with >=) and re-pin once it resolves.
+
+stravalib==2.3            # Strava OAuth + activity API client
+# ics — removed in STEP 6; library was broken against current tatsu. Hand-rolled
+# RFC 5545 serializer lives in src/trainingplan/ics_export.py — only ~150 lines.
+PyYAML==6.0.2             # plan + heuristics + config serialization
+python-dotenv==1.0.1      # .env loading
+click==8.1.7              # CLI ergonomics
+requests==2.32.3          # the local OAuth callback HTTP server
+pytest==8.3.3             # tests

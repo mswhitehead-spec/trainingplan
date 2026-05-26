@@ -1,0 +1,123 @@
+# heuristics.yaml — adaptation rules with citations.
+#
+# Each rule maps to a function in src/trainingplan/heuristics.py via the
+# `function:` key. To disable a rule without deleting it, set `enabled: false`.
+# Citations are surfaced in the proposal output so you can audit *why* the
+# pipeline wants to change something.
+#
+# Design principle (per user): proposals only ever REDUCE volume or intensity.
+# When in doubt, rest. None of these rules add training.
+
+version: 1
+
+rules:
+
+  - id: hr_drift_high
+    function: hr_drift_high
+    enabled: true
+    description: >
+      If the most recent completed long_endurance session showed HR drift
+      above the threshold (aerobic decoupling), reduce the next planned
+      long_endurance session's duration. Only fires once per-second HR
+      streams are wired in via the Strava API (post-STEP 2b).
+    params:
+      drift_threshold_pct: 8.0
+      duration_reduction_pct: 15.0
+    citations:
+      - "Friel, J. — The Cyclist's Training Bible (4th ed.), Ch. 4 — long-ride drift as fatigue signal. <5% clean, >5% needs more base."
+      - "TrainingPeaks / Uphill Athlete practitioner convention — see literature/README.md §6."
+      - "8% threshold (not 5%) is used here as the action trigger — more conservative for fatigue-management vs base-development context."
+
+  - id: race_week_cap_intensity
+    function: race_week_cap_intensity
+    enabled: true
+    description: >
+      In the 7 days before an A-event, demote any tempo/intervals session
+      to easy_endurance. Openers are exempt (short, neuromuscular only).
+      NOTE: this is MORE conservative than the 2023 meta-analysis (Bouzid),
+      which recommends maintaining intensity through the taper. The
+      conservative bias is deliberate given (a) the event is 315 km
+      ultra-endurance where completion > performance, and (b) the athlete's
+      recent volume is well short of race distance. Revisit for post-race
+      goals where peak performance is the objective.
+    params: {}
+    citations:
+      - "Bouzid et al. 2023 — meta-analysis: intensity should be maintained, not reduced (SMD -0.55 vs 0.25). Rule overrides this for ultra-distance context. See literature/README.md §3."
+      - "Mujika & Padilla 2003 (PMID 12840640) — taper minimizes accumulated fatigue without compromising adaptations."
+
+  - id: race_window_cap_long_duration
+    function: race_window_cap_long_duration
+    enabled: true
+    description: >
+      Within `window_days` of the A-event, cap any long_endurance session at
+      `max_long_duration_min`. Race-day session itself is exempt.
+    params:
+      window_days: 14
+      max_long_duration_min: 180   # 3 h cap inside the 2-week window
+    citations:
+      - "Bouzid et al. 2023 (PMC10171681) — 8-14 d taper window optimal, 41-60% volume reduction. See literature/README.md §3."
+      - "Mujika & Padilla 2003 (PMID 12840640) — progressive nonlinear taper outperforms step taper."
+      - "Friel, J. — Fast After 50 (2015) — taper protocols for masters athletes."
+
+  - id: missed_long_no_makeup_short_window
+    function: missed_long_no_makeup_short_window
+    enabled: true
+    description: >
+      If a long_endurance session was missed and the A-event is within
+      race_window_days, do NOT add a makeup. Instead reduce the next
+      long_endurance by duration_reduction_pct. Chasing missed volume
+      this close to a race creates fatigue, not fitness.
+    params:
+      race_window_days: 21
+      duration_reduction_pct: 10.0
+    citations:
+      - "Friel, J. — The Cyclist's Training Bible (4th ed.), Ch. 13 (taper)"
+      - "Common coaching practice — fitness from a missed session does not 'compound' into a makeup"
+
+  - id: two_hot_sessions
+    function: two_hot_sessions
+    enabled: true
+    description: >
+      If the two most recent completed sessions both had avg HR above
+      their target zone, flip the next quality session (tempo, intervals,
+      or long_endurance) to easy_endurance for one cycle. Signal of
+      accumulating fatigue or under-recovery.
+    params: {}
+    citations:
+      - "Friel, J. — The Cyclist's Training Bible (4th ed.), Ch. 9 — overreaching signals"
+      - "Achten & Jeukendrup 2003 — heart rate elevation at fixed workload as fatigue indicator"
+
+  - id: frequent_missed_sessions
+    function: frequent_missed_sessions
+    enabled: true
+    description: >
+      If the athlete has missed missed_threshold or more sessions in the last
+      lookback_days, demote the next high-intensity (tempo/intervals) session
+      to easy_endurance. Repeated missed sessions usually signal illness,
+      stress, or travel; adding intensity into that context is risky.
+      Substituted sessions (cross-sport completed) don't count as misses.
+    params:
+      missed_threshold: 3
+      lookback_days: 7
+    citations:
+      - "Foster, C. 1998 — Monitoring training in athletes with reference to overtraining (monotony / strain)."
+      - "Friel, J. — The Cyclist's Training Bible (4th ed.), Ch. 9 — consistency before intensity."
+
+  - id: duration_overreach
+    function: duration_overreach
+    enabled: true
+    description: >
+      If the most recent completed session's actual duration exceeded the
+      planned target by overreach_ratio or more, propose two changes:
+      (1) flip the immediately next session to 'recovery' so the training
+      stimulus can land before the next load; (2) reduce the next
+      long_endurance by long_reduction_pct because the big aerobic stimulus
+      already happened. Only fires within race_window_days of the A-event,
+      where fatigue management matters most.
+    params:
+      overreach_ratio: 2.0         # actual / planned >= 2x triggers the rule
+      long_reduction_pct: 25.0     # trim next long ride by this much
+      race_window_days: 21         # only act within 3 weeks of the event
+    citations:
+      - "Friel, J. — The Cyclist's Training Bible (4th ed.), Ch. 6 — supercompensation window; recovery day needed after large stimulus."
+      - "Bosquet et al. 2007 (Med Sci Sports Exerc) — fatigue management: avoid stacking high-load sessions near an event."

@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Virtual env
+venv/
+.venv/
+
+# Secrets — never commit. Real values live in GitHub Secrets (cloud) or
+# in your local .env (gitignored). Use .env.example as the template.
+.env
+
+# config.yaml has machine-specific paths (G:\, C:\) so keep it untracked.
+# Cloud runs use config.cloud.yaml instead (which IS tracked).
+config.yaml
+
+# Strava tokens live in ~/.trainingplan/ on Windows for local dev,
+# or come from STRAVA_REFRESH_TOKEN env var in the cloud. Never commit them.
+strava_tokens.json
+
+# Google Drive for Desktop's temporary upload staging dir.
+.tmp.driveupload/
+.tmp.drivedownload/
+
+# Editor / OS noise
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# NOTE: artifacts-local/ IS tracked. The plan, state, activities log,
+# summaries, and proposals are the canonical source of truth for the
+# cloud cron — they need to live in git so each run can read + commit them.

@@ -1,0 +1,56 @@
+# Copy this file to config.yaml and edit. config.yaml is gitignored.
+# Use forward slashes for paths on Windows (Python handles them fine).
+
+# ---------------------------------------------------------------------------
+# artifacts_dir: where the pipeline WRITES — plan.yaml, state.json, plan.ics,
+# summaries/, proposals/, activities.jsonl. Defaults to a local folder.
+# ---------------------------------------------------------------------------
+artifacts_dir: C:/Users/Michael/Desktop/TrainingPlan/artifacts-local
+
+# ---------------------------------------------------------------------------
+# sources: where the pipeline READS historical CSVs from. Paths can be
+# anywhere (Drive, USB, local). Leave a key blank or comment it out if you
+# don't have that source.
+# ---------------------------------------------------------------------------
+sources:
+  strava_export_csv: "G:/Mit drev/Training plan/export_120713925_strava/activities.csv"
+  garmin_csv:        "G:/Mit drev/Training plan/Activities_garmin.csv"
+
+# Athlete profile. Drives zone calculations and the plan generator.
+athlete:
+  name: Michael
+  age: 51
+  max_hr: 168
+  vo2max: 50
+  resting_hr: 50           # rough; refine after a few morning measurements
+  primary_sport: cycling   # the sport of the current A-event
+  secondary_sport: running
+
+# Default heart-rate zone scheme. Karvonen-style ranges computed from
+# max_hr and resting_hr above. These will be re-derived in plan.py;
+# the values are advisory and you can override per-session.
+zone_method: karvonen
+
+# ---------------------------------------------------------------------------
+# calendar: where to publish the .ics file.
+#
+#   - The primary copy is always written to <artifacts_dir>/plan.ics.
+#   - drive_mirror_path (optional) is a second copy. Typically a Google Drive
+#     synced path so Google Calendar can subscribe to the shared link.
+#     Comment out or leave blank to skip the mirror.
+#   - See docs/calendar_subscribe.md for the one-time GCal setup.
+# ---------------------------------------------------------------------------
+calendar:
+  drive_mirror_path: "G:/Mit drev/Training plan/plan.ics"
+  default_start_time: "07:00"
+
+# ---------------------------------------------------------------------------
+# email: daily summary of today's plan, sent via SMTP.
+# Use a Gmail App Password (NOT your regular Google password) — see
+# docs/email_setup.md. The password lives in .env, never here.
+# ---------------------------------------------------------------------------
+email:
+  from: "you@gmail.com"
+  to:   "you@gmail.com"
+  smtp_host: "smtp.gmail.com"
+  smtp_port: 587
