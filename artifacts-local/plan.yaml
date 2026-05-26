@@ -95,9 +95,34 @@ sessions:
     distance_km: 5
     avg_hr_zone: Z2
   notes: Easy conversational pace. Not a workout — general aerobic only.
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '18666080516'
+    name: Night Run
+    start_time_local: '2026-05-26T21:21:05'
+    date: '2026-05-26'
+    sport: running
+    duration_min: 29.2
+    distance_km: 5.02
+    avg_hr: 124
+    max_hr: 139
+    elevation_gain_m: 11.0
+    avg_power_w: 353.3
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-05-26T20:57:40'
+    duration_delta_min: -0.8
+    duration_pct: 97.3
+    distance_delta_km: 0.02
+    distance_pct: 100.4
+    hr_zone_status: unknown
+    hr_avg_actual: 124
+    hr_avg_target: null
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags: []
+    verdict: on target.
   adaptations: []
 - id: 2026-05-27_wed_z2-endurance
   date: '2026-05-27'
