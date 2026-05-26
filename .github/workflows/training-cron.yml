@@ -71,11 +71,8 @@ jobs:
         run: python scripts/sync.py --quiet
 
       - name: Generate proposal
-        env:
-          STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
-          STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
-          STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
-        run: python scripts/propose.py --quiet
+        # propose.py is offline (no Strava needed; reads plan.yaml only).
+        run: python scripts/propose.py
 
       - name: Regenerate plan.ics
         run: python scripts/publish_calendar.py
