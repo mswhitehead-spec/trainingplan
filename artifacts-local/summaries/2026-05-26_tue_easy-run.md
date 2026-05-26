@@ -1,9 +1,9 @@
-# 2026-05-26 — easy run
+# 2026-05-26 — recovery
 
 **Verdict:** on target.
 
 - **Session id:** `2026-05-26_tue_easy-run`
-- **Discipline / type:** running · easy_run
+- **Discipline / type:** running · recovery
 - **Status:** completed
 - **Source:** strava_api · 18666080516 · _Night Run_
 

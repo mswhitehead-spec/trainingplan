@@ -72,18 +72,22 @@ def main(today: str | None, dry_run: bool) -> None:
     md = render_proposal_markdown(proposal, plan)
     click.echo(md)
 
-    if not proposal.changes:
-        return
-
     if dry_run:
         click.echo("(dry run — no file written)")
         return
 
+    # Always write the proposal file — even when there are no changes.
+    # apply_proposal.py reads the LATEST file; if we skipped writing on
+    # "no changes" it would re-read an older file that may still have
+    # pending items. Writing an empty-changes proposal makes apply a no-op.
     proposals_dir = art_dir / "proposals"
     proposals_dir.mkdir(parents=True, exist_ok=True)
     out_path = proposals_dir / proposal_filename(proposal)
     out_path.write_text(md, encoding="utf-8")
-    click.echo(f"Proposal saved to: {out_path}")
+    if proposal.changes:
+        click.echo(f"Proposal saved to: {out_path}")
+    else:
+        click.echo(f"No-change proposal saved to: {out_path}")
 
 
 if __name__ == "__main__":
