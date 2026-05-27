@@ -141,9 +141,37 @@ sessions:
     avg_hr_range: *id001
   notes: 'Steady Z2 for 90 min. Practice the race fueling: 60 g carb/hr starting from minute 20. Don''t
     go above Z2 even on climbs.'
-  status: adjusted
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '18680278570'
+    name: Evening Ride
+    start_time_local: '2026-05-27T20:26:50'
+    date: '2026-05-27'
+    sport: cycling
+    duration_min: 91.1
+    distance_km: 35.16
+    avg_hr: 107
+    max_hr: 142
+    elevation_gain_m: 222.0
+    avg_power_w: 101.2
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-05-27T21:03:51'
+    duration_delta_min: 1.1
+    duration_pct: 101.2
+    distance_delta_km: 5.16
+    distance_pct: 117.2
+    hr_zone_status: below
+    hr_avg_actual: 107
+    hr_avg_target:
+    - 121
+    - 133
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - hr_below
+    verdict: easy and controlled — exactly right.
   adaptations:
   - rule_id: duration_overreach
     field: type
