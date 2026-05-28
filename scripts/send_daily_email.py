@@ -1,8 +1,12 @@
 """Send today's training email.
 
-Designed to be run from Windows Task Scheduler each morning. With `--dry-run`
-it prints the rendered email to stdout without contacting SMTP — useful for
-debugging and for the initial setup test.
+Runs on every cron slot but sends at most once per calendar day by checking
+`state.json["last_email_date"]`. If it already matches today, the script
+exits cleanly without sending. Use `--force` to override (e.g. for testing).
+
+The GitHub Actions workflow calls this on every run — the once-per-day guard
+means it will arrive from whichever cron slot fires first (ideally 05:00 CEST,
+but if that slot is skipped the next one picks it up).
 
 Required config (config.yaml):
 
@@ -21,6 +25,7 @@ Usage
     venv\\Scripts\\python scripts\\send_daily_email.py
     venv\\Scripts\\python scripts\\send_daily_email.py --dry-run
     venv\\Scripts\\python scripts\\send_daily_email.py --today 2026-06-12
+    venv\\Scripts\\python scripts\\send_daily_email.py --force   # skip already-sent guard
 """
 
 from __future__ import annotations
@@ -45,6 +50,7 @@ from trainingplan.email_sender import (
     render_daily_email,
     send_email,
 )
+from trainingplan.state import email_already_sent_today, stamp_email
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -55,7 +61,9 @@ CONFIG_PATH = ROOT / "config.yaml"
 @click.option("--dry-run", is_flag=True,
               help="Print the email to stdout instead of sending.")
 @click.option("--today", default=None, help="Override today's date (YYYY-MM-DD).")
-def main(dry_run: bool, today: str | None) -> None:
+@click.option("--force", is_flag=True,
+              help="Send even if today's email was already sent (override guard).")
+def main(dry_run: bool, today: str | None, force: bool) -> None:
     load_dotenv(ROOT / ".env")   # populates EMAIL_PASSWORD into os.environ
 
     if not CONFIG_PATH.exists():
@@ -81,6 +89,15 @@ def main(dry_run: bool, today: str | None) -> None:
     state = state_mod.load(state_path)
 
     today_d = date.fromisoformat(today) if today else date.today()
+    today_str = today_d.isoformat()
+
+    # Once-per-day guard: if the email already went out today, skip.
+    # This lets every cron run call this script; whichever fires first delivers
+    # the email, and the rest are silent no-ops.
+    if not dry_run and not force and email_already_sent_today(state, today_str):
+        click.echo(f"email already sent today ({today_str}) — skipping.")
+        return
+
     pending = _latest_pending_proposal(art_dir, state)
 
     subject, body = render_daily_email(
@@ -100,6 +117,9 @@ def main(dry_run: bool, today: str | None) -> None:
         smtp_host=email_cfg.get("smtp_host", "smtp.gmail.com"),
         smtp_port=int(email_cfg.get("smtp_port", 587)),
     )
+    # Record that today's email was sent so subsequent cron runs skip it.
+    stamp_email(state, today_str)
+    state_mod.save(state_path, state)
     click.echo(f"sent: {subject}  →  {to_addr}")
 
 

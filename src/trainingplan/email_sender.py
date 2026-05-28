@@ -13,7 +13,7 @@ Content priorities (today's email):
   1. Today's session(s) — type, targets, full plan notes.
   2. Yesterday's verdict (if any).
   3. The week ahead (next 7 days, one line each).
-  4. Pending proposal (if any), with a hint to run apply_proposal.py.
+  4. Recent auto-applied adaptations (last 3 days), if any.
   5. Days to A-event.
 
 Plain text only. Calendar apps + Gmail render plain text fine and we want
@@ -96,26 +96,37 @@ def _sessions_between(plan: dict, lo: date, hi: date) -> list[dict]:
 
 
 def _latest_pending_proposal(art_dir: Path, state: dict) -> Path | None:
-    """Return the path of the most-recent proposal markdown that hasn't been
-    applied yet (its id isn't in state.applied_adaptations[].proposal_id)."""
-    proposals_dir = art_dir / "proposals"
-    if not proposals_dir.exists():
-        return None
-    applied_ids = {
-        a.get("proposal_id") for a in (state.get("applied_adaptations") or [])
-    }
-    candidates = sorted(proposals_dir.glob("*.md"), reverse=True)
-    for p in candidates:
-        if p.stem not in applied_ids:
-            return p
+    """Kept for import compatibility. Returns None — proposals are now auto-applied."""
     return None
+
+
+def _recent_adaptations(state: dict, days: int = 3) -> list[dict]:
+    """Return auto-applied adaptation changes from the last `days` calendar days.
+
+    Deduplicated by (session_id, field_path) — if the same field was changed
+    more than once (e.g. during a fix-it loop) only the most-recent change is
+    shown. Newest-first order.
+    """
+    cutoff = (datetime.now() - timedelta(days=days)).isoformat()
+    seen: set[tuple[str, str]] = set()
+    out: list[dict] = []
+    for a in reversed(state.get("applied_adaptations") or []):
+        if (a.get("accepted_at") or "") < cutoff:
+            break
+        for ch in a.get("changes") or []:
+            key = (ch.get("session_id", ""), ch.get("field_path", ""))
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append({**ch, "accepted_at": a.get("accepted_at", "")})
+    return out
 
 
 def render_daily_email(
     plan: dict,
     today: date | None = None,
     state: dict | None = None,
-    pending_proposal: Path | None = None,
+    pending_proposal: Path | None = None,   # kept for call-site compat; ignored
 ) -> tuple[str, str]:
     """Render (subject, body) for today's email. Pure; no I/O."""
     today = today or date.today()
@@ -201,14 +212,21 @@ def render_daily_email(
             lines.append(f"  {_DOW[d.weekday()]} {d.day:>2}  {_short_title(s)}{tag}")
         lines.append("")
 
-    # --- pending proposal --------------------------------------------------
-    if pending_proposal:
-        lines.append(f"⚠ Pending adaptation proposal: {pending_proposal.name}")
-        lines.append("  Run:  venv\\Scripts\\python scripts\\apply_proposal.py")
+    # --- recent auto-applied adaptations -----------------------------------
+    recent = _recent_adaptations(state, days=3)
+    if recent:
+        lines.append("Auto-applied adaptations (last 3 days):")
+        for ch in recent:
+            sid = ch.get("session_id", "?")
+            field = ch.get("field_path", "?")
+            old = ch.get("old_value", "?")
+            new = ch.get("new_value", "?")
+            rule = ch.get("rule_id", "?")
+            lines.append(f"  • {sid}: {field} {old} → {new}  [{rule}]")
         lines.append("")
 
     lines.append("—")
-    lines.append("Auto-sent by trainingplan. To stop, disable the Windows Task.")
+    lines.append("Auto-sent by trainingplan.")
     body = "\n".join(lines)
 
     return subject, body

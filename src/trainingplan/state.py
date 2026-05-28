@@ -22,6 +22,7 @@ def empty_state() -> dict:
     return {
         "last_sync_at": None,
         "last_proposal_id": None,
+        "last_email_date": None,   # YYYY-MM-DD of the last successfully sent email
         "applied_adaptations": [],
     }
 
@@ -48,3 +49,14 @@ def stamp_sync(state: dict, now: datetime | None = None) -> dict:
     now = now or datetime.now()
     state["last_sync_at"] = now.isoformat(timespec="seconds")
     return state
+
+
+def stamp_email(state: dict, sent_date: str) -> dict:
+    """Record that today's email was sent. `sent_date` is YYYY-MM-DD."""
+    state["last_email_date"] = sent_date
+    return state
+
+
+def email_already_sent_today(state: dict, today: str) -> bool:
+    """Return True if `last_email_date` matches today (YYYY-MM-DD)."""
+    return state.get("last_email_date") == today

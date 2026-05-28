@@ -84,12 +84,20 @@ jobs:
       - name: Regenerate plan.ics
         run: python scripts/publish_calendar.py
 
-      - name: Send morning email
-        # Only at the 05:00 CEST slot, or when manually dispatched with send_email=true.
-        if: github.event.schedule == '0 3 * * *' || github.event.inputs.send_email == true
+      - name: Send daily email
+        # Runs on every cron slot. send_daily_email.py checks state.json and
+        # skips silently if today's email was already sent — so whichever slot
+        # fires first delivers the email (ideally 05:00 CEST, but any slot works
+        # if GitHub skips the early-morning run).
+        # workflow_dispatch with send_email=true bypasses the guard via --force.
         env:
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-        run: python scripts/send_daily_email.py
+        run: |
+          if [ "${{ github.event.inputs.send_email }}" = "true" ]; then
+            python scripts/send_daily_email.py --force
+          else
+            python scripts/send_daily_email.py
+          fi
 
       - name: Commit state changes
         run: |
