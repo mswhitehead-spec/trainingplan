@@ -263,13 +263,22 @@ def _coaching_note(
         )
 
     # ---- bullet 2: aerobic trend from recent data --------------------------
+    # For the trend bullet, derive the Z2 reference from the RECENT sessions'
+    # dominant discipline — not today's (which might be strength / rest).
+    cycling_count = sum(1 for s in completed if s.get("discipline") == "cycling")
+    if cycling_count > len(completed) / 2:
+        trend_zones = athlete.get("hr_zones_cycling") or athlete.get("hr_zones") or {}
+        trend_z2 = trend_zones.get("Z2", [116, 127])
+    else:
+        trend_z2 = z2
+
     if completed and stype not in {"race"}:
         if below_zone_count >= 2 and recent_hrs:
             avg_hr = round(sum(recent_hrs) / len(recent_hrs))
             bullets.append(
                 f"Aerobic control looks good: {below_zone_count} of your last "
                 f"{len(completed)} session(s) held HR below Z2 "
-                f"(average {avg_hr} bpm vs. your Z2 floor of {z2[0]}). "
+                f"(average {avg_hr} bpm vs. your Z2 floor of {trend_z2[0]}). "
                 f"That level of aerobic headroom is exactly right for a 315 km event — "
                 f"you can sustain output for hours without cardiac drift."
             )
