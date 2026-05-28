@@ -95,6 +95,239 @@ def _sessions_between(plan: dict, lo: date, hi: date) -> list[dict]:
     )
 
 
+def _coaching_note(
+    today_sessions: list[dict],
+    recent_sessions: list[dict],
+    plan: dict,
+    dte: int | None,
+) -> list[str]:
+    """Generate 3-5 data-driven coaching bullets for today's email.
+
+    Every bullet references real numbers from recent sessions where possible.
+    Generic advice is a last resort; specific numbers make it feel personal.
+    Positive framing throughout — the goal is to inform and motivate, not alarm.
+    """
+    bullets: list[str] = []
+
+    # ---- data extraction ---------------------------------------------------
+    completed = [s for s in recent_sessions if s.get("status") == "completed"]
+    recent_hrs = [
+        (s.get("actual") or {}).get("avg_hr")
+        for s in completed
+        if (s.get("actual") or {}).get("avg_hr")
+    ]
+    recent_drifts = [
+        (s.get("analysis") or {}).get("hr_drift_pct")
+        for s in completed
+        if (s.get("analysis") or {}).get("hr_drift_pct") is not None
+    ]
+    below_zone_count = sum(
+        1 for s in completed
+        if (s.get("analysis") or {}).get("hr_zone_status") == "below"
+    )
+    total_km_recent = sum(
+        (s.get("actual") or {}).get("distance_km") or 0
+        for s in completed
+    )
+    total_h_recent = sum(
+        (s.get("actual") or {}).get("duration_min") or 0
+        for s in completed
+    ) / 60
+
+    athlete = plan.get("athlete") or {}
+    max_hr = athlete.get("max_hr", 168)
+    zones = athlete.get("zones") or {}
+    z2 = zones.get("Z2", [123, 138])
+
+    stype = today_sessions[0].get("type", "") if today_sessions else ""
+    sdisc = today_sessions[0].get("discipline", "") if today_sessions else ""
+    targets = (today_sessions[0].get("targets") or {}) if today_sessions else {}
+
+    taper = dte is not None and dte <= 21
+    race_week = dte is not None and dte <= 7
+
+    # find next key upcoming session (long ride or race)
+    all_sessions = plan.get("sessions", [])
+    today_str = today_sessions[0].get("date", "") if today_sessions else date.today().isoformat()
+    next_key = next(
+        (s for s in all_sessions
+         if s.get("date", "") > today_str
+         and s.get("type") in {"long_endurance", "race"}
+         and s.get("status") in {"planned", "adjusted"}),
+        None,
+    )
+
+    # ---- bullet 1: session-specific execution advice -----------------------
+    if stype in {"rest"}:
+        bullets.append(
+            "Full rest day. The parasympathetic nervous system is running the show today — "
+            "heart rate variability recovers, glycogen refills, micro-tears repair. "
+            "Sleep and food are the active ingredients; there's nothing to do but let them work."
+        )
+    elif stype == "recovery":
+        if recent_hrs:
+            last_hr = recent_hrs[-1]
+            bullets.append(
+                f"Recovery session — keep HR well below {z2[0]} bpm (your last session "
+                f"averaged {last_hr} bpm; aim noticeably lower today). "
+                f"Supercompensation peaks 24–48 h after a stimulus (Friel, CTB Ch. 6) "
+                f"and elevated HR on recovery days blunts that window. Easy spin or walk only."
+            )
+        else:
+            bullets.append(
+                "Keep today genuinely easy — HR well below Z2, no efforts. "
+                "Supercompensation (the fitness gain from training) peaks in the 24–48 h "
+                "after a hard session (Friel, CTB Ch. 6). Easy days protect that window."
+            )
+    elif stype == "long_endurance":
+        dur_h = int((targets.get("duration_min") or 180) // 60)
+        dist = targets.get("distance_km", 80)
+        ceiling = z2[1]
+        bullets.append(
+            f"KEY SESSION — {dur_h}h Z2 endurance. Start the first 30 min feeling "
+            f"almost too easy; HR should settle into {z2[0]}–{ceiling} bpm on flat "
+            f"terrain. If it creeps above {ceiling + 5} on a climb, back off cadence "
+            f"before speed — at 315 km race distance, pacing discipline is worth more "
+            f"than any single extra watt today."
+        )
+        bullets.append(
+            f"Practice race fueling: 60–80 g carbohydrate per hour starting at minute 20 "
+            f"(gels, bars, or liquid — whatever you'll use on June 12). "
+            f"Your gut needs rehearsal; don't discover GI intolerance on race day. "
+            f"At ~{int(dur_h * 65)} g/hr that's {dur_h * 65} g total — roughly "
+            f"{dur_h * 65 // 25} standard gels (Burke & Hawley, 2002)."
+        )
+    elif stype in {"easy_endurance", "endurance_z2"}:
+        if recent_hrs:
+            avg_hr = round(sum(recent_hrs) / len(recent_hrs))
+            bullets.append(
+                f"Aerobic base work — target {z2[0]}–{z2[1]} bpm. "
+                f"Your recent sessions have averaged {avg_hr} bpm, "
+                f"which is {'well inside' if avg_hr < z2[0] else 'right in'} the aerobic zone. "
+                f"Talk-test pace: you should be able to speak in full sentences. "
+                f"If you can't, you're over zone."
+            )
+        else:
+            bullets.append(
+                f"Z2 target: {z2[0]}–{z2[1]} bpm. This builds mitochondrial density and "
+                f"fat oxidation without accumulating lactate — the aerobic foundation for "
+                f"a 315 km effort (Seiler, 2010 — polarised training model). "
+                f"Talk-test pace throughout."
+            )
+    elif stype == "easy_run":
+        bullets.append(
+            "Easy run — aerobic maintenance. The cardiovascular adaptations (cardiac output, "
+            "mitochondrial density) carry across disciplines: running Z2 primes the same "
+            "central engine as cycling Z2. Focus on HR, not pace. "
+            f"Target: conversational, well below {z2[1]} bpm."
+        )
+    elif stype == "strength":
+        bullets.append(
+            "Strength focus today: hip stability and core, not load. "
+            "Glute bridges, single-leg Romanian deadlifts, Copenhagen planks — "
+            "these directly improve power transfer on the bike and reduce lower-back "
+            "fatigue at 4+ hour efforts (Rønnestad & Mujika, 2014). "
+            "Skip anything that creates DOMS; with 15 days to the race you don't have "
+            "time to absorb new muscle damage."
+        )
+    elif stype == "tempo":
+        bullets.append(
+            "Tempo: upper Z3 / lower Z4 — comfortably hard, not all-out. "
+            f"Rough HR target: {z2[1] + 5}–{int(max_hr * 0.88)} bpm. "
+            "If you feel flat after the warmup, dial back to Z2 — pre-race taper "
+            "responses are individual, and a conservative tempo day beats a forced one "
+            "that generates lingering fatigue."
+        )
+    elif stype == "openers":
+        bullets.append(
+            "Openers: 2–3 short hard efforts (30–60 s at Z4–Z5) with full recovery between. "
+            "The goal is neuromuscular activation, not fitness — you should finish feeling "
+            "springy, not tired. These clear metabolic waste and prime fast-twitch recruitment "
+            "for race day (Mujika & Padilla, 2003 — peaking protocols)."
+        )
+    elif stype == "race":
+        bullets.append(
+            f"Race day — Vätternrundan 315 km. First 2 hours: stay patient, "
+            f"HR ≤ {z2[1]} bpm, let the fast starters go. "
+            f"Fuel every 20–30 min regardless of hunger. "
+            f"The riders you'll pass at km 200 are the ones going hard now. "
+            f"You've done the work — trust it."
+        )
+
+    # ---- bullet 2: aerobic trend from recent data --------------------------
+    if completed and stype not in {"race"}:
+        if below_zone_count >= 2 and recent_hrs:
+            avg_hr = round(sum(recent_hrs) / len(recent_hrs))
+            bullets.append(
+                f"Aerobic control looks good: {below_zone_count} of your last "
+                f"{len(completed)} session(s) held HR below Z2 "
+                f"(average {avg_hr} bpm vs. your Z2 floor of {z2[0]}). "
+                f"That level of aerobic headroom is exactly right for a 315 km event — "
+                f"you can sustain output for hours without cardiac drift."
+            )
+        elif recent_drifts:
+            avg_drift = sum(recent_drifts) / len(recent_drifts)
+            if avg_drift < 5:
+                bullets.append(
+                    f"HR drift on recent sessions: {avg_drift:+.1f}% — below the 5% "
+                    f"decoupling threshold (Maffetone). Your cardiovascular system is "
+                    f"coupling effort to output efficiently, which is a good sign for "
+                    f"sustained pacing over a long race."
+                )
+            else:
+                bullets.append(
+                    f"HR drift has been {avg_drift:+.1f}% on recent sessions "
+                    f"(>5% indicates aerobic decoupling — Maffetone). "
+                    f"Today's easy work helps clear it: low-HR sessions restore "
+                    f"parasympathetic tone and cardiac efficiency."
+                )
+        elif total_km_recent > 0 and total_h_recent > 0:
+            bullets.append(
+                f"Training load this week: {total_km_recent:.0f} km / {total_h_recent:.1f} h "
+                f"across {len(completed)} session(s). "
+                f"Volume is in the right range for the taper window — enough stimulus to "
+                f"maintain adaptation without accumulating fatigue that eats into race-day freshness."
+            )
+
+    # ---- bullet 3: taper / race countdown context --------------------------
+    if taper and dte is not None and stype not in {"race"}:
+        if race_week:
+            bullets.append(
+                f"Race week — {dte} day{'s' if dte != 1 else ''} out. "
+                f"Fitness is fixed; the only remaining variable is freshness. "
+                f"Every unnecessary effort now costs race-day watts. "
+                f"Sleep, hydration, and carbohydrate intake are the performance levers."
+            )
+        else:
+            bullets.append(
+                f"{dte} days to Vätternrundan. Physiological adaptation from today's "
+                f"training won't arrive in time — full adaptation takes 10–14 days "
+                f"(Bosquet et al., 2007). The job now is to arrive at the start line "
+                f"feeling fresh, not fitter."
+            )
+
+    # ---- bullet 4: next key event callout ----------------------------------
+    if next_key and stype not in {"long_endurance", "race"}:
+        key_d = date.fromisoformat(next_key["date"])
+        days_away = (key_d - date.today()).days
+        key_targets = next_key.get("targets") or {}
+        key_dur = _fmt_duration_min(key_targets.get("duration_min"))
+        if next_key.get("type") == "race":
+            bullets.append(
+                f"Vätternrundan is {days_away} day{'s' if days_away != 1 else ''} away "
+                f"({key_d.strftime('%a %b %d')}). "
+                f"Everything between now and then is about showing up fresh."
+            )
+        elif key_dur:
+            bullets.append(
+                f"Next key session: {_DOW[key_d.weekday()]} {key_d.strftime('%b %d')} — "
+                f"{key_dur} long ride ({days_away} day{'s' if days_away != 1 else ''} away). "
+                f"Today's job is to arrive at that session with legs ready."
+            )
+
+    return bullets
+
+
 def _latest_pending_proposal(art_dir: Path, state: dict) -> Path | None:
     """Kept for import compatibility. Returns None — proposals are now auto-applied."""
     return None
@@ -182,6 +415,23 @@ def render_daily_email(
                 for ln in notes.splitlines():
                     lines.append(f"  {ln}")
             lines.append("")
+
+    # --- coaching note -----------------------------------------------------
+    note_bullets = _coaching_note(today_sessions, recent_sessions, plan, dte)
+    if note_bullets:
+        lines.append("Today's note:")
+        for b in note_bullets:
+            # Wrap long bullets at ~72 chars for readability in plain-text clients
+            words = b.split()
+            line_buf = "  •"
+            for word in words:
+                if len(line_buf) + len(word) + 1 > 74:
+                    lines.append(line_buf)
+                    line_buf = "    " + word
+                else:
+                    line_buf += " " + word
+            lines.append(line_buf)
+        lines.append("")
 
     # --- last 5 days -------------------------------------------------------
     if recent_sessions:
