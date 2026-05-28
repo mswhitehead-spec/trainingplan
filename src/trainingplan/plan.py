@@ -148,6 +148,26 @@ def next_planned_session(plan: dict, today: date | None = None) -> dict | None:
     return min(candidates, key=lambda s: s["date"])
 
 
+def get_zone_range(plan: dict, zone_label: str,
+                   discipline: str = "running") -> list[int] | None:
+    """Return [lo, hi] bpm for `zone_label` (e.g. 'Z2'), choosing the
+    discipline-specific zone table when available.
+
+    Cycling HR is physiologically ~10 bpm lower than running at equivalent
+    effort, so 'hr_zones_cycling' is stored separately and consulted first
+    for cycling sessions.
+
+    Returns None if the zone isn't defined.
+    """
+    athlete = plan.get("athlete") or {}
+    if discipline == "cycling":
+        zones = athlete.get("hr_zones_cycling") or athlete.get("hr_zones") or {}
+    else:
+        zones = athlete.get("hr_zones") or {}
+    r = zones.get(zone_label)
+    return list(r) if r else None
+
+
 def days_to_event(plan: dict, today: date | None = None,
                   priority: str = "A") -> int | None:
     """Days until the next event of the given priority. None if no such event."""

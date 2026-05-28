@@ -134,14 +134,22 @@ def _coaching_note(
         for s in completed
     ) / 60
 
-    athlete = plan.get("athlete") or {}
-    max_hr = athlete.get("max_hr", 168)
-    zones = athlete.get("zones") or {}
-    z2 = zones.get("Z2", [123, 138])
-
     stype = today_sessions[0].get("type", "") if today_sessions else ""
     sdisc = today_sessions[0].get("discipline", "") if today_sessions else ""
     targets = (today_sessions[0].get("targets") or {}) if today_sessions else {}
+
+    athlete = plan.get("athlete") or {}
+    max_hr = athlete.get("max_hr", 168)
+
+    # Use sport-specific zones if the session discipline has its own set.
+    # Cycling HR runs ~10 bpm lower than running at equivalent effort, so
+    # cycling sessions use hr_zones_cycling when available (Karvonen, max=160).
+    if sdisc == "cycling":
+        zones = athlete.get("hr_zones_cycling") or athlete.get("hr_zones") or {}
+        max_hr = athlete.get("max_hr_cycling", max_hr)
+    else:
+        zones = athlete.get("hr_zones") or {}
+    z2 = zones.get("Z2", [116, 127] if sdisc == "cycling" else [121, 133])
 
     taper = dte is not None and dte <= 21
     race_week = dte is not None and dte <= 7
@@ -194,7 +202,7 @@ def _coaching_note(
             f"Practice race fueling: 60–80 g carbohydrate per hour starting at minute 20 "
             f"(gels, bars, or liquid — whatever you'll use on June 12). "
             f"Your gut needs rehearsal; don't discover GI intolerance on race day. "
-            f"At ~{int(dur_h * 65)} g/hr that's {dur_h * 65} g total — roughly "
+            f"At 65 g/hr that's {dur_h * 65} g total over {dur_h}h — roughly "
             f"{dur_h * 65 // 25} standard gels (Burke & Hawley, 2002)."
         )
     elif stype in {"easy_endurance", "endurance_z2"}:

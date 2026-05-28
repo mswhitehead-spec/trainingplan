@@ -8,7 +8,7 @@ athlete:
     Z1:
     - 109
     - 121
-    Z2: &id001
+    Z2:
     - 121
     - 133
     Z3:
@@ -20,6 +20,23 @@ athlete:
     Z5:
     - 156
     - 168
+  max_hr_cycling: 160
+  hr_zones_cycling:
+    Z1:
+    - 105
+    - 116
+    Z2:
+    - 116
+    - 127
+    Z3:
+    - 127
+    - 138
+    Z4:
+    - 138
+    - 149
+    Z5:
+    - 149
+    - 160
 events:
 - name: Vätternrundan
   date: '2026-06-12'
@@ -50,7 +67,9 @@ sessions:
   targets:
     duration_min: 45
     avg_hr_zone: Z2
-    avg_hr_range: *id001
+    avg_hr_range:
+    - 116
+    - 127
   notes: Wake the legs up after travel from Tampa. Easy spin, talk-test pace. Don't push. The heat-acclimatized
     engine is the asset — don't waste it on day 1.
   status: completed
@@ -69,7 +88,7 @@ sessions:
     avg_power_w: 121.2
     perceived_effort: null
   analysis:
-    computed_at: '2026-05-25T16:39:52'
+    computed_at: '2026-05-28T08:34:28'
     duration_delta_min: 159.8
     duration_pct: 455.1
     distance_delta_km: null
@@ -77,8 +96,8 @@ sessions:
     hr_zone_status: below
     hr_avg_actual: 112
     hr_avg_target:
-    - 121
-    - 133
+    - 116
+    - 127
     elevation_delta_m: null
     hr_drift_pct: null
     flags:
@@ -138,7 +157,9 @@ sessions:
     duration_min: 90
     distance_km_min: 30
     avg_hr_zone: Z2
-    avg_hr_range: *id001
+    avg_hr_range:
+    - 116
+    - 127
   notes: 'Steady Z2 for 90 min. Practice the race fueling: 60 g carb/hr starting from minute 20. Don''t
     go above Z2 even on climbs.'
   status: completed
@@ -157,7 +178,7 @@ sessions:
     avg_power_w: 101.2
     perceived_effort: null
   analysis:
-    computed_at: '2026-05-27T21:03:51'
+    computed_at: '2026-05-28T08:34:28'
     duration_delta_min: 1.1
     duration_pct: 101.2
     distance_delta_km: 5.16
@@ -165,8 +186,8 @@ sessions:
     hr_zone_status: below
     hr_avg_actual: 107
     hr_avg_target:
-    - 121
-    - 133
+    - 116
+    - 127
     elevation_delta_m: null
     hr_drift_pct: null
     flags:
@@ -230,15 +251,17 @@ sessions:
     duration_min: 180
     distance_km: 80
     avg_hr_zone: Z2
-    avg_hr_range: *id001
+    avg_hr_range:
+    - 116
+    - 127
     elevation_gain_m: 600
   notes: '*** KEY SESSION ***
 
     4 hours Z2 — your longest ride in months. This is the ONLY real endurance stimulus you''ll get before
     the race.
 
-    Pacing: stay in Z2 (121-133) even when fresh. If HR drifts above, slow down or shorten — don''t push
-    through.
+    Pacing: stay in cycling Z2 (116-127) even when fresh. If HR drifts above, slow down or shorten — don''t
+    push through.
 
     Fueling: 80 g carb/hr from minute 30. Real-food + bottle rehearsal — exactly what you''ll do on race
     day.
@@ -283,7 +306,9 @@ sessions:
   targets:
     duration_min: 60
     avg_hr_zone: Z2
-    avg_hr_range: *id001
+    avg_hr_range:
+    - 116
+    - 127
   notes: Spin out residual fatigue. Keep it in low Z2 — flush the legs.
   status: planned
   actual: null
@@ -296,8 +321,8 @@ sessions:
   targets:
     duration_min: 45
     avg_hr_zone: Z2
-  notes: Warm up 15 min Z2. Then 2 x 5 min in Z3 (134-144 HR) with 5 min Z2 between. Cool down 10 min
-    Z2. This is the only intensity work in the block — keep it controlled.
+  notes: Warm up 15 min Z2. Then 2 x 5 min in cycling Z3 (127-138 HR) with 5 min Z2 between. Cool down
+    10 min Z2. This is the only intensity work in the block — keep it controlled.
   status: planned
   actual: null
   analysis: null
@@ -322,7 +347,9 @@ sessions:
   targets:
     duration_min: 45
     avg_hr_zone: Z2
-    avg_hr_range: *id001
+    avg_hr_range:
+    - 116
+    - 127
   notes: Pre-medium-ride shake. Easy.
   status: planned
   actual: null
@@ -336,7 +363,9 @@ sessions:
     duration_min: 150
     distance_km: 50
     avg_hr_zone: Z2
-    avg_hr_range: *id001
+    avg_hr_range:
+    - 116
+    - 127
   notes: 2.5 h Z2. Last ride > 90 min before the race. Same fueling protocol as last Saturday. Treat as
     a dress rehearsal.
   status: planned
@@ -371,7 +400,9 @@ sessions:
   targets:
     duration_min: 45
     avg_hr_zone: Z2
-    avg_hr_range: *id001
+    avg_hr_range:
+    - 116
+    - 127
   notes: Easy. Wake the legs. Race week — less is more.
   status: planned
   actual: null
@@ -409,15 +440,15 @@ sessions:
     distance_km: 315
     avg_hr_zone: Z2
     avg_hr_range:
-    - 121
-    - 133
+    - 116
+    - 127
     avg_speed_kmh: 22.5
   notes: "*** RACE *** Vätternrundan — 315 km. Sub-14h target.\n\nPacing\n  First 100 km: low Z2 (121-127\
     \ HR). Resist the urge to go fast.\n  Middle 100 km: hold Z2; some drift to high Z2 is normal.\n \
     \ Last 100 km: hold whatever feels sustainable. Prioritize fuel.\n\nFueling\n  Carb: 70-80 g/h from\
     \ km 5. Real food + drink mix.\n  Fluids: 750 ml/h baseline; more if it's hot.\n  Caffeine: hold until\
     \ the last 100 km if possible.\n\nStops\n  Keep them short (5-10 min). Eat while moving where possible.\n\
-    \  Don't sit down at controls — gets cold, hard to restart.\n\nBail criteria\n  HR > 137 for 15+ min\
+    \  Don't sit down at controls — gets cold, hard to restart.\n\nBail criteria\n  HR > 133 for 15+ min\
     \ in first 100 km → slow immediately.\n  Can't keep food down → walk, sip, restart slow.\n  Mechanical\
     \ you can't fix → don't try to limp 200 km."
   status: planned
