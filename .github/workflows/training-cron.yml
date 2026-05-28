@@ -113,5 +113,7 @@ jobs:
           else
             STAMP=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
             git commit -m "cron: ${STAMP}"
-            git push
+            # Retry once on push failure: another run may have pushed between
+            # our checkout and now. Pull-rebase brings us current, then push.
+            git push || (git pull --rebase && git push)
           fi
