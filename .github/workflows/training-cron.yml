@@ -84,6 +84,9 @@ jobs:
       - name: Regenerate plan.ics
         run: python scripts/publish_calendar.py
 
+      - name: Regenerate dashboard
+        run: python scripts/publish_dashboard.py
+
       - name: Send daily email
         # Runs on every cron slot. send_daily_email.py checks state.json and
         # skips silently if today's email was already sent — so whichever slot
@@ -107,7 +110,7 @@ jobs:
 
           git config user.name  "training-cron"
           git config user.email "training-cron@users.noreply.github.com"
-          git add artifacts-local/
+          git add artifacts-local/ docs/
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else

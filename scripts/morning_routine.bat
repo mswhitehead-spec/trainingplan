@@ -7,4 +7,5 @@ venv\Scripts\python.exe scripts\sync.py --quiet
 venv\Scripts\python.exe scripts\propose.py
 venv\Scripts\python.exe scripts\apply_proposal.py --yes
 venv\Scripts\python.exe scripts\publish_calendar.py
+venv\Scripts\python.exe scripts\publish_dashboard.py
 venv\Scripts\python.exe scripts\send_daily_email.py

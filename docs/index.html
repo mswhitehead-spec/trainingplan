@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vätternrundan Training Dashboard</title>
+<style>
+  :root {
+    --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3e;
+    --text: #e2e8f0; --dim: #64748b; --accent: #3b82f6;
+    --green: #22c55e; --red: #ef4444; --yellow: #f59e0b; --purple: #a855f7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: system-ui, sans-serif;
+          font-size: 14px; line-height: 1.5; padding: 20px; }
+  h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+  h2 { font-size: 1rem; font-weight: 600; color: var(--accent); margin: 24px 0 10px; }
+  .meta { color: var(--dim); font-size: 0.85rem; margin-bottom: 20px; }
+  .kpi-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+           padding: 14px 18px; min-width: 130px; }
+  .kpi .label { color: var(--dim); font-size: 0.75rem; text-transform: uppercase;
+                  letter-spacing: .05em; }
+  .kpi .value { font-size: 1.5rem; font-weight: 700; margin-top: 2px; }
+  .kpi .value.ok   { color: var(--green); }
+  .kpi .value.warn { color: var(--yellow); }
+  .kpi .value.race { color: var(--purple); }
+  .chart-wrap { background: var(--surface); border: 1px solid var(--border);
+                  border-radius: 8px; padding: 16px; margin-bottom: 24px; }
+  canvas { max-height: 200px; }
+  table { width: 100%; border-collapse: collapse; background: var(--surface);
+            border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  th { background: #12151f; color: var(--dim); font-size: 0.75rem;
+        text-transform: uppercase; letter-spacing: .05em; padding: 8px 10px;
+        text-align: left; white-space: nowrap; }
+  td { padding: 7px 10px; border-top: 1px solid var(--border); vertical-align: top; }
+  .row-completed { background: #0d1a10; }
+  .row-missed     { background: #1a0d0d; }
+  .row-planned    { }
+  .row-adjusted   { background: #0d1220; }
+  .date-cell      { color: var(--dim); white-space: nowrap; }
+  .verdict        { color: var(--dim); font-size: 0.85em; }
+  .dim            { color: var(--dim); }
+  .flag           { background: #1e293b; border: 1px solid var(--border);
+                     border-radius: 4px; padding: 1px 5px; font-size: 0.75em;
+                     color: var(--yellow); margin-left: 4px; }
+  .badge { border-radius: 4px; padding: 2px 7px; font-size: 0.75em; font-weight: 600; }
+  .badge.done { background: #052e16; color: var(--green); }
+  .badge.miss { background: #2d0a0a; color: var(--red); }
+  .badge.plan { background: #1e293b; color: var(--dim); }
+  .badge.adj  { background: #172554; color: var(--accent); }
+  .badge.skip { background: #27161b; color: var(--dim); }
+  .week-table td, .week-table th { padding: 6px 10px; }
+  a { color: var(--accent); }
+  @media (max-width: 700px) {
+    body { padding: 10px; font-size: 13px; }
+    .kpi .value { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+<h1>🚴 Vätternrundan Training</h1>
+<p class="meta">Generated 2026-05-28 · Plan: vatternrundan-final-prep · <a href="plan.ics">📅 Subscribe (.ics)</a></p>
+
+<div class="kpi-row">
+  <div class="kpi"><div class="label">Days to race</div>
+    <div class="value ok">15</div></div>
+  <div class="kpi"><div class="label">Sessions done</div>
+    <div class="value ok">3 / 18</div></div>
+  <div class="kpi"><div class="label">Total km (bike)</div>
+    <div class="value">115 km</div></div>
+  <div class="kpi"><div class="label">Total time</div>
+    <div class="value">5.4 h</div></div>
+  <div class="kpi"><div class="label">Last sync</div>
+    <div class="value" style="font-size:0.9rem;margin-top:4px">2026-05-28 06:01</div></div>
+</div>
+
+<h2>Activity (all completed sessions)</h2>
+<div class="chart-wrap">
+  <canvas id="chart"></canvas>
+</div>
+
+<h2>Session log</h2>
+<div style="overflow-x:auto">
+<table>
+<thead><tr>
+  <th>Date</th><th>Activity</th><th>Status</th>
+  <th>Duration (plan→act)</th><th>Distance (plan→act)</th>
+  <th>Avg HR (zone)</th><th>HR drift</th><th>Elevation</th><th>Power</th>
+  <th>Verdict</th>
+</tr></thead>
+<tbody>
+
+        <tr class="row-completed">
+          <td class="date-cell">Mon 25 May</td>
+          <td>🚴 Lunch Ride</td>
+          <td><span class="badge done">✓ done</span></td>
+          <td>45m → 3h25m</td>
+          <td>— → 80.3 km</td>
+          <td>112 <span class="dim">(Z2)</span></td>
+          <td>—</td>
+          <td>607 m</td>
+          <td>121 W</td>
+          <td class="verdict">exceeded target duration. <span class="flag">duration_long</span> <span class="flag">hr_below</span></td>
+        </tr>
+
+        <tr class="row-completed">
+          <td class="date-cell">Tue 26 May</td>
+          <td>🏃 Night Run</td>
+          <td><span class="badge done">✓ done</span></td>
+          <td>30m → 29m</td>
+          <td>5 km → 5.0 km</td>
+          <td>124 <span class="dim">(Z2)</span></td>
+          <td>—</td>
+          <td>11 m</td>
+          <td>353 W</td>
+          <td class="verdict">on target. </td>
+        </tr>
+
+        <tr class="row-completed">
+          <td class="date-cell">Wed 27 May</td>
+          <td>🚴 Evening Ride</td>
+          <td><span class="badge done">✓ done</span></td>
+          <td>1h30m → 1h31m</td>
+          <td>— → 35.2 km</td>
+          <td>107 <span class="dim">(Z2)</span></td>
+          <td>—</td>
+          <td>222 m</td>
+          <td>101 W</td>
+          <td class="verdict">easy and controlled — exactly right. <span class="flag">hr_below</span></td>
+        </tr>
+
+        <tr class="row-planned">
+          <td class="date-cell">Thu 28 May</td>
+          <td>💪 strength</td>
+          <td><span class="badge plan">planned</span></td>
+          <td>40m → —</td>
+          <td>— → —</td>
+          <td>— <span class="dim">(—)</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="verdict"> </td>
+        </tr>
+
+        <tr class="row-planned">
+          <td class="date-cell">Fri 29 May</td>
+          <td>🏃 easy run</td>
+          <td><span class="badge plan">planned</span></td>
+          <td>25m → —</td>
+          <td>4 km → —</td>
+          <td>— <span class="dim">(Z2)</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="verdict"> </td>
+        </tr>
+
+        <tr class="row-adjusted">
+          <td class="date-cell">Sat 30 May</td>
+          <td>🚴 long endurance</td>
+          <td><span class="badge adj">adjusted</span></td>
+          <td>3h00m → —</td>
+          <td>80 km → —</td>
+          <td>— <span class="dim">(Z2)</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="verdict"> </td>
+        </tr>
+
+        <tr class="row-planned">
+          <td class="date-cell">Sun 31 May</td>
+          <td>🚶 recovery</td>
+          <td><span class="badge plan">planned</span></td>
+          <td>45m → —</td>
+          <td>— → —</td>
+          <td>— <span class="dim">(—)</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="verdict"> </td>
+        </tr>
+
+        <tr class="row-planned">
+          <td class="date-cell">Mon 01 Jun</td>
+          <td>🛌 rest</td>
+          <td><span class="badge plan">planned</span></td>
+          <td>— → —</td>
+          <td>— → —</td>
+          <td>— <span class="dim">(—)</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="verdict"> </td>
+        </tr>
+
+        <tr class="row-planned">
+          <td class="date-cell">Tue 02 Jun</td>
+          <td>🚴 easy endurance</td>
+          <td><span class="badge plan">planned</span></td>
+          <td>1h00m → —</td>
+          <td>— → —</td>
+          <td>— <span class="dim">(Z2)</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="verdict"> </td>
+        </tr>
+
+        <tr class="row-planned">
+          <td class="date-cell">Wed 03 Jun</td>
+          <td>🚴 tempo</td>
+          <td><span class="badge plan">planned</span></td>
+          <td>45m → —</td>
+          <td>— → —</td>
+          <td>— <span class="dim">(Z2)</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="verdict"> </td>
+        </tr>
+
+        <tr class="row-planned">
+          <td class="date-cell">Thu 04 Jun</td>
+          <td>🏃 easy run</td>
+          <td><span class="badge plan">planned</span></td>
+          <td>30m → —</td>
+          <td>5 km → —</td>
+          <td>— <span class="dim">(Z2)</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="verdict"> </td>
+        </tr>
+
+        <tr class="row-planned">
+          <td class="date-cell">Fri 05 Jun</td>
+          <td>🚴 easy endurance</td>
+          <td><span class="badge plan">planned</span></td>
+          <td>45m → —</td>
+          <td>— → —</td>
+          <td>— <span class="dim">(Z2)</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="verdict"> </td>
+        </tr>
+
+        <tr class="row-planned">
+          <td class="date-cell">Sat 06 Jun</td>
+          <td>🚴 endurance z2</td>
+          <td><span class="badge plan">planned</span></td>
+          <td>2h30m → —</td>
+          <td>50 km → —</td>
+          <td>— <span class="dim">(Z2)</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="verdict"> </td>
+        </tr>
+
+        <tr class="row-planned">
+          <td class="date-cell">Sun 07 Jun</td>
+          <td>🚶 recovery</td>
+          <td><span class="badge plan">planned</span></td>
+          <td>30m → —</td>
+          <td>— → —</td>
+          <td>— <span class="dim">(—)</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="verdict"> </td>
+        </tr>
+
+        <tr class="row-planned">
+          <td class="date-cell">Mon 08 Jun</td>
+          <td>🛌 rest</td>
+          <td><span class="badge plan">planned</span></td>
+          <td>— → —</td>
+          <td>— → —</td>
+          <td>— <span class="dim">(—)</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="verdict"> </td>
+        </tr>
+
+        <tr class="row-planned">
+          <td class="date-cell">Tue 09 Jun</td>
+          <td>🚴 easy endurance</td>
+          <td><span class="badge plan">planned</span></td>
+          <td>45m → —</td>
+          <td>— → —</td>
+          <td>— <span class="dim">(Z2)</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="verdict"> </td>
+        </tr>
+
+        <tr class="row-planned">
+          <td class="date-cell">Wed 10 Jun</td>
+          <td>🚴 openers</td>
+          <td><span class="badge plan">planned</span></td>
+          <td>35m → —</td>
+          <td>— → —</td>
+          <td>— <span class="dim">(—)</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="verdict"> </td>
+        </tr>
+
+        <tr class="row-planned">
+          <td class="date-cell">Thu 11 Jun</td>
+          <td>🛌 rest</td>
+          <td><span class="badge plan">planned</span></td>
+          <td>— → —</td>
+          <td>— → —</td>
+          <td>— <span class="dim">(—)</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="verdict"> </td>
+        </tr>
+
+        <tr class="row-planned">
+          <td class="date-cell">Fri 12 Jun</td>
+          <td>🚴 race</td>
+          <td><span class="badge plan">planned</span></td>
+          <td>14h00m → —</td>
+          <td>315 km → —</td>
+          <td>— <span class="dim">(Z2)</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="verdict"> </td>
+        </tr>
+</tbody>
+</table>
+</div>
+
+<h2>Week summary</h2>
+<div style="overflow-x:auto">
+<table class="week-table">
+<thead><tr><th>Week</th><th>Sessions</th><th>Total km</th><th>Total time</th></tr></thead>
+<tbody>
+<tr><td>W21 (May 25)</td><td>1</td><td>80 km</td><td>3h25m</td></tr>
+<tr><td>W21 (May 26)</td><td>1</td><td>5 km</td><td>29m</td></tr>
+<tr><td>W21 (May 27)</td><td>1</td><td>35 km</td><td>1h31m</td></tr>
+</tbody>
+</table>
+</div>
+
+<script>
+const data = {"labels": ["2026-05-25", "2026-05-26", "2026-05-27"], "hr": [112, 124, 107], "dist": [80.32, 5.02, 35.16], "dur": [3.41, 0.49, 1.52]};
+const ctx = document.getElementById('chart').getContext('2d');
+
+// Inline minimal Chart.js — drawn with Canvas API directly (no CDN dependency).
+// We draw HR as a line and distance as bars.
+(function() {
+  const labels = data.labels;
+  const n = labels.length;
+  if (!n) return;
+
+  const W = ctx.canvas.offsetWidth || 800;
+  ctx.canvas.width = W;
+  ctx.canvas.height = 180;
+  const w = W, h = 180;
+  const PAD = { t: 20, r: 20, b: 40, l: 50 };
+  const chartW = w - PAD.l - PAD.r;
+  const chartH = h - PAD.t - PAD.b;
+
+  // Scales
+  const maxDist = Math.max(...data.dist.map(v => v||0), 10);
+  const maxHR   = Math.max(...data.hr.map(v => v||0), 180);
+  const minHR   = 60;
+  const barW = Math.max(2, (chartW / n) - 2);
+
+  function xOf(i) { return PAD.l + (i + 0.5) * (chartW / n); }
+  function yHR(v)  { return PAD.t + chartH - ((v - minHR) / (maxHR - minHR)) * chartH; }
+  function yDist(v){ return PAD.t + chartH - (v / maxDist) * chartH; }
+
+  ctx.fillStyle = '#0f1117';
+  ctx.fillRect(0, 0, w, h);
+
+  // Grid lines
+  ctx.strokeStyle = '#2a2d3e'; ctx.lineWidth = 1;
+  for (let g = 0; g <= 4; g++) {
+    const y = PAD.t + (g / 4) * chartH;
+    ctx.beginPath(); ctx.moveTo(PAD.l, y); ctx.lineTo(w - PAD.r, y); ctx.stroke();
+  }
+
+  // Bars (distance)
+  data.dist.forEach((v, i) => {
+    if (!v) return;
+    const bh = (v / maxDist) * chartH;
+    ctx.fillStyle = '#1e3a5f';
+    ctx.fillRect(xOf(i) - barW/2, PAD.t + chartH - bh, barW, bh);
+  });
+
+  // HR line
+  ctx.beginPath(); ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2;
+  let moved = false;
+  data.hr.forEach((v, i) => {
+    if (!v) { moved = false; return; }
+    if (!moved) { ctx.moveTo(xOf(i), yHR(v)); moved = true; }
+    else ctx.lineTo(xOf(i), yHR(v));
+  });
+  ctx.stroke();
+
+  // HR dots
+  data.hr.forEach((v, i) => {
+    if (!v) return;
+    ctx.beginPath(); ctx.arc(xOf(i), yHR(v), 3, 0, Math.PI*2);
+    ctx.fillStyle = '#ef4444'; ctx.fill();
+  });
+
+  // X labels
+  ctx.fillStyle = '#64748b'; ctx.font = '10px system-ui'; ctx.textAlign = 'center';
+  labels.forEach((lbl, i) => {
+    if (i % Math.max(1, Math.floor(n/8)) === 0)
+      ctx.fillText(lbl.slice(5), xOf(i), h - 8);
+  });
+
+  // Y axis label (HR)
+  ctx.save(); ctx.translate(12, PAD.t + chartH/2);
+  ctx.rotate(-Math.PI/2); ctx.fillText('HR bpm', 0, 0); ctx.restore();
+
+  // Legend
+  ctx.fillStyle='#1e3a5f'; ctx.fillRect(w-110,8,12,12);
+  ctx.fillStyle='#e2e8f0'; ctx.textAlign='left'; ctx.font='11px system-ui';
+  ctx.fillText('Distance', w-94, 18);
+  ctx.strokeStyle='#ef4444'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(w-110,26); ctx.lineTo(w-98,26); ctx.stroke();
+  ctx.fillText('Avg HR', w-94, 30);
+})();
+</script>
+</body>
+</html>

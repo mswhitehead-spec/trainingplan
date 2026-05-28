@@ -133,7 +133,7 @@ def render_daily_email(
     state = state or {}
 
     today_sessions = _sessions_on(plan, today)
-    yesterday_sessions = _sessions_on(plan, today - timedelta(days=1))
+    recent_sessions = _sessions_between(plan, today - timedelta(days=5), today - timedelta(days=1))
     week_ahead = _sessions_between(
         plan, today + timedelta(days=1), today + timedelta(days=7)
     )
@@ -183,22 +183,40 @@ def render_daily_email(
                     lines.append(f"  {ln}")
             lines.append("")
 
-    # --- yesterday's verdict ----------------------------------------------
-    if yesterday_sessions:
-        done_yesterday = [s for s in yesterday_sessions
-                          if s.get("status") == "completed"]
-        missed_yesterday = [s for s in yesterday_sessions
-                            if s.get("status") == "missed"]
-        if done_yesterday:
-            lines.append("Yesterday:")
-            for s in done_yesterday:
-                verdict = ((s.get("analysis") or {}).get("verdict")
-                           or "completed")
-                lines.append(f"  ✓ {_short_title(s)} — {verdict}")
-            lines.append("")
-        elif missed_yesterday:
-            lines.append("Yesterday: session(s) missed — not logged.")
-            lines.append("")
+    # --- last 5 days -------------------------------------------------------
+    if recent_sessions:
+        lines.append("Last 5 days:")
+        for s in sorted(recent_sessions, key=lambda x: x["date"]):
+            d = date.fromisoformat(s["date"])
+            dow = _DOW[d.weekday()]
+            status = s.get("status", "planned")
+            actual = s.get("actual") or {}
+            analysis = s.get("analysis") or {}
+
+            if status == "completed":
+                icon = "✓"
+                dur = actual.get("duration_min")
+                dist = actual.get("distance_km")
+                hr = actual.get("avg_hr")
+                verdict = analysis.get("verdict", "completed")
+                # Build a compact metrics string
+                metrics: list[str] = []
+                if dist and dist > 0:
+                    metrics.append(f"{dist:.0f}km")
+                if dur:
+                    metrics.append(_fmt_duration_min(dur) or "")
+                if hr:
+                    metrics.append(f"HR {hr}")
+                metric_str = " · ".join(m for m in metrics if m)
+                suffix = f" ({metric_str})" if metric_str else ""
+                lines.append(f"  {icon} {dow} {d.day}  {_short_title(s)}{suffix} — {verdict}")
+            elif status == "missed":
+                lines.append(f"  ✗ {dow} {d.day}  {_short_title(s)} — missed")
+            elif status in {"planned", "adjusted"}:
+                lines.append(f"  – {dow} {d.day}  {_short_title(s)} — not logged yet")
+            else:
+                lines.append(f"  – {dow} {d.day}  {_short_title(s)} — {status}")
+        lines.append("")
 
     # --- week ahead --------------------------------------------------------
     if week_ahead:
