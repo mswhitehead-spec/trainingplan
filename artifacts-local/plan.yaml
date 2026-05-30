@@ -294,9 +294,37 @@ sessions:
 
     Bail criteria: if HR drift exceeds +10% in the last hour, or you can''t maintain Z2 power on flats,
     cut the ride short. The point is time-on-bike, not heroics.'
-  status: adjusted
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '18710546720'
+    name: Morning Ride
+    start_time_local: '2026-05-30T05:32:01'
+    date: '2026-05-30'
+    sport: cycling
+    duration_min: 186.3
+    distance_km: 73.22
+    avg_hr: 114
+    max_hr: 128
+    elevation_gain_m: 276.0
+    avg_power_w: 100.6
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-05-30T09:12:43'
+    duration_delta_min: 6.3
+    duration_pct: 103.5
+    distance_delta_km: -6.78
+    distance_pct: 91.5
+    hr_zone_status: below
+    hr_avg_actual: 114
+    hr_avg_target:
+    - 116
+    - 127
+    elevation_delta_m: -324.0
+    hr_drift_pct: null
+    flags:
+    - hr_below
+    verdict: avg HR below target zone — may have run easy when a stimulus was planned.
   adaptations:
   - rule_id: duration_overreach
     field: targets.duration_min
