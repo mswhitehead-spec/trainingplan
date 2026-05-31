@@ -339,9 +339,35 @@ sessions:
   targets:
     duration_min: 45
   notes: Easy walk only. Legs will be tired. No cycling, no running.
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '18733187178'
+    name: Evening Walk
+    start_time_local: '2026-05-31T19:51:15'
+    date: '2026-05-31'
+    sport: walking
+    duration_min: 18.7
+    distance_km: 1.39
+    avg_hr: 72
+    max_hr: 84
+    elevation_gain_m: 0
+    avg_power_w: null
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-05-31T20:15:11'
+    duration_delta_min: -26.3
+    duration_pct: 41.6
+    distance_delta_km: null
+    distance_pct: null
+    hr_zone_status: unknown
+    hr_avg_actual: 72
+    hr_avg_target: null
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - duration_short
+    verdict: session cut short of target duration.
   adaptations: []
 - id: 2026-06-01_mon_rest
   date: '2026-06-01'
