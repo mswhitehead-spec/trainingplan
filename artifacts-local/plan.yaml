@@ -390,9 +390,37 @@ sessions:
     - 116
     - 127
   notes: Spin out residual fatigue. Keep it in low Z2 — flush the legs.
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '18760589963'
+    name: Evening Ride
+    start_time_local: '2026-06-02T20:12:24'
+    date: '2026-06-02'
+    sport: cycling
+    duration_min: 65.5
+    distance_km: 25.55
+    avg_hr: 99
+    max_hr: 137
+    elevation_gain_m: 181.0
+    avg_power_w: 121.7
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-06-02T21:52:34'
+    duration_delta_min: 5.5
+    duration_pct: 109.2
+    distance_delta_km: null
+    distance_pct: null
+    hr_zone_status: below
+    hr_avg_actual: 99
+    hr_avg_target:
+    - 116
+    - 127
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - hr_below
+    verdict: easy and controlled — exactly right.
   adaptations: []
 - id: 2026-06-03_wed_tempo-opener
   date: '2026-06-03'
