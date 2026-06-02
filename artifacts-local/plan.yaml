@@ -375,7 +375,7 @@ sessions:
   type: rest
   targets: {}
   notes: Full rest after the long ride. Sleep priority.
-  status: planned
+  status: missed
   actual: null
   analysis: null
   adaptations: []
