@@ -28,6 +28,7 @@ from datetime import date, datetime, timedelta
 from email.message import EmailMessage
 from pathlib import Path
 
+from .activity import Activity, for_date_range
 from .plan import days_to_event
 
 
@@ -100,6 +101,7 @@ def _coaching_note(
     recent_sessions: list[dict],
     plan: dict,
     dte: int | None,
+    activities: list[Activity] | None = None,
 ) -> list[str]:
     """Generate 3-5 data-driven coaching bullets for today's email.
 
@@ -111,11 +113,25 @@ def _coaching_note(
 
     # ---- data extraction ---------------------------------------------------
     completed = [s for s in recent_sessions if s.get("status") == "completed"]
+
+    # Orphan activities: done during the recent window but not matched to any
+    # plan session. They still contribute to total training load, so include
+    # them in volume and HR metrics (but NOT in zone-status counts, which are
+    # plan-session-specific).
+    recent_lo = date.fromisoformat(recent_sessions[0]["date"]) if recent_sessions else (date.today() - timedelta(days=5))
+    recent_hi = date.today() - timedelta(days=1)
+    orphans = _orphan_acts(activities or [], plan, recent_lo, recent_hi)
+
     recent_hrs = [
         (s.get("actual") or {}).get("avg_hr")
         for s in completed
         if (s.get("actual") or {}).get("avg_hr")
     ]
+    # Add orphan HRs to the pool used for average calculations.
+    for a in orphans:
+        if a.avg_hr:
+            recent_hrs.append(a.avg_hr)
+
     recent_drifts = [
         (s.get("analysis") or {}).get("hr_drift_pct")
         for s in completed
@@ -128,10 +144,10 @@ def _coaching_note(
     total_km_recent = sum(
         (s.get("actual") or {}).get("distance_km") or 0
         for s in completed
-    )
-    total_h_recent = sum(
-        (s.get("actual") or {}).get("duration_min") or 0
-        for s in completed
+    ) + sum(a.distance_km for a in orphans)
+    total_h_recent = (
+        sum((s.get("actual") or {}).get("duration_min") or 0 for s in completed)
+        + sum(a.duration_min for a in orphans)
     ) / 60
 
     stype = today_sessions[0].get("type", "") if today_sessions else ""
@@ -345,6 +361,32 @@ def _coaching_note(
     return bullets
 
 
+def _consumed_source_ids(plan: dict) -> set[str]:
+    """Source IDs already claimed by a matched plan session."""
+    out: set[str] = set()
+    for s in plan.get("sessions", []):
+        sid = (s.get("actual") or {}).get("source_id")
+        if sid:
+            out.add(str(sid))
+    return out
+
+
+def _orphan_acts(
+    activities: list[Activity],
+    plan: dict,
+    lo: date,
+    hi: date,
+) -> list[Activity]:
+    """Activities in [lo, hi] not claimed by any plan session, oldest-first."""
+    if not activities:
+        return []
+    consumed = _consumed_source_ids(plan)
+    return [
+        a for a in for_date_range(activities, lo.isoformat(), hi.isoformat())
+        if str(a.source_id) not in consumed
+    ]
+
+
 def _latest_pending_proposal(art_dir: Path, state: dict) -> Path | None:
     """Kept for import compatibility. Returns None — proposals are now auto-applied."""
     return None
@@ -377,6 +419,7 @@ def render_daily_email(
     today: date | None = None,
     state: dict | None = None,
     pending_proposal: Path | None = None,   # kept for call-site compat; ignored
+    activities: list[Activity] | None = None,
 ) -> tuple[str, str]:
     """Render (subject, body) for today's email. Pure; no I/O."""
     today = today or date.today()
@@ -434,7 +477,8 @@ def render_daily_email(
             lines.append("")
 
     # --- coaching note -----------------------------------------------------
-    note_bullets = _coaching_note(today_sessions, recent_sessions, plan, dte)
+    note_bullets = _coaching_note(today_sessions, recent_sessions, plan, dte,
+                                   activities=activities)
     if note_bullets:
         lines.append("Today's note:")
         for b in note_bullets:
@@ -451,38 +495,67 @@ def render_daily_email(
         lines.append("")
 
     # --- last 5 days -------------------------------------------------------
-    if recent_sessions:
-        lines.append("Last 5 days:")
-        for s in sorted(recent_sessions, key=lambda x: x["date"]):
-            d = date.fromisoformat(s["date"])
-            dow = _DOW[d.weekday()]
-            status = s.get("status", "planned")
-            actual = s.get("actual") or {}
-            analysis = s.get("analysis") or {}
+    # Build a map of date → orphan activities so we can show them alongside
+    # the plan session for that day.
+    recent_lo = (today - timedelta(days=5))
+    recent_hi = (today - timedelta(days=1))
+    orphans_by_date: dict[str, list[Activity]] = {}
+    for a in _orphan_acts(activities or [], plan, recent_lo, recent_hi):
+        orphans_by_date.setdefault(a.date, []).append(a)
 
-            if status == "completed":
-                icon = "✓"
-                dur = actual.get("duration_min")
-                dist = actual.get("distance_km")
-                hr = actual.get("avg_hr")
-                verdict = analysis.get("verdict", "completed")
-                # Build a compact metrics string
-                metrics: list[str] = []
-                if dist and dist > 0:
-                    metrics.append(f"{dist:.0f}km")
-                if dur:
-                    metrics.append(_fmt_duration_min(dur) or "")
-                if hr:
-                    metrics.append(f"HR {hr}")
-                metric_str = " · ".join(m for m in metrics if m)
-                suffix = f" ({metric_str})" if metric_str else ""
-                lines.append(f"  {icon} {dow} {d.day}  {_short_title(s)}{suffix} — {verdict}")
-            elif status == "missed":
-                lines.append(f"  ✗ {dow} {d.day}  {_short_title(s)} — missed")
-            elif status in {"planned", "adjusted"}:
-                lines.append(f"  – {dow} {d.day}  {_short_title(s)} — not logged yet")
-            else:
-                lines.append(f"  – {dow} {d.day}  {_short_title(s)} — {status}")
+    if recent_sessions or orphans_by_date:
+        lines.append("Last 5 days:")
+        # Collect all dates that have either a plan session or an orphan
+        all_dates = sorted(set(
+            [s["date"] for s in recent_sessions]
+            + list(orphans_by_date.keys())
+        ))
+        for date_str in all_dates:
+            d = date.fromisoformat(date_str)
+            dow = _DOW[d.weekday()]
+            # Plan session(s) for this day
+            day_sessions = [s for s in recent_sessions if s["date"] == date_str]
+            for s in day_sessions:
+                status = s.get("status", "planned")
+                actual = s.get("actual") or {}
+                analysis = s.get("analysis") or {}
+                if status == "completed":
+                    icon = "✓"
+                    dur = actual.get("duration_min")
+                    dist = actual.get("distance_km")
+                    hr = actual.get("avg_hr")
+                    verdict = analysis.get("verdict", "completed")
+                    metrics: list[str] = []
+                    if dist and dist > 0:
+                        metrics.append(f"{dist:.0f}km")
+                    if dur:
+                        metrics.append(_fmt_duration_min(dur) or "")
+                    if hr:
+                        metrics.append(f"HR {hr}")
+                    metric_str = " · ".join(m for m in metrics if m)
+                    suffix = f" ({metric_str})" if metric_str else ""
+                    lines.append(f"  {icon} {dow} {d.day}  {_short_title(s)}{suffix} — {verdict}")
+                elif status == "missed":
+                    lines.append(f"  ✗ {dow} {d.day}  {_short_title(s)} — missed")
+                elif status in {"planned", "adjusted"}:
+                    lines.append(f"  – {dow} {d.day}  {_short_title(s)} — not logged yet")
+                else:
+                    lines.append(f"  – {dow} {d.day}  {_short_title(s)} — {status}")
+            # Orphan activities for this day (workouts outside the plan)
+            for a in orphans_by_date.get(date_str, []):
+                tag = {"cycling": "Bike", "running": "Run", "walking": "Walk",
+                       "strength": "Strength", "swimming": "Swim"}.get(a.sport, a.sport.title()[:6])
+                o_metrics: list[str] = []
+                if a.distance_km > 0:
+                    o_metrics.append(f"{a.distance_km:.0f}km")
+                if a.duration_min:
+                    o_metrics.append(_fmt_duration_min(a.duration_min) or "")
+                if a.avg_hr:
+                    o_metrics.append(f"HR {a.avg_hr}")
+                o_str = " · ".join(m for m in o_metrics if m)
+                # Show with a different icon to distinguish from plan sessions
+                label = (a.name or "unplanned").encode("ascii", "replace").decode("ascii")[:30]
+                lines.append(f"  + {dow} {d.day}  [{tag}] {label} ({o_str}) — outside plan")
         lines.append("")
 
     # --- week ahead --------------------------------------------------------

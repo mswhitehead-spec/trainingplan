@@ -32,6 +32,7 @@ if hasattr(sys.stdout, "reconfigure"):
 import click
 import yaml
 
+from trainingplan import activity as activity_mod
 from trainingplan import plan as plan_mod
 from trainingplan.adapt import (
     generate_proposal,
@@ -65,9 +66,11 @@ def main(today: str | None, dry_run: bool) -> None:
     plan = plan_mod.load(plan_path)
     plan_mod.validate(plan)
     heuristics = load_heuristics(heur_path)
+    acts_path = art_dir / "activities.jsonl"
+    activities = activity_mod.load_all(acts_path) if acts_path.exists() else []
 
     today_d = date.fromisoformat(today) if today else date.today()
-    proposal = generate_proposal(plan, heuristics, today=today_d)
+    proposal = generate_proposal(plan, heuristics, today=today_d, activities=activities)
 
     md = render_proposal_markdown(proposal, plan)
     click.echo(md)

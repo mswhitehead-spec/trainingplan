@@ -43,6 +43,7 @@ import click
 import yaml
 from dotenv import load_dotenv
 
+from trainingplan import activity as activity_mod
 from trainingplan import plan as plan_mod
 from trainingplan import state as state_mod
 from trainingplan.email_sender import (
@@ -82,11 +83,13 @@ def main(dry_run: bool, today: str | None, force: bool) -> None:
     art_dir = Path(cfg["artifacts_dir"])
     plan_path = art_dir / "plan.yaml"
     state_path = art_dir / "state.json"
+    acts_path = art_dir / "activities.jsonl"
     if not plan_path.exists():
         raise SystemExit(f"plan.yaml not found at {plan_path}")
     plan = plan_mod.load(plan_path)
     plan_mod.validate(plan)
     state = state_mod.load(state_path)
+    activities = activity_mod.load_all(acts_path) if acts_path.exists() else []
 
     today_d = date.fromisoformat(today) if today else date.today()
     today_str = today_d.isoformat()
@@ -101,7 +104,8 @@ def main(dry_run: bool, today: str | None, force: bool) -> None:
     pending = _latest_pending_proposal(art_dir, state)
 
     subject, body = render_daily_email(
-        plan, today=today_d, state=state, pending_proposal=pending
+        plan, today=today_d, state=state, pending_proposal=pending,
+        activities=activities,
     )
 
     if dry_run:

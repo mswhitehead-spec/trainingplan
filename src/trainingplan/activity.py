@@ -140,6 +140,28 @@ def merge_into(
     return combined, added, replaced
 
 
+def for_date_range(
+    activities: list["Activity"],
+    lo: str,
+    hi: str,
+) -> list["Activity"]:
+    """Return activities with date in [lo, hi] (YYYY-MM-DD, inclusive).
+
+    Deduplicates by (source, source_id) — safe to call after a merge that
+    may still have duplicates. Result is sorted oldest-first.
+    """
+    seen: set[tuple[str, str]] = set()
+    result: list[Activity] = []
+    for a in activities:
+        if lo <= a.date <= hi:
+            key = (a.source, a.source_id)
+            if key not in seen:
+                seen.add(key)
+                result.append(a)
+    result.sort(key=lambda a: (a.date, a.start_time_local))
+    return result
+
+
 def sport_from_strava_type(activity_type: str) -> str:
     """Map a Strava 'Activity Type' string to our sport category.
 

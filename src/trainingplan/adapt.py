@@ -126,10 +126,11 @@ def generate_proposal(
     plan: dict,
     heuristics: dict,
     today: date | None = None,
+    activities: list | None = None,
 ) -> Proposal:
     """Run all enabled rules and assemble a Proposal."""
     today = today or date.today()
-    ctx = build_context(plan, today=today)
+    ctx = build_context(plan, today=today, activities=activities or [])
 
     raw_changes = run_all(heuristics, ctx)
     changes = _dedup(raw_changes)

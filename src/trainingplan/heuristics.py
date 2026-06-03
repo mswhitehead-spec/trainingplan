@@ -70,6 +70,10 @@ class RuleContext:
     upcoming: list[dict]              # sessions with date >= today AND status in {planned, adjusted}
     completed_recent: list[dict]      # completed sessions in last 14 days, newest first
     missed_recent: list[dict]         # missed sessions in last 14 days
+    # All raw activities from the store (last 14 days), deduplicated.
+    # Includes bonus workouts not matched to any plan session — used to
+    # compute true daily load (not just the planned-session fraction).
+    all_activities: list = field(default_factory=list)
 
 
 # ---------------------------------------------------------------------------
@@ -356,10 +360,22 @@ def rule_duration_overreach(ctx: RuleContext, params: dict) -> list[ProposedChan
 
     if not planned_dur or not actual_dur:
         return []
-    if actual_dur < planned_dur * ratio:
+
+    # Add any unplanned activities on the same day to the actual duration.
+    # A bonus workout (not matched to a plan session) still contributes to
+    # daily load and should count toward the overreach threshold.
+    matched_src_id = str((last.get("actual") or {}).get("source_id", ""))
+    same_day_bonus = sum(
+        a.duration_min
+        for a in ctx.all_activities
+        if a.date == last["date"] and str(a.source_id) != matched_src_id
+    )
+    effective_dur = actual_dur + same_day_bonus
+
+    if effective_dur < planned_dur * ratio:
         return []
 
-    overreach_pct = int(round((actual_dur / planned_dur - 1) * 100))
+    overreach_pct = int(round((effective_dur / planned_dur - 1) * 100))
     changes: list[ProposedChange] = []
 
     # Change 1: promote first upcoming non-race session to recovery.
@@ -449,7 +465,8 @@ def load_heuristics(path: Path) -> dict:
 
 
 def build_context(plan: dict, today: date | None = None,
-                  recent_days: int = 14) -> RuleContext:
+                  recent_days: int = 14,
+                  activities: list | None = None) -> RuleContext:
     """Slice the plan into the views every rule wants."""
     from .plan import days_to_event   # local import to avoid cycle
 
@@ -478,6 +495,11 @@ def build_context(plan: dict, today: date | None = None,
     ]
     missed_recent.sort(key=lambda s: s["date"], reverse=True)
 
+    # Slice raw activities to the same recent window and dedup.
+    from .activity import for_date_range   # local import to avoid cycle
+    cutoff_str = (today - timedelta(days=recent_days)).isoformat()
+    recent_acts = for_date_range(activities or [], cutoff_str, today.isoformat())
+
     return RuleContext(
         plan=plan,
         today=today,
@@ -486,6 +508,7 @@ def build_context(plan: dict, today: date | None = None,
         upcoming=upcoming,
         completed_recent=completed_recent,
         missed_recent=missed_recent,
+        all_activities=recent_acts,
     )
 
 
