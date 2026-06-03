@@ -102,16 +102,33 @@ def match_activities_to_sessions(
     """
     today = today or date.today()
 
+    # Materialise the iterable once so we can walk it twice below.
+    all_sessions = list(sessions)
+
     # Stable ordering — sessions earliest first, ties by id.
     sessions_sorted = sorted(
-        (s for s in sessions if s.get("status", "planned") in _MATCHABLE_STATUSES
+        (s for s in all_sessions if s.get("status", "planned") in _MATCHABLE_STATUSES
          and s.get("discipline") != "rest"),
         key=lambda s: (s["date"], s["id"]),
     )
 
+    # Pre-consume activities already referenced by completed sessions.
+    # Without this, a completed session's activity stays in the available
+    # pool and can accidentally re-match a nearby session on the next cron run
+    # (the ±1 day window means yesterday's activity is still a candidate today).
+    pre_consumed: set[tuple[str, str]] = set()
+    for s in all_sessions:
+        if s.get("status") == "completed":
+            act = s.get("actual") or {}
+            src = act.get("source", "strava_api")
+            src_id = act.get("source_id")
+            if src_id:
+                pre_consumed.add((src, str(src_id)))
+
     # Activities are indexed by (source, source_id) for quick consume.
     available: dict[tuple[str, str], Activity] = {
         (a.source, a.source_id): a for a in activities
+        if (a.source, a.source_id) not in pre_consumed
     }
 
     matches: list[Match] = []

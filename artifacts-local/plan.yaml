@@ -431,35 +431,9 @@ sessions:
     avg_hr_zone: Z2
   notes: Warm up 15 min Z2. Then 2 x 5 min in cycling Z3 (127-138 HR) with 5 min Z2 between. Cool down
     10 min Z2. This is the only intensity work in the block — keep it controlled.
-  status: completed
-  actual:
-    source: strava_api
-    source_id: '18760589963'
-    name: Evening Ride
-    start_time_local: '2026-06-02T20:12:24'
-    date: '2026-06-02'
-    sport: cycling
-    duration_min: 65.5
-    distance_km: 25.55
-    avg_hr: 99
-    max_hr: 137
-    elevation_gain_m: 181.0
-    avg_power_w: 121.7
-    perceived_effort: null
-  analysis:
-    computed_at: '2026-06-03T08:08:05'
-    duration_delta_min: 20.5
-    duration_pct: 145.6
-    distance_delta_km: null
-    distance_pct: null
-    hr_zone_status: unknown
-    hr_avg_actual: 99
-    hr_avg_target: null
-    elevation_delta_m: null
-    hr_drift_pct: null
-    flags:
-    - duration_long
-    verdict: exceeded target duration.
+  status: planned
+  actual: null
+  analysis: null
   adaptations: []
 - id: 2026-06-04_thu_easy-run
   date: '2026-06-04'
