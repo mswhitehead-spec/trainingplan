@@ -431,7 +431,7 @@ sessions:
     avg_hr_zone: Z2
   notes: Warm up 15 min Z2. Then 2 x 5 min in cycling Z3 (127-138 HR) with 5 min Z2 between. Cool down
     10 min Z2. This is the only intensity work in the block — keep it controlled.
-  status: planned
+  status: missed
   actual: null
   analysis: null
   adaptations: []
