@@ -444,9 +444,34 @@ sessions:
     distance_km: 5
     avg_hr_zone: Z2
   notes: Easy. Skip if legs feel off — taper says when in doubt, rest.
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '18788345047'
+    name: Evening Run
+    start_time_local: '2026-06-04T20:48:45'
+    date: '2026-06-04'
+    sport: running
+    duration_min: 30.0
+    distance_km: 5.76
+    avg_hr: 138
+    max_hr: 154
+    elevation_gain_m: 14.0
+    avg_power_w: 398.4
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-06-05T06:58:50'
+    duration_delta_min: 0.0
+    duration_pct: 100.0
+    distance_delta_km: 0.76
+    distance_pct: 115.2
+    hr_zone_status: unknown
+    hr_avg_actual: 138
+    hr_avg_target: null
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags: []
+    verdict: on target.
   adaptations: []
 - id: 2026-06-05_fri_easy-spin
   date: '2026-06-05'
