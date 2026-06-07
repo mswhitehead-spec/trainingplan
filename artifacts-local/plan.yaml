@@ -529,9 +529,37 @@ sessions:
     - 127
   notes: 2.5 h Z2. Last ride > 90 min before the race. Same fueling protocol as last Saturday. Treat as
     a dress rehearsal.
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '18815141010'
+    name: Evening Ride
+    start_time_local: '2026-06-06T20:14:28'
+    date: '2026-06-06'
+    sport: cycling
+    duration_min: 131.6
+    distance_km: 54.15
+    avg_hr: 109
+    max_hr: 132
+    elevation_gain_m: 327.0
+    avg_power_w: 112.9
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-06-07T06:59:34'
+    duration_delta_min: -18.4
+    duration_pct: 87.7
+    distance_delta_km: 4.15
+    distance_pct: 108.3
+    hr_zone_status: below
+    hr_avg_actual: 109
+    hr_avg_target:
+    - 116
+    - 127
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - hr_below
+    verdict: avg HR below target zone — may have run easy when a stimulus was planned.
   adaptations: []
 - id: 2026-06-07_sun_recovery-walk
   date: '2026-06-07'
