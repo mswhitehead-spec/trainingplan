@@ -568,20 +568,55 @@ sessions:
   targets:
     duration_min: 30
   notes: Walk only.
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '18829395675'
+    name: Evening Ride
+    start_time_local: '2026-06-07T20:44:39'
+    date: '2026-06-07'
+    sport: cycling
+    duration_min: 64.4
+    distance_km: 26.47
+    avg_hr: 102
+    max_hr: 121
+    elevation_gain_m: 152.0
+    avg_power_w: 113.6
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-06-07T20:16:36'
+    duration_delta_min: 34.4
+    duration_pct: 214.7
+    distance_delta_km: null
+    distance_pct: null
+    hr_zone_status: unknown
+    hr_avg_actual: 102
+    hr_avg_target: null
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - substitute
+    - duration_long
+    substitute_sport: cycling
+    planned_discipline: walking
+    verdict: substituted cycling for walking — counts as training, but not the planned stimulus.
   adaptations: []
 - id: 2026-06-08_mon_rest
   date: '2026-06-08'
   discipline: rest
-  type: rest
+  type: recovery
   targets: {}
   notes: Rest. Race week.
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: duration_overreach
+    field: type
+    from: rest
+    to: recovery
+    reason: last session (2026-06-07) overreached planned duration by 115% — supercompensation needs a
+      recovery day (Friel CTB Ch. 6).
 - id: 2026-06-09_tue_easy-spin
   date: '2026-06-09'
   discipline: cycling
