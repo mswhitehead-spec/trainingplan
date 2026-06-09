@@ -607,7 +607,7 @@ sessions:
   type: recovery
   targets: {}
   notes: Rest. Race week.
-  status: adjusted
+  status: missed
   actual: null
   analysis: null
   adaptations:
@@ -620,7 +620,7 @@ sessions:
 - id: 2026-06-09_tue_easy-spin
   date: '2026-06-09'
   discipline: cycling
-  type: easy_endurance
+  type: recovery
   targets:
     duration_min: 45
     avg_hr_zone: Z2
@@ -628,10 +628,16 @@ sessions:
     - 116
     - 127
   notes: Easy. Wake the legs. Race week — less is more.
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: duration_overreach
+    field: type
+    from: easy_endurance
+    to: recovery
+    reason: last session (2026-06-07) overreached planned duration by 115% — supercompensation needs a
+      recovery day (Friel CTB Ch. 6).
 - id: 2026-06-10_wed_openers
   date: '2026-06-10'
   discipline: cycling
