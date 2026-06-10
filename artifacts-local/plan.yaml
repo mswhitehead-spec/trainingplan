@@ -628,7 +628,7 @@ sessions:
     - 116
     - 127
   notes: Easy. Wake the legs. Race week — less is more.
-  status: adjusted
+  status: missed
   actual: null
   analysis: null
   adaptations:
@@ -641,15 +641,21 @@ sessions:
 - id: 2026-06-10_wed_openers
   date: '2026-06-10'
   discipline: cycling
-  type: openers
+  type: recovery
   targets:
     duration_min: 35
   notes: 'Openers: 20 min easy Z2, then 4 x 30 s strong (Z4) with 2 min easy spin between, then 5 min
     Z2 cool down. Total ~35 min. Goal: wake up neuromuscular system, not fatigue.'
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: duration_overreach
+    field: type
+    from: openers
+    to: recovery
+    reason: last session (2026-06-07) overreached planned duration by 115% — supercompensation needs a
+      recovery day (Friel CTB Ch. 6).
 - id: 2026-06-11_thu_rest
   date: '2026-06-11'
   discipline: rest
