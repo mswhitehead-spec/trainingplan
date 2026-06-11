@@ -646,7 +646,7 @@ sessions:
     duration_min: 35
   notes: 'Openers: 20 min easy Z2, then 4 x 30 s strong (Z4) with 2 min easy spin between, then 5 min
     Z2 cool down. Total ~35 min. Goal: wake up neuromuscular system, not fatigue.'
-  status: adjusted
+  status: missed
   actual: null
   analysis: null
   adaptations:
@@ -659,14 +659,20 @@ sessions:
 - id: 2026-06-11_thu_rest
   date: '2026-06-11'
   discipline: rest
-  type: rest
+  type: recovery
   targets: {}
   notes: Rest. Travel day to Motala (Sweden). Carb-load. Hydrate. Bike check, gear check, sleep priority.
     No spin today even if legs feel itchy.
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: duration_overreach
+    field: type
+    from: rest
+    to: recovery
+    reason: last session (2026-06-07) overreached planned duration by 115% — supercompensation needs a
+      recovery day (Friel CTB Ch. 6).
 - id: 2026-06-12_fri_vatternrundan
   date: '2026-06-12'
   discipline: cycling
