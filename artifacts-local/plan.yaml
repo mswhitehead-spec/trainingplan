@@ -693,7 +693,7 @@ sessions:
     \  Don't sit down at controls — gets cold, hard to restart.\n\nBail criteria\n  HR > 133 for 15+ min\
     \ in first 100 km → slow immediately.\n  Can't keep food down → walk, sip, restart slow.\n  Mechanical\
     \ you can't fix → don't try to limp 200 km."
-  status: planned
+  status: missed
   actual: null
   analysis: null
   adaptations: []
