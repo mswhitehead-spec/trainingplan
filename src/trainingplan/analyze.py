@@ -38,6 +38,48 @@ DURATION_LONG_THRESH = 1.20    # above 120% → "exceeded target"
 HR_DRIFT_CLEAN = 5.0           # ≤5% drift = clean aerobic
 HR_DRIFT_HIGH = 8.0            # >8% = fatigue signal
 
+# Session types where comparing the SESSION-AVERAGE pace against the target
+# range is meaningful. Tempo/intervals/openers carry the WORK-rep pace in
+# their target, which the session average never matches (warmup/cooldown),
+# so they're excluded — check the laps in Strava instead.
+PACE_CHECK_TYPES = {"easy_run", "easy_endurance", "endurance_z2",
+                    "long_endurance", "recovery", "race"}
+
+
+def _pace_to_sec(p: str) -> int | None:
+    """'5:40' -> 340 seconds. None on anything malformed."""
+    try:
+        m, s = str(p).split(":")
+        return int(m) * 60 + int(s)
+    except (ValueError, AttributeError):
+        return None
+
+
+def _sec_to_pace(sec: float) -> str:
+    return f"{int(sec // 60)}:{int(round(sec % 60)):02d}"
+
+
+def pace_status(avg_pace_sec: float | None, target_range: list | None,
+                session_type: str) -> str:
+    """Classify session-avg pace vs the target [fast, slow] range.
+
+    Returns 'faster' | 'in_range' | 'slower' | 'unknown'. Note the range is
+    stored fast-bound first ('5:40', '6:10'); lower seconds = faster.
+    """
+    if session_type not in PACE_CHECK_TYPES:
+        return "unknown"
+    if avg_pace_sec is None or not target_range or len(target_range) != 2:
+        return "unknown"
+    fast = _pace_to_sec(target_range[0])
+    slow = _pace_to_sec(target_range[1])
+    if fast is None or slow is None:
+        return "unknown"
+    if avg_pace_sec < fast:
+        return "faster"
+    if avg_pace_sec > slow:
+        return "slower"
+    return "in_range"
+
 
 def _pct(numer: float, denom: float) -> float | None:
     if denom in (0, None):
@@ -108,6 +150,17 @@ def _verdict(analysis: dict, session_type: str) -> str:
         return "session cut short of target duration."
     if "duration_long" in flags:
         return "exceeded target duration."
+
+    # Easy days run too fast is the classic masters mistake — call it out
+    # even when everything else looks fine.
+    if "pace_fast" in flags and session_type in {
+        "easy_run", "easy_endurance", "recovery", "long_endurance",
+        "endurance_z2",
+    }:
+        return ("faster than the target pace range — easy days protect the "
+                "quality days; save it for Tuesday.")
+    if "pace_slow" in flags and session_type == "race":
+        return "slower than the target pace range."
 
     if "drift_high" in flags:
         return "HR drift high — fatigue signal; consider lighter next session."
@@ -187,6 +240,16 @@ def analyze_session(
     elif hr_status == "below":
         flags.append("hr_below")
 
+    # Pace vs target range (running; steady session types only).
+    pace_target = targets.get("pace_range_min_per_km")
+    pace_actual_sec = actual.get("avg_pace_sec_per_km")
+    p_status = pace_status(pace_actual_sec, pace_target,
+                           session.get("type", ""))
+    if p_status == "faster":
+        flags.append("pace_fast")
+    elif p_status == "slower":
+        flags.append("pace_slow")
+
     # Elevation.
     target_elev = targets.get("elevation_gain_m")
     actual_elev = actual.get("elevation_gain_m")
@@ -215,6 +278,10 @@ def analyze_session(
         "hr_zone_status": hr_status,
         "hr_avg_actual": hr_actual,
         "hr_avg_target": list(hr_target) if hr_target else None,
+        "pace_status": p_status,
+        "pace_avg_actual": (_sec_to_pace(pace_actual_sec)
+                            if pace_actual_sec else None),
+        "pace_target": list(pace_target) if pace_target else None,
         "elevation_delta_m": elev_delta,
         "hr_drift_pct": drift,
         "flags": flags,

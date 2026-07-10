@@ -100,7 +100,10 @@ def _title_for(session: dict) -> str:
         parts.append(f"{targets['distance_km']:g}km")
     elif targets.get("distance_km_min"):
         parts.append(f"{targets['distance_km_min']:g}km+")
-    if targets.get("avg_hr_zone"):
+    if targets.get("pace_range_min_per_km"):
+        lo, hi = targets["pace_range_min_per_km"]
+        parts.append(f"{lo}-{hi}/km")
+    elif targets.get("avg_hr_zone"):
         parts.append(targets["avg_hr_zone"])
 
     if parts:

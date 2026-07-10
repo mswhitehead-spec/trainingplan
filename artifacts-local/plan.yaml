@@ -86,6 +86,9 @@ sessions:
     distance_km: 6
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:40'
+    - '6:10'
   notes: Easy conversational pace. Z2 ceiling — slower is fine.
   status: planned
   actual: null
@@ -101,6 +104,9 @@ sessions:
     distance_km: 10
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:30'
+    - '6:00'
   notes: 'First long run of the block: 10 km relaxed Z2. Sets the baseline the next ten weeks build on.'
   status: planned
   actual: null
@@ -129,6 +135,9 @@ sessions:
     distance_km: 6
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:40'
+    - '6:10'
   notes: Easy conversational pace. Z2 ceiling — slower is fine. Finish with 4 x 20 s strides (fast but
     relaxed, full recovery) — neuromuscular sharpness, not fatigue.
   status: planned
@@ -175,6 +184,9 @@ sessions:
     distance_km: 7
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:20'
+    - '5:45'
   notes: Steady Z2, upper half of the zone ok. Smooth and even — this is aerobic base, the engine for
     the half.
   status: planned
@@ -231,6 +243,9 @@ sessions:
     distance_km: 11
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:30'
+    - '6:00'
   notes: Long run 11 km. Relaxed Z2 — 5:40-6:00/km territory. Fuel if over 90 min (gel at 45 min).
   status: planned
   actual: null
@@ -259,6 +274,9 @@ sessions:
     distance_km: 7
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:40'
+    - '6:10'
   notes: Easy conversational pace. Z2 ceiling — slower is fine. Finish with 4 x 20 s strides (fast but
     relaxed, full recovery) — neuromuscular sharpness, not fatigue.
   status: planned
@@ -305,6 +323,9 @@ sessions:
     distance_km: 8
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:20'
+    - '5:45'
   notes: Steady Z2, upper half of the zone ok. Smooth and even — this is aerobic base, the engine for
     the half.
   status: planned
@@ -361,6 +382,9 @@ sessions:
     distance_km: 12
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:30'
+    - '6:00'
   notes: Long run 12 km. Relaxed Z2 — 5:40-6:00/km territory. Fuel if over 90 min (gel at 45 min).
   status: planned
   actual: null
@@ -388,6 +412,9 @@ sessions:
     duration_min: 45
     distance_km: 8
     avg_hr_zone: Z3
+    pace_range_min_per_km:
+    - '4:55'
+    - '5:00'
   notes: 'Threshold intro: 15 min easy, then 2 x 10 min at 4:55-5:00/km (HR drifting to ~145) with 5 min
     easy between, 5 min easy to finish. Comfortably hard — short phrases, not sentences. This is last
     year''s race pace; it should feel manageable.'
@@ -435,6 +462,9 @@ sessions:
     distance_km: 6
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:40'
+    - '6:10'
   notes: Easy conversational pace. Z2 ceiling — slower is fine.
   status: planned
   actual: null
@@ -490,6 +520,9 @@ sessions:
     distance_km: 13
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:30'
+    - '6:00'
   notes: Long run 13 km. Relaxed Z2 — 5:40-6:00/km territory. Fuel if over 90 min (gel at 45 min).
   status: planned
   actual: null
@@ -518,6 +551,9 @@ sessions:
     distance_km: 6
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:40'
+    - '6:10'
   notes: Easy conversational pace. Z2 ceiling — slower is fine.
   status: planned
   actual: null
@@ -563,6 +599,9 @@ sessions:
     distance_km: 7
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:40'
+    - '6:10'
   notes: Easy conversational pace. Z2 ceiling — slower is fine. Finish with 4 x 20 s strides (fast but
     relaxed, full recovery) — neuromuscular sharpness, not fatigue.
   status: planned
@@ -604,6 +643,9 @@ sessions:
     distance_km: 10
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:30'
+    - '6:00'
   notes: 'Cutback long run — 10 km, genuinely easy. Absorption week: the fitness from weeks 1-3 lands
     now.'
   status: planned
@@ -632,6 +674,9 @@ sessions:
     duration_min: 50
     distance_km: 9
     avg_hr_zone: Z3
+    pace_range_min_per_km:
+    - '4:50'
+    - '4:55'
   notes: 3 x 10 min at 4:50-4:55/km with 4 min easy between. Even effort across all three — the third
     rep should feel like the first. Threshold volume is what moves the 1:40 needle.
   status: planned
@@ -678,6 +723,9 @@ sessions:
     distance_km: 7
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:40'
+    - '6:10'
   notes: Easy conversational pace. Z2 ceiling — slower is fine.
   status: planned
   actual: null
@@ -733,6 +781,9 @@ sessions:
     distance_km: 14
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:30'
+    - '6:00'
   notes: Long run 14 km. Relaxed Z2 — 5:40-6:00/km territory. Fuel if over 90 min (gel at 45 min).
   status: planned
   actual: null
@@ -760,6 +811,9 @@ sessions:
     duration_min: 55
     distance_km: 10
     avg_hr_zone: Z4
+    pace_range_min_per_km:
+    - '4:30'
+    - '4:35'
   notes: 'Speed: 5 x 1 km at 4:30-4:35/km with 400 m jog between. Faster than race pace on purpose — it
     makes 4:44 feel like cruising. Full warmup (15 min + 4 strides) before rep 1. Stop at 4 reps if form
     falls apart; quality over count.'
@@ -807,6 +861,9 @@ sessions:
     distance_km: 7
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:40'
+    - '6:10'
   notes: Easy conversational pace. Z2 ceiling — slower is fine.
   status: planned
   actual: null
@@ -862,6 +919,9 @@ sessions:
     distance_km: 16
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:30'
+    - '6:00'
   notes: Long run 16 km. Relaxed Z2 — 5:40-6:00/km territory. Fuel if over 90 min (gel at 45 min). Last
     3 km at goal half pace (4:44/km — HR will climb into Z4; that's the point). Practicing race pace on
     tired legs is the single most race-specific stimulus in the plan.
@@ -891,6 +951,9 @@ sessions:
     duration_min: 55
     distance_km: 10
     avg_hr_zone: Z3
+    pace_range_min_per_km:
+    - '4:42'
+    - '4:46'
   notes: 2 x 15 min at goal pace (4:44/km, HR settling around 144-150) with 5 min easy between. First
     proper rehearsal of race rhythm — learn what 4:44 feels like when fresh so you can find it by feel
     at km 10.
@@ -938,6 +1001,9 @@ sessions:
     distance_km: 8
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:40'
+    - '6:10'
   notes: Easy conversational pace. Z2 ceiling — slower is fine.
   status: planned
   actual: null
@@ -993,6 +1059,9 @@ sessions:
     distance_km: 17
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:30'
+    - '6:00'
   notes: Long run 17 km. Relaxed Z2 — 5:40-6:00/km territory. Fuel if over 90 min (gel at 45 min). Last
     4 km at goal half pace (4:44/km — HR will climb into Z4; that's the point). Practicing race pace on
     tired legs is the single most race-specific stimulus in the plan.
@@ -1022,6 +1091,9 @@ sessions:
     duration_min: 60
     distance_km: 11
     avg_hr_zone: Z4
+    pace_range_min_per_km:
+    - '4:40'
+    - '4:44'
   notes: '*** CHECKPOINT *** 4 x 2 km at 4:40-4:44/km with 2 min jog between. This decides the race plan:
     controlled and repeatable → race at 4:44 (sub-1:40). A fight → race at 4:58 (sub-1:45, still a 4-min
     PR). A strong finish beats a brave blowup — decide today, not at km 16.'
@@ -1069,6 +1141,9 @@ sessions:
     distance_km: 7
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:40'
+    - '6:10'
   notes: Easy conversational pace. Z2 ceiling — slower is fine.
   status: planned
   actual: null
@@ -1121,6 +1196,9 @@ sessions:
     distance_km: 18
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:30'
+    - '6:00'
   notes: Peak long run — 18 km relaxed Z2, fuel like race day (gel at 45 and 90 min). Longest run of the
     block; after today the hay is in the barn.
   status: planned
@@ -1149,6 +1227,9 @@ sessions:
     duration_min: 45
     distance_km: 8
     avg_hr_zone: Z3
+    pace_range_min_per_km:
+    - '4:44'
+    - '4:58'
   notes: '2 x 10 min at race pace (per the Sep 1 decision: 4:44 or 4:58), 5 min easy between. Volume drops
     in taper; intensity stays — that''s what preserves race sharpness (Bosquet 2007, Mujika & Padilla
     2003).'
@@ -1194,6 +1275,9 @@ sessions:
     distance_km: 6
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:40'
+    - '6:10'
   notes: Easy conversational pace. Z2 ceiling — slower is fine.
   status: planned
   actual: null
@@ -1237,6 +1321,9 @@ sessions:
     distance_km: 12
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:30'
+    - '6:00'
   notes: 'Taper long run — 12 km easy. No pace work. Rehearse race-morning routine: same breakfast, same
     start time if possible.'
   status: planned
@@ -1266,6 +1353,9 @@ sessions:
     distance_km: 5
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:40'
+    - '6:10'
   notes: Easy 5 km. Strides at race pace — rhythm check, nothing more. Finish with 4 x 20 s strides (fast
     but relaxed, full recovery) — neuromuscular sharpness, not fatigue.
   status: planned
@@ -1293,8 +1383,11 @@ sessions:
   targets:
     duration_min: 25
     distance_km: 4
-  notes: 'Openers: 15 min easy, then 3 x 60 s at race effort with 2 min easy between, 5 min easy to finish.
-    Wake up the legs, don''t tire them. You should finish feeling springy.'
+    pace_range_min_per_km:
+    - '4:35'
+    - '4:45'
+  notes: 'Openers: 15 min easy, then 3 x 60 s at race effort (4:35-4:45/km) with 2 min easy between, 5
+    min easy to finish. Wake up the legs, don''t tire them. You should finish feeling springy.'
   status: planned
   actual: null
   analysis: null
@@ -1319,6 +1412,9 @@ sessions:
     distance_km: 3
     avg_hr_zone: Z2
     avg_hr_range: *id001
+    pace_range_min_per_km:
+    - '5:40'
+    - '6:10'
   notes: 3 km shakeout + 2 strides. Legs itchy is exactly right — save it.
   status: planned
   actual: null
@@ -1334,6 +1430,9 @@ sessions:
     distance_km: 21.1
     avg_hr_range: *id003
     avg_pace_min_per_km: '4:44'
+    pace_range_min_per_km:
+    - '4:40'
+    - '4:46'
   notes: "*** RACE *** Half marathon — 21.1 km. Sub-1:40 target (4:44/km). Last year: 1:49 — this is the\
     \ A-goal; B-goal is sub-1:45 (4:58/km), still a 4-min PR.\n\nPacing\n  Km 1-3: 4:44, never faster.\
     \ Banked seconds cost minutes later.\n  Km 4-15: lock in 4:42-4:46, HR 144-154. Rhythm over heroics.\n\

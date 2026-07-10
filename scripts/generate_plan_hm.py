@@ -124,28 +124,37 @@ def easy_run(d: date, km: float, strides: bool = False, slot: str = "easy-run",
               "recovery) — neuromuscular sharpness, not fatigue.")
     return _base(d, slot, "running", "easy_run",
                  {"duration_min": dur, "distance_km": km,
-                  "avg_hr_zone": "Z2", "avg_hr_range": Z_RUN["Z2"]}, n, tod=tod)
+                  "avg_hr_zone": "Z2", "avg_hr_range": Z_RUN["Z2"],
+                  "pace_range_min_per_km": ["5:40", "6:10"]}, n, tod=tod)
 
 
 def steady_run(d: date, km: float) -> dict:
     dur = int(round(km * 5.75 / 5) * 5)
     return _base(d, "steady-z2", "running", "endurance_z2",
                  {"duration_min": dur, "distance_km": km,
-                  "avg_hr_zone": "Z2", "avg_hr_range": Z_RUN["Z2"]},
+                  "avg_hr_zone": "Z2", "avg_hr_range": Z_RUN["Z2"],
+                  "pace_range_min_per_km": ["5:20", "5:45"]},
                  "Steady Z2, upper half of the zone ok. Smooth and even — "
                  "this is aerobic base, the engine for the half.")
 
 
-def tempo(d: date, km: float, dur: int, notes: str) -> dict:
+def tempo(d: date, km: float, dur: int, notes: str,
+          pace: tuple[str, str]) -> dict:
+    # pace = the WORK-rep target, not the session average (warmup/cooldown
+    # pull the average down — analysis knows to skip session-avg pace checks
+    # for tempo/intervals).
     return _base(d, "tempo", "running", "tempo",
                  {"duration_min": dur, "distance_km": km,
-                  "avg_hr_zone": "Z3"}, notes)
+                  "avg_hr_zone": "Z3",
+                  "pace_range_min_per_km": list(pace)}, notes)
 
 
-def intervals(d: date, km: float, dur: int, notes: str) -> dict:
+def intervals(d: date, km: float, dur: int, notes: str,
+              pace: tuple[str, str]) -> dict:
     return _base(d, "intervals", "running", "intervals",
                  {"duration_min": dur, "distance_km": km,
-                  "avg_hr_zone": "Z4"}, notes)
+                  "avg_hr_zone": "Z4",
+                  "pace_range_min_per_km": list(pace)}, notes)
 
 
 def long_run(d: date, km: float, pace_finish_km: int = 0,
@@ -161,7 +170,8 @@ def long_run(d: date, km: float, pace_finish_km: int = 0,
                       f"single most race-specific stimulus in the plan.")
     return _base(d, "long-run", "running", "long_endurance",
                  {"duration_min": dur, "distance_km": km,
-                  "avg_hr_zone": "Z2", "avg_hr_range": Z_RUN["Z2"]}, notes)
+                  "avg_hr_zone": "Z2", "avg_hr_range": Z_RUN["Z2"],
+                  "pace_range_min_per_km": ["5:30", "6:00"]}, notes)
 
 
 def bike(d: date, minutes: int, tod: str = "morning") -> dict:
@@ -181,10 +191,12 @@ def walk(d: date, minutes: int, tod: str = "morning") -> dict:
 
 def openers(d: date) -> dict:
     return _base(d, "openers", "running", "openers",
-                 {"duration_min": 25, "distance_km": 4},
-                 "Openers: 15 min easy, then 3 x 60 s at race effort with "
-                 "2 min easy between, 5 min easy to finish. Wake up the "
-                 "legs, don't tire them. You should finish feeling springy.")
+                 {"duration_min": 25, "distance_km": 4,
+                  "pace_range_min_per_km": ["4:35", "4:45"]},
+                 "Openers: 15 min easy, then 3 x 60 s at race effort "
+                 "(4:35-4:45/km) with 2 min easy between, 5 min easy to "
+                 "finish. Wake up the legs, don't tire them. You should "
+                 "finish feeling springy.")
 
 
 def race(d: date) -> dict:
@@ -192,7 +204,8 @@ def race(d: date) -> dict:
                  {"duration_min": RACE_TARGET_MIN,
                   "distance_km": RACE_DISTANCE_KM,
                   "avg_hr_range": RACE_HR_RANGE,
-                  "avg_pace_min_per_km": GOAL_PACE},
+                  "avg_pace_min_per_km": GOAL_PACE,
+                  "pace_range_min_per_km": ["4:40", "4:46"]},
                  "*** RACE *** Half marathon — 21.1 km. Sub-1:40 target "
                  f"({GOAL_PACE}/km). Last year: 1:49 — this is the A-goal; "
                  f"B-goal is sub-1:45 ({B_GOAL_PACE}/km), still a 4-min PR.\n\n"
@@ -276,7 +289,8 @@ def build_sessions() -> list[dict]:
              "Threshold intro: 15 min easy, then 2 x 10 min at 4:55-5:00/km "
              "(HR drifting to ~145) with 5 min easy between, 5 min easy to "
              "finish. Comfortably hard — short phrases, not sentences. This "
-             "is last year's race pace; it should feel manageable."),
+             "is last year's race pace; it should feel manageable.",
+             pace=("4:55", "5:00")),
          tue_pm=pm_strength,
          wed=am_spin,
          thu_am=lambda d: easy_run(d, 6),
@@ -300,7 +314,8 @@ def build_sessions() -> list[dict]:
          tue_am=lambda d: tempo(d, 9, 50,
              "3 x 10 min at 4:50-4:55/km with 4 min easy between. Even "
              "effort across all three — the third rep should feel like the "
-             "first. Threshold volume is what moves the 1:40 needle."),
+             "first. Threshold volume is what moves the 1:40 needle.",
+             pace=("4:50", "4:55")),
          tue_pm=pm_strength,
          wed=am_spin,
          thu_am=lambda d: easy_run(d, 7),
@@ -312,7 +327,8 @@ def build_sessions() -> list[dict]:
              "Speed: 5 x 1 km at 4:30-4:35/km with 400 m jog between. "
              "Faster than race pace on purpose — it makes 4:44 feel like "
              "cruising. Full warmup (15 min + 4 strides) before rep 1. "
-             "Stop at 4 reps if form falls apart; quality over count."),
+             "Stop at 4 reps if form falls apart; quality over count.",
+             pace=("4:30", "4:35")),
          tue_pm=pm_strength,
          wed=am_spin,
          thu_am=lambda d: easy_run(d, 7),
@@ -324,7 +340,8 @@ def build_sessions() -> list[dict]:
              f"2 x 15 min at goal pace ({GOAL_PACE}/km, HR settling around "
              "144-150) with 5 min easy between. First proper rehearsal of "
              "race rhythm — learn what 4:44 feels like when fresh so you "
-             "can find it by feel at km 10."),
+             "can find it by feel at km 10.",
+             pace=("4:42", "4:46")),
          tue_pm=pm_strength,
          wed=am_spin,
          thu_am=lambda d: easy_run(d, 8),
@@ -339,7 +356,8 @@ def build_sessions() -> list[dict]:
              "between. This decides the race plan: controlled and "
              f"repeatable → race at {GOAL_PACE} (sub-1:40). A fight → race "
              f"at {B_GOAL_PACE} (sub-1:45, still a 4-min PR). A strong "
-             "finish beats a brave blowup — decide today, not at km 16."),
+             "finish beats a brave blowup — decide today, not at km 16.",
+             pace=("4:40", "4:44")),
          tue_pm=pm_strength,
          wed=am_spin,
          thu_am=lambda d: easy_run(d, 7),
@@ -357,7 +375,8 @@ def build_sessions() -> list[dict]:
              f"2 x 10 min at race pace (per the Sep 1 decision: {GOAL_PACE} "
              f"or {B_GOAL_PACE}), 5 min easy between. Volume drops in "
              "taper; intensity stays — that's what preserves race "
-             "sharpness (Bosquet 2007, Mujika & Padilla 2003)."),
+             "sharpness (Bosquet 2007, Mujika & Padilla 2003).",
+             pace=("4:44", "4:58")),
          tue_pm=lambda d: strength(d, 30, light=True),
          wed=lambda d: bike(d, 30),
          thu_am=lambda d: easy_run(d, 6),

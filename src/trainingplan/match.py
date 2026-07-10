@@ -222,6 +222,8 @@ def actual_from_activity(activity: Activity) -> dict:
         "distance_km": round(activity.distance_km, 2),
         "avg_hr": activity.avg_hr,
         "max_hr": activity.max_hr,
+        "avg_pace_sec_per_km": (round(activity.avg_pace_sec_per_km, 1)
+                                if activity.avg_pace_sec_per_km else None),
         "elevation_gain_m": round(activity.elevation_gain_m, 0) if activity.elevation_gain_m else 0,
         "avg_power_w": activity.avg_power_w,
         "perceived_effort": activity.perceived_effort,

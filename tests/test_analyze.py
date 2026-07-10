@@ -146,3 +146,33 @@ def test_analyze_no_targets_flag():
     a = analyze_session(s)
     assert "no_target" in a["flags"]
     assert "no quantitative" in a["verdict"]
+
+
+# ----- pace vs target range --------------------------------------------------
+
+def test_pace_status_classification():
+    from trainingplan.analyze import pace_status
+    rng = ["5:40", "6:10"]  # fast bound first
+    assert pace_status(330.0, rng, "easy_run") == "faster"    # 5:30
+    assert pace_status(350.0, rng, "easy_run") == "in_range"  # 5:50
+    assert pace_status(380.0, rng, "easy_run") == "slower"    # 6:20
+    assert pace_status(None, rng, "easy_run") == "unknown"
+    # Work-pace types are never judged on session average.
+    assert pace_status(330.0, rng, "tempo") == "unknown"
+    assert pace_status(330.0, rng, "intervals") == "unknown"
+
+
+def test_easy_run_too_fast_verdict():
+    from trainingplan.analyze import analyze_session
+    session = {
+        "type": "easy_run", "discipline": "running",
+        "targets": {"duration_min": 35, "distance_km": 6,
+                    "pace_range_min_per_km": ["5:40", "6:10"]},
+        "actual": {"sport": "running", "duration_min": 33.0,
+                   "distance_km": 6.0, "avg_hr": 138,
+                   "avg_pace_sec_per_km": 315.0},   # 5:15 — too fast
+    }
+    analysis = analyze_session(session)
+    assert "pace_fast" in analysis["flags"]
+    assert "easy days" in analysis["verdict"]
+    assert analysis["pace_avg_actual"] == "5:15"

@@ -77,7 +77,12 @@ def _short_title(session: dict) -> str:
         parts.append(f"{targets['distance_km']:g}km")
     elif targets.get("distance_km_min"):
         parts.append(f"{targets['distance_km_min']:g}km+")
-    if targets.get("avg_hr_zone"):
+    # Pace range beats HR zone in the one-liner when both exist — this is a
+    # pace-driven block and the watch shows pace, not zone labels.
+    if targets.get("pace_range_min_per_km"):
+        lo, hi = targets["pace_range_min_per_km"]
+        parts.append(f"{lo}-{hi}/km")
+    elif targets.get("avg_hr_zone"):
         parts.append(targets["avg_hr_zone"])
 
     tail = " · " + " · ".join(parts) if parts else ""
@@ -588,6 +593,9 @@ def render_daily_email(
             if status != "planned":
                 lines.append(f"  status: {status}")
             targets = s.get("targets") or {}
+            if targets.get("pace_range_min_per_km"):
+                plo, phi = targets["pace_range_min_per_km"]
+                lines.append(f"  Pace target: {plo}–{phi} /km")
             if targets.get("avg_hr_range"):
                 lo, hi = targets["avg_hr_range"]
                 lines.append(f"  HR target: {lo}–{hi} bpm")
@@ -753,6 +761,9 @@ def render_daily_email_html(
         tod_chip = (_h_chip(tod, "#374151", "#e5e7eb") + " ") if tod else ""
         targets = s.get("targets") or {}
         meta: list[str] = []
+        if targets.get("pace_range_min_per_km"):
+            plo, phi = targets["pace_range_min_per_km"]
+            meta.append(f"Pace {plo}–{phi} /km")
         if targets.get("avg_hr_range"):
             lo, hi = targets["avg_hr_range"]
             meta.append(f"HR {lo}–{hi} bpm")
