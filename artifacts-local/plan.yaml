@@ -86,6 +86,7 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-07-12_sun_long-run
   date: '2026-07-12'
   discipline: running
@@ -100,12 +101,16 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-07-13_mon_rest
   date: '2026-07-13'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -125,19 +130,37 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
-- id: 2026-07-15_wed_strength
-  date: '2026-07-15'
+  time_of_day: morning
+- id: 2026-07-14_tue_strength
+  date: '2026-07-14'
   discipline: strength
   type: strength
   targets:
     duration_min: 40
   notes: 'Strength: hips, glutes, calves, core. Single-leg RDLs, step-ups, calf raises, Copenhagen planks.
     Masters athletes keep strength or lose it (Friel, Fast After 50) — this is injury armor for the running
-    build.'
+    build. Evening slot: the morning run is done, so quality stays on quality days and easy days stay
+    easy.'
   status: planned
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: evening
+- id: 2026-07-15_wed_easy-spin
+  date: '2026-07-15'
+  discipline: cycling
+  type: easy_endurance
+  targets:
+    duration_min: 40
+    avg_hr_zone: Z2
+    avg_hr_range: *id002
+  notes: Easy spin — aerobic volume with zero impact. Cycling Z2 (116-127). Legs should feel better after
+    than before.
+  status: planned
+  actual: null
+  analysis: null
+  adaptations: []
+  time_of_day: morning
 - id: 2026-07-16_thu_steady-z2
   date: '2026-07-16'
   discipline: running
@@ -153,12 +176,28 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
+- id: 2026-07-16_thu_recovery-walk
+  date: '2026-07-16'
+  discipline: walking
+  type: recovery
+  targets:
+    duration_min: 30
+  notes: Easy walk only — active recovery.
+  status: planned
+  actual: null
+  analysis: null
+  adaptations: []
+  time_of_day: evening
 - id: 2026-07-17_fri_rest
   date: '2026-07-17'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -177,6 +216,7 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-07-19_sun_long-run
   date: '2026-07-19'
   discipline: running
@@ -191,12 +231,16 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-07-20_mon_rest
   date: '2026-07-20'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -216,19 +260,37 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
-- id: 2026-07-22_wed_strength
-  date: '2026-07-22'
+  time_of_day: morning
+- id: 2026-07-21_tue_strength
+  date: '2026-07-21'
   discipline: strength
   type: strength
   targets:
     duration_min: 40
   notes: 'Strength: hips, glutes, calves, core. Single-leg RDLs, step-ups, calf raises, Copenhagen planks.
     Masters athletes keep strength or lose it (Friel, Fast After 50) — this is injury armor for the running
-    build.'
+    build. Evening slot: the morning run is done, so quality stays on quality days and easy days stay
+    easy.'
   status: planned
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: evening
+- id: 2026-07-22_wed_easy-spin
+  date: '2026-07-22'
+  discipline: cycling
+  type: easy_endurance
+  targets:
+    duration_min: 40
+    avg_hr_zone: Z2
+    avg_hr_range: *id002
+  notes: Easy spin — aerobic volume with zero impact. Cycling Z2 (116-127). Legs should feel better after
+    than before.
+  status: planned
+  actual: null
+  analysis: null
+  adaptations: []
+  time_of_day: morning
 - id: 2026-07-23_thu_steady-z2
   date: '2026-07-23'
   discipline: running
@@ -244,12 +306,28 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
+- id: 2026-07-23_thu_recovery-walk
+  date: '2026-07-23'
+  discipline: walking
+  type: recovery
+  targets:
+    duration_min: 30
+  notes: Easy walk only — active recovery.
+  status: planned
+  actual: null
+  analysis: null
+  adaptations: []
+  time_of_day: evening
 - id: 2026-07-24_fri_rest
   date: '2026-07-24'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -268,6 +346,7 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-07-26_sun_long-run
   date: '2026-07-26'
   discipline: running
@@ -282,12 +361,16 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-07-27_mon_rest
   date: '2026-07-27'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -306,19 +389,37 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
-- id: 2026-07-29_wed_strength
-  date: '2026-07-29'
+  time_of_day: morning
+- id: 2026-07-28_tue_strength
+  date: '2026-07-28'
   discipline: strength
   type: strength
   targets:
     duration_min: 40
   notes: 'Strength: hips, glutes, calves, core. Single-leg RDLs, step-ups, calf raises, Copenhagen planks.
     Masters athletes keep strength or lose it (Friel, Fast After 50) — this is injury armor for the running
-    build.'
+    build. Evening slot: the morning run is done, so quality stays on quality days and easy days stay
+    easy.'
   status: planned
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: evening
+- id: 2026-07-29_wed_easy-spin
+  date: '2026-07-29'
+  discipline: cycling
+  type: easy_endurance
+  targets:
+    duration_min: 40
+    avg_hr_zone: Z2
+    avg_hr_range: *id002
+  notes: Easy spin — aerobic volume with zero impact. Cycling Z2 (116-127). Legs should feel better after
+    than before.
+  status: planned
+  actual: null
+  analysis: null
+  adaptations: []
+  time_of_day: morning
 - id: 2026-07-30_thu_easy-run
   date: '2026-07-30'
   discipline: running
@@ -333,12 +434,28 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
+- id: 2026-07-30_thu_recovery-walk
+  date: '2026-07-30'
+  discipline: walking
+  type: recovery
+  targets:
+    duration_min: 30
+  notes: Easy walk only — active recovery.
+  status: planned
+  actual: null
+  analysis: null
+  adaptations: []
+  time_of_day: evening
 - id: 2026-07-31_fri_rest
   date: '2026-07-31'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -357,6 +474,7 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-08-02_sun_long-run
   date: '2026-08-02'
   discipline: running
@@ -371,12 +489,16 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-08-03_mon_rest
   date: '2026-08-03'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -395,19 +517,37 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
-- id: 2026-08-05_wed_strength
-  date: '2026-08-05'
+  time_of_day: morning
+- id: 2026-08-04_tue_strength
+  date: '2026-08-04'
   discipline: strength
   type: strength
   targets:
     duration_min: 40
   notes: 'Strength: hips, glutes, calves, core. Single-leg RDLs, step-ups, calf raises, Copenhagen planks.
     Masters athletes keep strength or lose it (Friel, Fast After 50) — this is injury armor for the running
-    build.'
+    build. Evening slot: the morning run is done, so quality stays on quality days and easy days stay
+    easy.'
   status: planned
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: evening
+- id: 2026-08-05_wed_easy-spin
+  date: '2026-08-05'
+  discipline: cycling
+  type: easy_endurance
+  targets:
+    duration_min: 40
+    avg_hr_zone: Z2
+    avg_hr_range: *id002
+  notes: Easy spin — aerobic volume with zero impact. Cycling Z2 (116-127). Legs should feel better after
+    than before.
+  status: planned
+  actual: null
+  analysis: null
+  adaptations: []
+  time_of_day: morning
 - id: 2026-08-06_thu_easy-run
   date: '2026-08-06'
   discipline: running
@@ -423,12 +563,16 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-08-07_fri_rest
   date: '2026-08-07'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -444,6 +588,7 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-08-09_sun_long-run
   date: '2026-08-09'
   discipline: running
@@ -459,12 +604,16 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-08-10_mon_rest
   date: '2026-08-10'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -483,19 +632,37 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
-- id: 2026-08-12_wed_strength
-  date: '2026-08-12'
+  time_of_day: morning
+- id: 2026-08-11_tue_strength
+  date: '2026-08-11'
   discipline: strength
   type: strength
   targets:
     duration_min: 40
   notes: 'Strength: hips, glutes, calves, core. Single-leg RDLs, step-ups, calf raises, Copenhagen planks.
     Masters athletes keep strength or lose it (Friel, Fast After 50) — this is injury armor for the running
-    build.'
+    build. Evening slot: the morning run is done, so quality stays on quality days and easy days stay
+    easy.'
   status: planned
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: evening
+- id: 2026-08-12_wed_easy-spin
+  date: '2026-08-12'
+  discipline: cycling
+  type: easy_endurance
+  targets:
+    duration_min: 40
+    avg_hr_zone: Z2
+    avg_hr_range: *id002
+  notes: Easy spin — aerobic volume with zero impact. Cycling Z2 (116-127). Legs should feel better after
+    than before.
+  status: planned
+  actual: null
+  analysis: null
+  adaptations: []
+  time_of_day: morning
 - id: 2026-08-13_thu_easy-run
   date: '2026-08-13'
   discipline: running
@@ -510,12 +677,28 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
+- id: 2026-08-13_thu_recovery-walk
+  date: '2026-08-13'
+  discipline: walking
+  type: recovery
+  targets:
+    duration_min: 30
+  notes: Easy walk only — active recovery.
+  status: planned
+  actual: null
+  analysis: null
+  adaptations: []
+  time_of_day: evening
 - id: 2026-08-14_fri_rest
   date: '2026-08-14'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -534,6 +717,7 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-08-16_sun_long-run
   date: '2026-08-16'
   discipline: running
@@ -548,12 +732,16 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-08-17_mon_rest
   date: '2026-08-17'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -572,19 +760,37 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
-- id: 2026-08-19_wed_strength
-  date: '2026-08-19'
+  time_of_day: morning
+- id: 2026-08-18_tue_strength
+  date: '2026-08-18'
   discipline: strength
   type: strength
   targets:
     duration_min: 40
   notes: 'Strength: hips, glutes, calves, core. Single-leg RDLs, step-ups, calf raises, Copenhagen planks.
     Masters athletes keep strength or lose it (Friel, Fast After 50) — this is injury armor for the running
-    build.'
+    build. Evening slot: the morning run is done, so quality stays on quality days and easy days stay
+    easy.'
   status: planned
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: evening
+- id: 2026-08-19_wed_easy-spin
+  date: '2026-08-19'
+  discipline: cycling
+  type: easy_endurance
+  targets:
+    duration_min: 40
+    avg_hr_zone: Z2
+    avg_hr_range: *id002
+  notes: Easy spin — aerobic volume with zero impact. Cycling Z2 (116-127). Legs should feel better after
+    than before.
+  status: planned
+  actual: null
+  analysis: null
+  adaptations: []
+  time_of_day: morning
 - id: 2026-08-20_thu_easy-run
   date: '2026-08-20'
   discipline: running
@@ -599,12 +805,28 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
+- id: 2026-08-20_thu_recovery-walk
+  date: '2026-08-20'
+  discipline: walking
+  type: recovery
+  targets:
+    duration_min: 30
+  notes: Easy walk only — active recovery.
+  status: planned
+  actual: null
+  analysis: null
+  adaptations: []
+  time_of_day: evening
 - id: 2026-08-21_fri_rest
   date: '2026-08-21'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -623,6 +845,7 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-08-23_sun_long-run
   date: '2026-08-23'
   discipline: running
@@ -639,12 +862,16 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-08-24_mon_rest
   date: '2026-08-24'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -663,19 +890,37 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
-- id: 2026-08-26_wed_strength
-  date: '2026-08-26'
+  time_of_day: morning
+- id: 2026-08-25_tue_strength
+  date: '2026-08-25'
   discipline: strength
   type: strength
   targets:
     duration_min: 40
   notes: 'Strength: hips, glutes, calves, core. Single-leg RDLs, step-ups, calf raises, Copenhagen planks.
     Masters athletes keep strength or lose it (Friel, Fast After 50) — this is injury armor for the running
-    build.'
+    build. Evening slot: the morning run is done, so quality stays on quality days and easy days stay
+    easy.'
   status: planned
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: evening
+- id: 2026-08-26_wed_easy-spin
+  date: '2026-08-26'
+  discipline: cycling
+  type: easy_endurance
+  targets:
+    duration_min: 40
+    avg_hr_zone: Z2
+    avg_hr_range: *id002
+  notes: Easy spin — aerobic volume with zero impact. Cycling Z2 (116-127). Legs should feel better after
+    than before.
+  status: planned
+  actual: null
+  analysis: null
+  adaptations: []
+  time_of_day: morning
 - id: 2026-08-27_thu_easy-run
   date: '2026-08-27'
   discipline: running
@@ -690,12 +935,28 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
+- id: 2026-08-27_thu_recovery-walk
+  date: '2026-08-27'
+  discipline: walking
+  type: recovery
+  targets:
+    duration_min: 30
+  notes: Easy walk only — active recovery.
+  status: planned
+  actual: null
+  analysis: null
+  adaptations: []
+  time_of_day: evening
 - id: 2026-08-28_fri_rest
   date: '2026-08-28'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -714,6 +975,7 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-08-30_sun_long-run
   date: '2026-08-30'
   discipline: running
@@ -730,12 +992,16 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-08-31_mon_rest
   date: '2026-08-31'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -755,19 +1021,37 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
-- id: 2026-09-02_wed_strength
-  date: '2026-09-02'
+  time_of_day: morning
+- id: 2026-09-01_tue_strength
+  date: '2026-09-01'
   discipline: strength
   type: strength
   targets:
     duration_min: 40
   notes: 'Strength: hips, glutes, calves, core. Single-leg RDLs, step-ups, calf raises, Copenhagen planks.
     Masters athletes keep strength or lose it (Friel, Fast After 50) — this is injury armor for the running
-    build.'
+    build. Evening slot: the morning run is done, so quality stays on quality days and easy days stay
+    easy.'
   status: planned
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: evening
+- id: 2026-09-02_wed_easy-spin
+  date: '2026-09-02'
+  discipline: cycling
+  type: easy_endurance
+  targets:
+    duration_min: 40
+    avg_hr_zone: Z2
+    avg_hr_range: *id002
+  notes: Easy spin — aerobic volume with zero impact. Cycling Z2 (116-127). Legs should feel better after
+    than before.
+  status: planned
+  actual: null
+  analysis: null
+  adaptations: []
+  time_of_day: morning
 - id: 2026-09-03_thu_easy-run
   date: '2026-09-03'
   discipline: running
@@ -782,12 +1066,28 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
+- id: 2026-09-03_thu_recovery-walk
+  date: '2026-09-03'
+  discipline: walking
+  type: recovery
+  targets:
+    duration_min: 30
+  notes: Easy walk only — active recovery.
+  status: planned
+  actual: null
+  analysis: null
+  adaptations: []
+  time_of_day: evening
 - id: 2026-09-04_fri_rest
   date: '2026-09-04'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -803,6 +1103,7 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-09-06_sun_long-run
   date: '2026-09-06'
   discipline: running
@@ -818,12 +1119,16 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-09-07_mon_rest
   date: '2026-09-07'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -842,8 +1147,9 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
-- id: 2026-09-09_wed_strength
-  date: '2026-09-09'
+  time_of_day: morning
+- id: 2026-09-08_tue_strength
+  date: '2026-09-08'
   discipline: strength
   type: strength
   targets:
@@ -854,6 +1160,22 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: evening
+- id: 2026-09-09_wed_easy-spin
+  date: '2026-09-09'
+  discipline: cycling
+  type: easy_endurance
+  targets:
+    duration_min: 30
+    avg_hr_zone: Z2
+    avg_hr_range: *id002
+  notes: Easy spin — aerobic volume with zero impact. Cycling Z2 (116-127). Legs should feel better after
+    than before.
+  status: planned
+  actual: null
+  analysis: null
+  adaptations: []
+  time_of_day: morning
 - id: 2026-09-10_thu_easy-run
   date: '2026-09-10'
   discipline: running
@@ -868,12 +1190,16 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-09-11_fri_rest
   date: '2026-09-11'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -892,6 +1218,7 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-09-13_sun_long-run
   date: '2026-09-13'
   discipline: running
@@ -907,12 +1234,16 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-09-14_mon_rest
   date: '2026-09-14'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -932,12 +1263,16 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-09-16_wed_rest
   date: '2026-09-16'
   discipline: rest
   type: rest
   targets: {}
-  notes: Full rest.
+  notes: "Full rest is the default — sleep and food do the work today. If you get restless, pick ONE and\
+    \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
+    \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
+    \ recovery."
   status: planned
   actual: null
   analysis: null
@@ -955,6 +1290,7 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-09-18_fri_rest
   date: '2026-09-18'
   discipline: rest
@@ -979,6 +1315,7 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning
 - id: 2026-09-20_sun_half-marathon
   date: '2026-09-20'
   discipline: running
@@ -998,3 +1335,4 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
+  time_of_day: morning

@@ -63,8 +63,8 @@ def _sid(d: date, slot: str) -> str:
 
 
 def _base(d: date, slot: str, discipline: str, stype: str,
-          targets: dict, notes: str) -> dict:
-    return {
+          targets: dict, notes: str, tod: str | None = "morning") -> dict:
+    s = {
         "id": _sid(d, slot),
         "date": d.isoformat(),
         "discipline": discipline,
@@ -76,13 +76,27 @@ def _base(d: date, slot: str, discipline: str, stype: str,
         "analysis": None,
         "adaptations": [],
     }
+    if tod:
+        s["time_of_day"] = tod   # morning | evening — drives .ics slot + email order
+    return s
 
 
-def rest(d: date, notes: str = "Full rest.") -> dict:
-    return _base(d, "rest", "rest", "rest", {}, notes)
+REST_NOTES = (
+    "Full rest is the default — sleep and food do the work today. "
+    "If you get restless, pick ONE and keep it genuinely easy:\n"
+    "  - 30-45 min walk\n"
+    "  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n"
+    "  - 15-20 min mobility / stretching\n"
+    "Nothing that touches Z2. Optional movement must not cost recovery."
+)
 
 
-def strength(d: date, minutes: int = 40, light: bool = False) -> dict:
+def rest(d: date, notes: str = REST_NOTES) -> dict:
+    return _base(d, "rest", "rest", "rest", {}, notes, tod=None)
+
+
+def strength(d: date, minutes: int = 40, light: bool = False,
+             tod: str = "evening") -> dict:
     notes = (
         "Light maintenance only: core, glute bridges, calf raises. Nothing "
         "that creates soreness — taper protects freshness."
@@ -90,14 +104,15 @@ def strength(d: date, minutes: int = 40, light: bool = False) -> dict:
         "Strength: hips, glutes, calves, core. Single-leg RDLs, step-ups, "
         "calf raises, Copenhagen planks. Masters athletes keep strength or "
         "lose it (Friel, Fast After 50) — this is injury armor for the "
-        "running build."
+        "running build. Evening slot: the morning run is done, so quality "
+        "stays on quality days and easy days stay easy."
     )
     return _base(d, "strength", "strength", "strength",
-                 {"duration_min": minutes}, notes)
+                 {"duration_min": minutes}, notes, tod=tod)
 
 
 def easy_run(d: date, km: float, strides: bool = False, slot: str = "easy-run",
-             notes: str | None = None) -> dict:
+             notes: str | None = None, tod: str = "morning") -> dict:
     dur = int(round(km * 5.9 / 5) * 5)
     n = notes or "Easy conversational pace. Z2 ceiling — slower is fine."
     if strides:
@@ -105,7 +120,7 @@ def easy_run(d: date, km: float, strides: bool = False, slot: str = "easy-run",
               "recovery) — neuromuscular sharpness, not fatigue.")
     return _base(d, slot, "running", "easy_run",
                  {"duration_min": dur, "distance_km": km,
-                  "avg_hr_zone": "Z2", "avg_hr_range": Z_RUN["Z2"]}, n)
+                  "avg_hr_zone": "Z2", "avg_hr_range": Z_RUN["Z2"]}, n, tod=tod)
 
 
 def steady_run(d: date, km: float) -> dict:
@@ -145,18 +160,19 @@ def long_run(d: date, km: float, pace_finish_km: int = 0,
                   "avg_hr_zone": "Z2", "avg_hr_range": Z_RUN["Z2"]}, notes)
 
 
-def bike(d: date, minutes: int) -> dict:
+def bike(d: date, minutes: int, tod: str = "morning") -> dict:
     return _base(d, "easy-spin", "cycling", "easy_endurance",
                  {"duration_min": minutes, "avg_hr_zone": "Z2",
                   "avg_hr_range": Z_BIKE["Z2"]},
                  "Easy spin — aerobic volume with zero impact. Cycling Z2 "
-                 "(116-127). Legs should feel better after than before.")
+                 "(116-127). Legs should feel better after than before.",
+                 tod=tod)
 
 
-def walk(d: date, minutes: int) -> dict:
+def walk(d: date, minutes: int, tod: str = "morning") -> dict:
     return _base(d, "recovery-walk", "walking", "recovery",
                  {"duration_min": minutes},
-                 "Easy walk only — active recovery.")
+                 "Easy walk only — active recovery.", tod=tod)
 
 
 def openers(d: date) -> dict:
@@ -202,47 +218,66 @@ def build_sessions() -> list[dict]:
                       notes="First long run of the block: 10 km relaxed Z2. "
                             "Sets the baseline the next ten weeks build on."))
 
-    def week(monday: date, tue, wed, thu, sat, sun, fri=None):
+    # Weekly template. Doubles land on Tue (AM run + PM strength) and Thu
+    # (AM run + PM walk) — Michael trains early morning and evening, so the
+    # plan structures that instead of leaving the second session unplanned.
+    # Mon + Fri stay rest (with optional-activity notes in REST_NOTES).
+    def week(monday: date, tue_am, wed, thu_am, sat, sun,
+             tue_pm=None, thu_pm=None):
         s.append(rest(monday))
-        s.append(tue(monday + timedelta(days=1)))
+        s.append(tue_am(monday + timedelta(days=1)))
+        if tue_pm:
+            s.append(tue_pm(monday + timedelta(days=1)))
         s.append(wed(monday + timedelta(days=2)))
-        s.append(thu(monday + timedelta(days=3)))
-        s.append((fri or rest)(monday + timedelta(days=4)))
+        s.append(thu_am(monday + timedelta(days=3)))
+        if thu_pm:
+            s.append(thu_pm(monday + timedelta(days=3)))
+        s.append(rest(monday + timedelta(days=4)))
         s.append(sat(monday + timedelta(days=5)))
         s.append(sun(monday + timedelta(days=6)))
 
     w = date(2026, 7, 13)
+    pm_strength = lambda d: strength(d)                       # noqa: E731
+    pm_walk = lambda d: walk(d, 30, tod="evening")            # noqa: E731
+    am_spin = lambda d: bike(d, 40)                           # noqa: E731
 
     # W1-2: base
     week(w,
-         tue=lambda d: easy_run(d, 6, strides=True),
-         wed=lambda d: strength(d),
-         thu=lambda d: steady_run(d, 7),
+         tue_am=lambda d: easy_run(d, 6, strides=True),
+         tue_pm=pm_strength,
+         wed=am_spin,
+         thu_am=lambda d: steady_run(d, 7),
+         thu_pm=pm_walk,
          sat=lambda d: bike(d, 45),
          sun=lambda d: long_run(d, 11))
     week(w + timedelta(weeks=1),
-         tue=lambda d: easy_run(d, 7, strides=True),
-         wed=lambda d: strength(d),
-         thu=lambda d: steady_run(d, 8),
+         tue_am=lambda d: easy_run(d, 7, strides=True),
+         tue_pm=pm_strength,
+         wed=am_spin,
+         thu_am=lambda d: steady_run(d, 8),
+         thu_pm=pm_walk,
          sat=lambda d: bike(d, 60),
          sun=lambda d: long_run(d, 12))
 
     # W3: first quality
     week(w + timedelta(weeks=2),
-         tue=lambda d: tempo(d, 8, 45,
+         tue_am=lambda d: tempo(d, 8, 45,
              "Tempo intro: 15 min easy, then 2 x 10 min at Z3 (133-144) "
              "with 5 min easy between, 5 min easy to finish. Comfortably "
              "hard — you could speak in short phrases, not sentences."),
-         wed=lambda d: strength(d),
-         thu=lambda d: easy_run(d, 6),
+         tue_pm=pm_strength,
+         wed=am_spin,
+         thu_am=lambda d: easy_run(d, 6),
+         thu_pm=pm_walk,
          sat=lambda d: bike(d, 60),
          sun=lambda d: long_run(d, 13))
 
     # W4: cutback
     week(w + timedelta(weeks=3),
-         tue=lambda d: easy_run(d, 6),
-         wed=lambda d: strength(d),
-         thu=lambda d: easy_run(d, 7, strides=True),
+         tue_am=lambda d: easy_run(d, 6),
+         tue_pm=pm_strength,
+         wed=am_spin,
+         thu_am=lambda d: easy_run(d, 7, strides=True),
          sat=lambda d: walk(d, 45),
          sun=lambda d: long_run(d, 10,
              notes="Cutback long run — 10 km, genuinely easy. Absorption "
@@ -250,54 +285,64 @@ def build_sessions() -> list[dict]:
 
     # W5-7: build
     week(w + timedelta(weeks=4),
-         tue=lambda d: tempo(d, 9, 50,
+         tue_am=lambda d: tempo(d, 9, 50,
              "3 x 10 min at Z3 with 4 min easy between. Even effort across "
              "all three — the third rep should feel like the first."),
-         wed=lambda d: strength(d),
-         thu=lambda d: easy_run(d, 7),
+         tue_pm=pm_strength,
+         wed=am_spin,
+         thu_am=lambda d: easy_run(d, 7),
+         thu_pm=pm_walk,
          sat=lambda d: bike(d, 60),
          sun=lambda d: long_run(d, 14))
     week(w + timedelta(weeks=5),
-         tue=lambda d: tempo(d, 10, 55,
+         tue_am=lambda d: tempo(d, 10, 55,
              "2 x 15 min at goal half-marathon effort (~5:27/km, HR high "
              "Z3) with 5 min easy between. First proper rehearsal of race "
              "rhythm."),
-         wed=lambda d: strength(d),
-         thu=lambda d: easy_run(d, 7),
+         tue_pm=pm_strength,
+         wed=am_spin,
+         thu_am=lambda d: easy_run(d, 7),
+         thu_pm=pm_walk,
          sat=lambda d: bike(d, 60),
          sun=lambda d: long_run(d, 16, pace_finish_km=3))
     week(w + timedelta(weeks=6),
-         tue=lambda d: tempo(d, 9, 50,
+         tue_am=lambda d: tempo(d, 9, 50,
              "25 min continuous at Z3. One block, steady effort — mental "
              "rehearsal for holding pace when it stops feeling fresh."),
-         wed=lambda d: strength(d),
-         thu=lambda d: easy_run(d, 8),
+         tue_pm=pm_strength,
+         wed=am_spin,
+         thu_am=lambda d: easy_run(d, 8),
+         thu_pm=pm_walk,
          sat=lambda d: bike(d, 60),
          sun=lambda d: long_run(d, 17, pace_finish_km=4))
 
     # W8: peak
     week(w + timedelta(weeks=7),
-         tue=lambda d: intervals(d, 11, 60,
+         tue_am=lambda d: intervals(d, 11, 60,
              "4 x 2 km at goal half pace (5:25-5:30/km) with 2 min jog "
              "between. The fitness check: if these feel controlled, "
              "sub-1:55 is on. If they're a fight, adjust race target to "
              "5:35/km (1:58) — a strong finish beats a brave blowup."),
-         wed=lambda d: strength(d),
-         thu=lambda d: easy_run(d, 7),
+         tue_pm=pm_strength,
+         wed=am_spin,
+         thu_am=lambda d: easy_run(d, 7),
+         thu_pm=pm_walk,
          sat=lambda d: walk(d, 30),
          sun=lambda d: long_run(d, 18,
              notes="Peak long run — 18 km relaxed Z2, fuel like race day "
                    "(gel at 45 and 90 min). Longest run of the block; "
                    "after today the hay is in the barn."))
 
-    # W9: taper 1
+    # W9: taper 1 — volume down, doubles get lighter (light strength, no
+    # second bike). Intensity stays (Bosquet 2007).
     week(w + timedelta(weeks=8),
-         tue=lambda d: tempo(d, 8, 45,
+         tue_am=lambda d: tempo(d, 8, 45,
              "2 x 10 min at goal half pace, 5 min easy between. Volume "
              "drops in taper; intensity stays — that's what preserves "
              "race sharpness (Bosquet 2007, Mujika & Padilla 2003)."),
-         wed=lambda d: strength(d, 30, light=True),
-         thu=lambda d: easy_run(d, 6),
+         tue_pm=lambda d: strength(d, 30, light=True),
+         wed=lambda d: bike(d, 30),
+         thu_am=lambda d: easy_run(d, 6),
          sat=lambda d: bike(d, 45),
          sun=lambda d: long_run(d, 12,
              notes="Taper long run — 12 km easy. No pace work. Rehearse "

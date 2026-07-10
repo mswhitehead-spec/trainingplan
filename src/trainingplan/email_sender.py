@@ -22,6 +22,7 @@ to keep this readable on a phone lock-screen preview.
 
 from __future__ import annotations
 
+import html as html_mod
 import os
 import smtplib
 from datetime import date, datetime, timedelta
@@ -83,9 +84,19 @@ def _short_title(session: dict) -> str:
     return f"[{tag}] {stype.replace('_', ' ')}{tail}"
 
 
+_TOD_ORDER = {"morning": 0, None: 1, "evening": 2}
+
+
+def _tod_tag(session: dict) -> str:
+    """'AM' / 'PM' marker for double days; empty for untimed sessions."""
+    return {"morning": "AM", "evening": "PM"}.get(session.get("time_of_day"), "")
+
+
 def _sessions_on(plan: dict, d: date) -> list[dict]:
     s_iso = d.isoformat()
-    return [s for s in plan["sessions"] if s.get("date") == s_iso]
+    out = [s for s in plan["sessions"] if s.get("date") == s_iso]
+    out.sort(key=lambda s: _TOD_ORDER.get(s.get("time_of_day"), 1))
+    return out
 
 
 def _sessions_between(plan: dict, lo: date, hi: date) -> list[dict]:
@@ -200,9 +211,15 @@ def _coaching_note(
     # ---- bullet 1: session-specific execution advice -----------------------
     if stype in {"rest"}:
         bullets.append(
-            "Full rest day. The parasympathetic nervous system is running the show today — "
+            "Rest day. The parasympathetic nervous system is running the show today — "
             "heart rate variability recovers, glycogen refills, micro-tears repair. "
-            "Sleep and food are the active ingredients; there's nothing to do but let them work."
+            "Sleep and food are the active ingredients."
+        )
+        bullets.append(
+            "Restless? Pick ONE, kept genuinely easy: a 30–45 min walk, a "
+            "20–30 min very easy spin (HR under 116), or 15–20 min of "
+            "mobility work. Movement below Z1 aids recovery (blood flow "
+            "without training stress); anything harder steals from tomorrow."
         )
     elif stype == "recovery":
         if recent_hrs:
@@ -421,6 +438,74 @@ def _orphan_acts(
     ]
 
 
+def _day_rows(
+    plan: dict,
+    recent_sessions: list[dict],
+    activities: list[Activity],
+    today: date,
+) -> list[dict]:
+    """Structured rows for the last-5-days section.
+
+    Shared by the plain-text and HTML renderers so both show identical data.
+    Each row: {kind: done|missed|pending|orphan, date, title, metrics, verdict}.
+    """
+    recent_lo = today - timedelta(days=5)
+    recent_hi = today - timedelta(days=1)
+    orphans_by_date: dict[str, list[Activity]] = {}
+    for a in _orphan_acts(activities, plan, recent_lo, recent_hi):
+        orphans_by_date.setdefault(a.date, []).append(a)
+
+    rows: list[dict] = []
+    all_dates = sorted(set(
+        [s["date"] for s in recent_sessions] + list(orphans_by_date)
+    ))
+    for date_str in all_dates:
+        d = date.fromisoformat(date_str)
+        for s in (x for x in recent_sessions if x["date"] == date_str):
+            status = s.get("status", "planned")
+            actual = s.get("actual") or {}
+            metrics: list[str] = []
+            if status == "completed":
+                if (actual.get("distance_km") or 0) > 0:
+                    metrics.append(f"{actual['distance_km']:.0f}km")
+                if actual.get("duration_min"):
+                    metrics.append(_fmt_duration_min(actual["duration_min"]) or "")
+                if actual.get("avg_hr"):
+                    metrics.append(f"HR {actual['avg_hr']}")
+                verdict = (s.get("analysis") or {}).get("verdict", "completed")
+            elif status == "missed":
+                verdict = "missed"
+            else:
+                verdict = "not logged yet"
+            rows.append({
+                "kind": {"completed": "done", "missed": "missed"}.get(status, "pending"),
+                "date": d,
+                "title": _short_title(s),
+                "metrics": " · ".join(m for m in metrics if m),
+                "verdict": verdict,
+            })
+        for a in orphans_by_date.get(date_str, []):
+            tag = {"cycling": "Bike", "running": "Run", "walking": "Walk",
+                   "strength": "Strength", "swimming": "Swim"}.get(
+                       a.sport, a.sport.title()[:6])
+            o_metrics = []
+            if a.distance_km > 0:
+                o_metrics.append(f"{a.distance_km:.0f}km")
+            if a.duration_min:
+                o_metrics.append(_fmt_duration_min(a.duration_min) or "")
+            if a.avg_hr:
+                o_metrics.append(f"HR {a.avg_hr}")
+            label = (a.name or "unplanned").encode("ascii", "replace").decode("ascii")[:30]
+            rows.append({
+                "kind": "orphan",
+                "date": d,
+                "title": f"[{tag}] {label}",
+                "metrics": " · ".join(m for m in o_metrics if m),
+                "verdict": "outside plan",
+            })
+    return rows
+
+
 def _latest_pending_proposal(art_dir: Path, state: dict) -> Path | None:
     """Kept for import compatibility. Returns None — proposals are now auto-applied."""
     return None
@@ -473,7 +558,12 @@ def render_daily_email(
     elif len(today_sessions) == 1:
         subj_inner = _short_title(today_sessions[0])
     else:
-        subj_inner = f"{len(today_sessions)} sessions"
+        disc_tag = {"cycling": "Bike", "running": "Run", "strength": "Strength",
+                    "walking": "Walk", "swimming": "Swim", "rest": "Rest"}
+        subj_inner = " + ".join(
+            f"{_tod_tag(s)} {disc_tag.get(s.get('discipline'), '?')}".strip()
+            for s in today_sessions
+        )
     subject = f"[Training] {today.isoformat()} — {subj_inner}"
 
     # --- body --------------------------------------------------------------
@@ -492,7 +582,8 @@ def render_daily_email(
         lines.append("")
     else:
         for s in today_sessions:
-            lines.append(f"▶ {_short_title(s)}")
+            tod = _tod_tag(s)
+            lines.append(f"▶ {tod + ' — ' if tod else ''}{_short_title(s)}")
             status = s.get("status", "planned")
             if status != "planned":
                 lines.append(f"  status: {status}")
@@ -529,79 +620,33 @@ def render_daily_email(
         lines.append("")
 
     # --- last 5 days -------------------------------------------------------
-    # Build a map of date → orphan activities so we can show them alongside
-    # the plan session for that day.
-    recent_lo = (today - timedelta(days=5))
-    recent_hi = (today - timedelta(days=1))
-    orphans_by_date: dict[str, list[Activity]] = {}
-    for a in _orphan_acts(activities or [], plan, recent_lo, recent_hi):
-        orphans_by_date.setdefault(a.date, []).append(a)
-
-    if recent_sessions or orphans_by_date:
+    rows = _day_rows(plan, recent_sessions, activities or [], today)
+    if rows:
         lines.append("Last 5 days:")
-        # Collect all dates that have either a plan session or an orphan
-        all_dates = sorted(set(
-            [s["date"] for s in recent_sessions]
-            + list(orphans_by_date.keys())
-        ))
-        for date_str in all_dates:
-            d = date.fromisoformat(date_str)
-            dow = _DOW[d.weekday()]
-            # Plan session(s) for this day
-            day_sessions = [s for s in recent_sessions if s["date"] == date_str]
-            for s in day_sessions:
-                status = s.get("status", "planned")
-                actual = s.get("actual") or {}
-                analysis = s.get("analysis") or {}
-                if status == "completed":
-                    icon = "✓"
-                    dur = actual.get("duration_min")
-                    dist = actual.get("distance_km")
-                    hr = actual.get("avg_hr")
-                    verdict = analysis.get("verdict", "completed")
-                    metrics: list[str] = []
-                    if dist and dist > 0:
-                        metrics.append(f"{dist:.0f}km")
-                    if dur:
-                        metrics.append(_fmt_duration_min(dur) or "")
-                    if hr:
-                        metrics.append(f"HR {hr}")
-                    metric_str = " · ".join(m for m in metrics if m)
-                    suffix = f" ({metric_str})" if metric_str else ""
-                    lines.append(f"  {icon} {dow} {d.day}  {_short_title(s)}{suffix} — {verdict}")
-                elif status == "missed":
-                    lines.append(f"  ✗ {dow} {d.day}  {_short_title(s)} — missed")
-                elif status in {"planned", "adjusted"}:
-                    lines.append(f"  – {dow} {d.day}  {_short_title(s)} — not logged yet")
-                else:
-                    lines.append(f"  – {dow} {d.day}  {_short_title(s)} — {status}")
-            # Orphan activities for this day (workouts outside the plan)
-            for a in orphans_by_date.get(date_str, []):
-                tag = {"cycling": "Bike", "running": "Run", "walking": "Walk",
-                       "strength": "Strength", "swimming": "Swim"}.get(a.sport, a.sport.title()[:6])
-                o_metrics: list[str] = []
-                if a.distance_km > 0:
-                    o_metrics.append(f"{a.distance_km:.0f}km")
-                if a.duration_min:
-                    o_metrics.append(_fmt_duration_min(a.duration_min) or "")
-                if a.avg_hr:
-                    o_metrics.append(f"HR {a.avg_hr}")
-                o_str = " · ".join(m for m in o_metrics if m)
-                # Show with a different icon to distinguish from plan sessions
-                label = (a.name or "unplanned").encode("ascii", "replace").decode("ascii")[:30]
-                lines.append(f"  + {dow} {d.day}  [{tag}] {label} ({o_str}) — outside plan")
+        for r in rows:
+            icon = {"done": "✓", "missed": "✗", "orphan": "+"}.get(r["kind"], "–")
+            d = r["date"]
+            metric_str = f" ({r['metrics']})" if r["metrics"] else ""
+            lines.append(f"  {icon} {_DOW[d.weekday()]} {d.day}  "
+                         f"{r['title']}{metric_str} — {r['verdict']}")
         lines.append("")
 
     # --- week ahead --------------------------------------------------------
     if week_ahead:
         lines.append("Week ahead:")
-        for s in week_ahead:
+        week_ahead_sorted = sorted(
+            week_ahead,
+            key=lambda s: (s["date"], _TOD_ORDER.get(s.get("time_of_day"), 1)),
+        )
+        for s in week_ahead_sorted:
             d = date.fromisoformat(s["date"])
             tag = " ⭐ KEY" if (
                 s.get("type") == "long_endurance"
                 or s.get("type") == "race"
             ) else ""
-            lines.append(f"  {_DOW[d.weekday()]} {d.day:>2}  {_short_title(s)}{tag}")
+            tod = _tod_tag(s)
+            tod_str = f" {tod}" if tod else "   "
+            lines.append(f"  {_DOW[d.weekday()]} {d.day:>2}{tod_str}  {_short_title(s)}{tag}")
         lines.append("")
 
     # --- recent auto-applied adaptations -----------------------------------
@@ -625,6 +670,191 @@ def render_daily_email(
 
 
 # ---------------------------------------------------------------------------
+# HTML rendering
+# ---------------------------------------------------------------------------
+
+_DISC_COLORS = {
+    "running": "#059669", "cycling": "#2563eb", "strength": "#b45309",
+    "walking": "#64748b", "swimming": "#0891b2", "rest": "#94a3b8",
+}
+_FONT = "-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif"
+_DASHBOARD_URL = "https://mswhitehead-spec.github.io/trainingplan/"
+
+
+def _e(text: str) -> str:
+    return html_mod.escape(str(text))
+
+
+def _h_label(text: str) -> str:
+    return (f'<div style="font-size:11px;font-weight:700;color:#9ca3af;'
+            f'text-transform:uppercase;letter-spacing:.08em;'
+            f'margin:22px 0 8px;">{_e(text)}</div>')
+
+
+def _h_chip(text: str, fg: str, bg: str) -> str:
+    return (f'<span style="display:inline-block;background:{bg};color:{fg};'
+            f'font-size:11px;font-weight:700;border-radius:10px;'
+            f'padding:2px 9px;vertical-align:middle;">{_e(text)}</span>')
+
+
+def render_daily_email_html(
+    plan: dict,
+    today: date | None = None,
+    state: dict | None = None,
+    activities: list[Activity] | None = None,
+) -> str:
+    """HTML twin of render_daily_email — same sections, styled for Gmail.
+
+    Inline styles only (email clients strip <style> blocks unreliably).
+    The plain-text version remains the multipart fallback and the format
+    of record for tests.
+    """
+    today = today or date.today()
+    state = state or {}
+
+    today_sessions = _sessions_on(plan, today)
+    recent_sessions = _sessions_between(
+        plan, today - timedelta(days=5), today - timedelta(days=1))
+    week_ahead = sorted(
+        _sessions_between(plan, today + timedelta(days=1), today + timedelta(days=7)),
+        key=lambda s: (s["date"], _TOD_ORDER.get(s.get("time_of_day"), 1)),
+    )
+    dte = days_to_event(plan, today=today)
+    ev = _next_a_event(plan, today)
+    ev_name = (ev or {}).get("name", "race")
+
+    out: list[str] = []
+    out.append(f'<div style="max-width:600px;margin:0 auto;padding:12px 8px;'
+               f'font-family:{_FONT};color:#1f2937;font-size:14.5px;'
+               f'line-height:1.55;">')
+
+    # --- header --------------------------------------------------------------
+    if dte == 0:
+        pill = _h_chip("RACE DAY", "#ffffff", "#7c3aed")
+    elif dte is not None and dte > 0:
+        pill = _h_chip(f"{dte} days to {ev_name}", "#4338ca", "#eef2ff")
+    else:
+        pill = ""
+    out.append(
+        f'<div style="padding-bottom:6px;border-bottom:2px solid #e5e7eb;">'
+        f'<div style="font-size:12px;color:#9ca3af;text-transform:uppercase;'
+        f'letter-spacing:.08em;">Training</div>'
+        f'<div style="font-size:21px;font-weight:800;margin:1px 0 6px;">'
+        f'{_DOW[today.weekday()]} {today.strftime("%b %d, %Y")}</div>'
+        f'{pill}</div>'
+    )
+
+    # --- today's session cards ------------------------------------------------
+    if not today_sessions:
+        out.append('<p style="color:#6b7280;">Nothing on the plan today.</p>')
+    for s in today_sessions:
+        color = _DISC_COLORS.get(s.get("discipline"), "#2563eb")
+        tod = _tod_tag(s)
+        tod_chip = (_h_chip(tod, "#374151", "#e5e7eb") + " ") if tod else ""
+        targets = s.get("targets") or {}
+        meta: list[str] = []
+        if targets.get("avg_hr_range"):
+            lo, hi = targets["avg_hr_range"]
+            meta.append(f"HR {lo}–{hi} bpm")
+        if targets.get("elevation_gain_m"):
+            meta.append(f"{int(targets['elevation_gain_m'])} m elev")
+        status = s.get("status", "planned")
+        if status != "planned":
+            meta.append(status)
+        meta_html = (f'<div style="color:#6b7280;font-size:13px;margin-top:2px;">'
+                     f'{_e(" · ".join(meta))}</div>') if meta else ""
+        notes = (s.get("notes") or "").strip()
+        notes_html = (f'<div style="white-space:pre-line;color:#4b5563;'
+                      f'font-size:13px;margin-top:8px;border-top:1px solid '
+                      f'#e5e7eb;padding-top:8px;">{_e(notes)}</div>') if notes else ""
+        out.append(
+            f'<div style="background:#f8fafc;border-left:4px solid {color};'
+            f'border-radius:8px;padding:12px 14px;margin:12px 0;">'
+            f'<div style="font-size:15.5px;font-weight:700;">{tod_chip}'
+            f'{_e(_short_title(s))}</div>{meta_html}{notes_html}</div>'
+        )
+
+    # --- coach's notes ---------------------------------------------------------
+    bullets = _coaching_note(today_sessions, recent_sessions, plan, dte,
+                             activities=activities)
+    if bullets:
+        out.append(_h_label("Coach's notes"))
+        out.append('<ul style="margin:0;padding-left:20px;">')
+        for b in bullets:
+            out.append(f'<li style="margin:0 0 8px;color:#374151;'
+                       f'font-size:13.5px;">{_e(b)}</li>')
+        out.append('</ul>')
+
+    # --- last 5 days -------------------------------------------------------------
+    rows = _day_rows(plan, recent_sessions, activities or [], today)
+    if rows:
+        out.append(_h_label("Last 5 days"))
+        icon_style = {
+            "done":   ("✓", "#059669"),
+            "missed": ("✗", "#dc2626"),
+            "orphan": ("+", "#2563eb"),
+            "pending": ("–", "#9ca3af"),
+        }
+        for r in rows:
+            icon, ic = icon_style.get(r["kind"], ("–", "#9ca3af"))
+            d = r["date"]
+            metrics = (f' <span style="color:#6b7280;">({_e(r["metrics"])})</span>'
+                       if r["metrics"] else "")
+            out.append(
+                f'<div style="margin:3px 0;font-size:13.5px;">'
+                f'<span style="color:{ic};font-weight:700;">{icon}</span> '
+                f'<span style="color:#9ca3af;">{_DOW[d.weekday()]} {d.day}</span> '
+                f'{_e(r["title"])}{metrics} '
+                f'<span style="color:#9ca3af;">— {_e(r["verdict"])}</span></div>'
+            )
+
+    # --- week ahead ------------------------------------------------------------
+    if week_ahead:
+        out.append(_h_label("Week ahead"))
+        out.append('<table style="border-collapse:collapse;width:100%;'
+                   'font-size:13.5px;">')
+        for s in week_ahead:
+            d = date.fromisoformat(s["date"])
+            key = s.get("type") in {"long_endurance", "race"}
+            color = _DISC_COLORS.get(s.get("discipline"), "#2563eb")
+            tod = _tod_tag(s)
+            weight = "700" if key else "400"
+            star = " ⭐" if key else ""
+            out.append(
+                f'<tr>'
+                f'<td style="padding:3px 8px 3px 0;color:#9ca3af;'
+                f'white-space:nowrap;">{_DOW[d.weekday()]} {d.day}'
+                f'{(" · " + tod) if tod else ""}</td>'
+                f'<td style="padding:3px 0;font-weight:{weight};">'
+                f'<span style="color:{color};">●</span> '
+                f'{_e(_short_title(s))}{star}</td></tr>'
+            )
+        out.append('</table>')
+
+    # --- recent adaptations ------------------------------------------------------
+    recent = _recent_adaptations(state, days=3)
+    if recent:
+        out.append(_h_label("Auto-applied adaptations"))
+        for ch in recent:
+            out.append(
+                f'<div style="margin:3px 0;font-size:13px;color:#4b5563;">'
+                f'{_e(ch.get("session_id", "?"))}: {_e(ch.get("field_path", "?"))} '
+                f'{_e(ch.get("old_value", "?"))} → {_e(ch.get("new_value", "?"))} '
+                f'<span style="color:#9ca3af;">[{_e(ch.get("rule_id", "?"))}]</span></div>'
+            )
+
+    # --- footer --------------------------------------------------------------
+    out.append(
+        f'<div style="margin-top:24px;padding-top:10px;border-top:1px solid '
+        f'#e5e7eb;font-size:12px;color:#9ca3af;">'
+        f'Auto-sent by trainingplan · '
+        f'<a href="{_DASHBOARD_URL}" style="color:#4338ca;">Dashboard</a>'
+        f'</div></div>'
+    )
+    return "\n".join(out)
+
+
+# ---------------------------------------------------------------------------
 # Sending
 # ---------------------------------------------------------------------------
 
@@ -639,6 +869,7 @@ def send_email(
     smtp_port: int = 587,
     smtp_user: str | None = None,
     smtp_password: str | None = None,
+    html_body: str | None = None,
 ) -> None:
     """Send a plain-text email via SMTP+STARTTLS.
 
@@ -664,6 +895,10 @@ def send_email(
     msg["From"] = from_addr
     msg["To"] = to_addr
     msg.set_content(body)
+    if html_body:
+        # multipart/alternative: clients that render HTML use it; the plain
+        # text stays as the fallback (and the lock-screen preview source).
+        msg.add_alternative(html_body, subtype="html")
 
     with smtplib.SMTP(smtp_host, smtp_port, timeout=30) as s:
         s.ehlo()

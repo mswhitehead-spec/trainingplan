@@ -163,3 +163,37 @@ def test_send_email_raises_without_password(monkeypatch):
     monkeypatch.delenv("EMAIL_PASSWORD", raising=False)
     with pytest.raises(RuntimeError, match="No SMTP password set"):
         send_email("S", "B", from_addr="a@x", to_addr="b@x")
+
+
+# ----- HTML rendering --------------------------------------------------------
+
+def test_html_email_renders_sections(mini_plan):
+    from trainingplan.email_sender import render_daily_email_html
+    html = render_daily_email_html(mini_plan, today=date(2026, 5, 25))
+    assert "max-width:600px" in html
+    assert "Week ahead" in html
+    # session title escaped into the card
+    assert "easy" in html.lower()
+
+
+def test_html_email_escapes_notes(mini_plan):
+    from trainingplan.email_sender import render_daily_email_html
+    mini_plan["sessions"][0]["notes"] = "watch out for <script>alert(1)</script>"
+    html = render_daily_email_html(mini_plan, today=date(2026, 5, 25))
+    assert "<script>" not in html
+    assert "&lt;script&gt;" in html
+
+
+def test_double_day_subject_and_order(mini_plan):
+    """Two sessions on one day: AM sorts before PM, subject names both."""
+    d = mini_plan["sessions"][0]["date"]
+    mini_plan["sessions"][0]["time_of_day"] = "evening"
+    mini_plan["sessions"].append({
+        "id": f"{d}_am-spin", "date": d, "discipline": "cycling",
+        "type": "easy_endurance", "targets": {"duration_min": 40},
+        "notes": "", "status": "planned", "actual": None, "analysis": None,
+        "adaptations": [], "time_of_day": "morning",
+    })
+    subject, body = render_daily_email(mini_plan, today=date.fromisoformat(d))
+    assert "AM Bike + PM Bike" in subject
+    assert body.index("AM —") < body.index("PM —")

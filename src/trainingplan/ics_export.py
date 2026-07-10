@@ -241,7 +241,11 @@ def build_calendar(plan: dict, start_time: time = _DEFAULT_START_TIME) -> str:
             lines.append(f"DTEND;VALUE=DATE:{_fmt_date(sdate + timedelta(days=1))}")
             lines.append("TRANSP:TRANSPARENT")     # don't block the day
         else:
-            dt_start = datetime.combine(sdate, start_time)
+            # Per-session slot: double days carry time_of_day so the two
+            # sessions land at 06:00 and 18:00 instead of stacking.
+            slot = {"morning": time(6, 0), "evening": time(18, 0)}
+            dt_start = datetime.combine(
+                sdate, slot.get(s.get("time_of_day"), start_time))
             duration_min = (s.get("targets") or {}).get("duration_min") or 30
             dt_end = dt_start + timedelta(minutes=int(duration_min))
             lines.append(f"DTSTART:{_fmt_dt_local(dt_start)}")

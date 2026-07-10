@@ -7,7 +7,7 @@ X-WR-CALNAME:Training plan
 X-WR-CALDESC:Auto-generated training schedule
 BEGIN:VEVENT
 UID:2026-07-10_fri_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-07-10_fri_rest\nType: rest  ·  Status: planned\n
@@ -18,19 +18,19 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-11_sat_easy-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] easy run · 35m · 6km · Z2
 DESCRIPTION:Session: 2026-07-11_sat_easy-run\nType: easy_run  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 35\n  - distance_km: 6\n  - avg_hr_z
  one: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nEasy conversational pace
  . Z2 ceiling — slower is fine.
-DTSTART:20260711T070000
-DTEND:20260711T073500
+DTSTART:20260711T060000
+DTEND:20260711T063500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-12_sun_long-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] long endurance · 1h · 10km · Z2
 DESCRIPTION:Session: 2026-07-12_sun_long-run\nType: long_endurance  ·  Sta
@@ -38,23 +38,27 @@ DESCRIPTION:Session: 2026-07-12_sun_long-run\nType: long_endurance  ·  Sta
  vg_hr_zone: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nFirst long run of
   the block: 10 km relaxed Z2. Sets the baseline the next ten weeks build o
  n.
-DTSTART:20260712T070000
-DTEND:20260712T080000
+DTSTART:20260712T060000
+DTEND:20260712T070000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-13_mon_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-07-13_mon_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260713
 DTEND;VALUE=DATE:20260714
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-14_tue_easy-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] easy run · 35m · 6km · Z2
 DESCRIPTION:Session: 2026-07-14_tue_easy-run\nType: easy_run  ·  Status: p
@@ -62,25 +66,38 @@ DESCRIPTION:Session: 2026-07-14_tue_easy-run\nType: easy_run  ·  Status: p
  one: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nEasy conversational pace
  . Z2 ceiling — slower is fine. Finish with 4 x 20 s strides (fast but re
  laxed\, full recovery) — neuromuscular sharpness\, not fatigue.
-DTSTART:20260714T070000
-DTEND:20260714T073500
+DTSTART:20260714T060000
+DTEND:20260714T063500
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-07-15_wed_strength@trainingplan.local
-DTSTAMP:20260710T063151Z
+UID:2026-07-14_tue_strength@trainingplan.local
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Strength] strength · 40m
-DESCRIPTION:Session: 2026-07-15_wed_strength\nType: strength  ·  Status: p
+DESCRIPTION:Session: 2026-07-14_tue_strength\nType: strength  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 40\n\nNotes:\nStrength: hips\, glute
  s\, calves\, core. Single-leg RDLs\, step-ups\, calf raises\, Copenhagen p
  lanks. Masters athletes keep strength or lose it (Friel\, Fast After 50) 
- — this is injury armor for the running build.
-DTSTART:20260715T070000
-DTEND:20260715T074000
+ — this is injury armor for the running build. Evening slot: the morning 
+ run is done\, so quality stays on quality days and easy days stay easy.
+DTSTART:20260714T180000
+DTEND:20260714T184000
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-15_wed_easy-spin@trainingplan.local
+DTSTAMP:20260710T064913Z
+STATUS:CONFIRMED
+SUMMARY:[Bike] easy endurance · 40m · Z2
+DESCRIPTION:Session: 2026-07-15_wed_easy-spin\nType: easy_endurance  ·  St
+ atus: planned\n\nTargets:\n  - duration_min: 40\n  - avg_hr_zone: Z2\n  - 
+ avg_hr_range: [116\, 127]\n\nNotes:\nEasy spin — aerobic volume with zer
+ o impact. Cycling Z2 (116-127). Legs should feel better after than before.
+DTSTART:20260715T060000
+DTEND:20260715T064000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-16_thu_steady-z2@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] endurance z2 · 40m · 7km · Z2
 DESCRIPTION:Session: 2026-07-16_thu_steady-z2\nType: endurance_z2  ·  Stat
@@ -88,58 +105,77 @@ DESCRIPTION:Session: 2026-07-16_thu_steady-z2\nType: endurance_z2  ·  Stat
  _hr_zone: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nSteady Z2\, upper h
  alf of the zone ok. Smooth and even — this is aerobic base\, the engine 
  for the half.
-DTSTART:20260716T070000
-DTEND:20260716T074000
+DTSTART:20260716T060000
+DTEND:20260716T064000
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-16_thu_recovery-walk@trainingplan.local
+DTSTAMP:20260710T064913Z
+STATUS:CONFIRMED
+SUMMARY:[Walk] recovery · 30m
+DESCRIPTION:Session: 2026-07-16_thu_recovery-walk\nType: recovery  ·  Stat
+ us: planned\n\nTargets:\n  - duration_min: 30\n\nNotes:\nEasy walk only 
+ — active recovery.
+DTSTART:20260716T180000
+DTEND:20260716T183000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-17_fri_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-07-17_fri_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260717
 DTEND;VALUE=DATE:20260718
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-18_sat_easy-spin@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Bike] easy endurance · 45m · Z2
 DESCRIPTION:Session: 2026-07-18_sat_easy-spin\nType: easy_endurance  ·  St
  atus: planned\n\nTargets:\n  - duration_min: 45\n  - avg_hr_zone: Z2\n  - 
  avg_hr_range: [116\, 127]\n\nNotes:\nEasy spin — aerobic volume with zer
  o impact. Cycling Z2 (116-127). Legs should feel better after than before.
-DTSTART:20260718T070000
-DTEND:20260718T074500
+DTSTART:20260718T060000
+DTEND:20260718T064500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-19_sun_long-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] long endurance · 1h05m · 11km · Z2
 DESCRIPTION:Session: 2026-07-19_sun_long-run\nType: long_endurance  ·  Sta
  tus: planned\n\nTargets:\n  - duration_min: 65\n  - distance_km: 11\n  - a
  vg_hr_zone: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nLong run 11 km. R
  elaxed Z2 — 5:50-6:10/km territory. Fuel if over 90 min (gel at 45 min).
-DTSTART:20260719T070000
-DTEND:20260719T080500
+DTSTART:20260719T060000
+DTEND:20260719T070500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-20_mon_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-07-20_mon_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260720
 DTEND;VALUE=DATE:20260721
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-21_tue_easy-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] easy run · 40m · 7km · Z2
 DESCRIPTION:Session: 2026-07-21_tue_easy-run\nType: easy_run  ·  Status: p
@@ -147,25 +183,38 @@ DESCRIPTION:Session: 2026-07-21_tue_easy-run\nType: easy_run  ·  Status: p
  one: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nEasy conversational pace
  . Z2 ceiling — slower is fine. Finish with 4 x 20 s strides (fast but re
  laxed\, full recovery) — neuromuscular sharpness\, not fatigue.
-DTSTART:20260721T070000
-DTEND:20260721T074000
+DTSTART:20260721T060000
+DTEND:20260721T064000
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-07-22_wed_strength@trainingplan.local
-DTSTAMP:20260710T063151Z
+UID:2026-07-21_tue_strength@trainingplan.local
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Strength] strength · 40m
-DESCRIPTION:Session: 2026-07-22_wed_strength\nType: strength  ·  Status: p
+DESCRIPTION:Session: 2026-07-21_tue_strength\nType: strength  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 40\n\nNotes:\nStrength: hips\, glute
  s\, calves\, core. Single-leg RDLs\, step-ups\, calf raises\, Copenhagen p
  lanks. Masters athletes keep strength or lose it (Friel\, Fast After 50) 
- — this is injury armor for the running build.
-DTSTART:20260722T070000
-DTEND:20260722T074000
+ — this is injury armor for the running build. Evening slot: the morning 
+ run is done\, so quality stays on quality days and easy days stay easy.
+DTSTART:20260721T180000
+DTEND:20260721T184000
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-22_wed_easy-spin@trainingplan.local
+DTSTAMP:20260710T064913Z
+STATUS:CONFIRMED
+SUMMARY:[Bike] easy endurance · 40m · Z2
+DESCRIPTION:Session: 2026-07-22_wed_easy-spin\nType: easy_endurance  ·  St
+ atus: planned\n\nTargets:\n  - duration_min: 40\n  - avg_hr_zone: Z2\n  - 
+ avg_hr_range: [116\, 127]\n\nNotes:\nEasy spin — aerobic volume with zer
+ o impact. Cycling Z2 (116-127). Legs should feel better after than before.
+DTSTART:20260722T060000
+DTEND:20260722T064000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-23_thu_steady-z2@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] endurance z2 · 45m · 8km · Z2
 DESCRIPTION:Session: 2026-07-23_thu_steady-z2\nType: endurance_z2  ·  Stat
@@ -173,58 +222,77 @@ DESCRIPTION:Session: 2026-07-23_thu_steady-z2\nType: endurance_z2  ·  Stat
  _hr_zone: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nSteady Z2\, upper h
  alf of the zone ok. Smooth and even — this is aerobic base\, the engine 
  for the half.
-DTSTART:20260723T070000
-DTEND:20260723T074500
+DTSTART:20260723T060000
+DTEND:20260723T064500
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-23_thu_recovery-walk@trainingplan.local
+DTSTAMP:20260710T064913Z
+STATUS:CONFIRMED
+SUMMARY:[Walk] recovery · 30m
+DESCRIPTION:Session: 2026-07-23_thu_recovery-walk\nType: recovery  ·  Stat
+ us: planned\n\nTargets:\n  - duration_min: 30\n\nNotes:\nEasy walk only 
+ — active recovery.
+DTSTART:20260723T180000
+DTEND:20260723T183000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-24_fri_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-07-24_fri_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260724
 DTEND;VALUE=DATE:20260725
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-25_sat_easy-spin@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Bike] easy endurance · 1h · Z2
 DESCRIPTION:Session: 2026-07-25_sat_easy-spin\nType: easy_endurance  ·  St
  atus: planned\n\nTargets:\n  - duration_min: 60\n  - avg_hr_zone: Z2\n  - 
  avg_hr_range: [116\, 127]\n\nNotes:\nEasy spin — aerobic volume with zer
  o impact. Cycling Z2 (116-127). Legs should feel better after than before.
-DTSTART:20260725T070000
-DTEND:20260725T080000
+DTSTART:20260725T060000
+DTEND:20260725T070000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-26_sun_long-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] long endurance · 1h15m · 12km · Z2
 DESCRIPTION:Session: 2026-07-26_sun_long-run\nType: long_endurance  ·  Sta
  tus: planned\n\nTargets:\n  - duration_min: 75\n  - distance_km: 12\n  - a
  vg_hr_zone: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nLong run 12 km. R
  elaxed Z2 — 5:50-6:10/km territory. Fuel if over 90 min (gel at 45 min).
-DTSTART:20260726T070000
-DTEND:20260726T081500
+DTSTART:20260726T060000
+DTEND:20260726T071500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-27_mon_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-07-27_mon_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260727
 DTEND;VALUE=DATE:20260728
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-28_tue_tempo@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] tempo · 45m · 8km · Z3
 DESCRIPTION:Session: 2026-07-28_tue_tempo\nType: tempo  ·  Status: planned
@@ -232,108 +300,153 @@ DESCRIPTION:Session: 2026-07-28_tue_tempo\nType: tempo  ·  Status: planned
  3\n\nNotes:\nTempo intro: 15 min easy\, then 2 x 10 min at Z3 (133-144) wi
  th 5 min easy between\, 5 min easy to finish. Comfortably hard — you cou
  ld speak in short phrases\, not sentences.
-DTSTART:20260728T070000
-DTEND:20260728T074500
+DTSTART:20260728T060000
+DTEND:20260728T064500
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-07-29_wed_strength@trainingplan.local
-DTSTAMP:20260710T063151Z
+UID:2026-07-28_tue_strength@trainingplan.local
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Strength] strength · 40m
-DESCRIPTION:Session: 2026-07-29_wed_strength\nType: strength  ·  Status: p
+DESCRIPTION:Session: 2026-07-28_tue_strength\nType: strength  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 40\n\nNotes:\nStrength: hips\, glute
  s\, calves\, core. Single-leg RDLs\, step-ups\, calf raises\, Copenhagen p
  lanks. Masters athletes keep strength or lose it (Friel\, Fast After 50) 
- — this is injury armor for the running build.
-DTSTART:20260729T070000
-DTEND:20260729T074000
+ — this is injury armor for the running build. Evening slot: the morning 
+ run is done\, so quality stays on quality days and easy days stay easy.
+DTSTART:20260728T180000
+DTEND:20260728T184000
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-29_wed_easy-spin@trainingplan.local
+DTSTAMP:20260710T064913Z
+STATUS:CONFIRMED
+SUMMARY:[Bike] easy endurance · 40m · Z2
+DESCRIPTION:Session: 2026-07-29_wed_easy-spin\nType: easy_endurance  ·  St
+ atus: planned\n\nTargets:\n  - duration_min: 40\n  - avg_hr_zone: Z2\n  - 
+ avg_hr_range: [116\, 127]\n\nNotes:\nEasy spin — aerobic volume with zer
+ o impact. Cycling Z2 (116-127). Legs should feel better after than before.
+DTSTART:20260729T060000
+DTEND:20260729T064000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-30_thu_easy-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] easy run · 35m · 6km · Z2
 DESCRIPTION:Session: 2026-07-30_thu_easy-run\nType: easy_run  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 35\n  - distance_km: 6\n  - avg_hr_z
  one: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nEasy conversational pace
  . Z2 ceiling — slower is fine.
-DTSTART:20260730T070000
-DTEND:20260730T073500
+DTSTART:20260730T060000
+DTEND:20260730T063500
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-30_thu_recovery-walk@trainingplan.local
+DTSTAMP:20260710T064913Z
+STATUS:CONFIRMED
+SUMMARY:[Walk] recovery · 30m
+DESCRIPTION:Session: 2026-07-30_thu_recovery-walk\nType: recovery  ·  Stat
+ us: planned\n\nTargets:\n  - duration_min: 30\n\nNotes:\nEasy walk only 
+ — active recovery.
+DTSTART:20260730T180000
+DTEND:20260730T183000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-07-31_fri_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-07-31_fri_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260731
 DTEND;VALUE=DATE:20260801
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-01_sat_easy-spin@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Bike] easy endurance · 1h · Z2
 DESCRIPTION:Session: 2026-08-01_sat_easy-spin\nType: easy_endurance  ·  St
  atus: planned\n\nTargets:\n  - duration_min: 60\n  - avg_hr_zone: Z2\n  - 
  avg_hr_range: [116\, 127]\n\nNotes:\nEasy spin — aerobic volume with zer
  o impact. Cycling Z2 (116-127). Legs should feel better after than before.
-DTSTART:20260801T070000
-DTEND:20260801T080000
+DTSTART:20260801T060000
+DTEND:20260801T070000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-02_sun_long-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] long endurance · 1h20m · 13km · Z2
 DESCRIPTION:Session: 2026-08-02_sun_long-run\nType: long_endurance  ·  Sta
  tus: planned\n\nTargets:\n  - duration_min: 80\n  - distance_km: 13\n  - a
  vg_hr_zone: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nLong run 13 km. R
  elaxed Z2 — 5:50-6:10/km territory. Fuel if over 90 min (gel at 45 min).
-DTSTART:20260802T070000
-DTEND:20260802T082000
+DTSTART:20260802T060000
+DTEND:20260802T072000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-03_mon_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-08-03_mon_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260803
 DTEND;VALUE=DATE:20260804
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-04_tue_easy-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] easy run · 35m · 6km · Z2
 DESCRIPTION:Session: 2026-08-04_tue_easy-run\nType: easy_run  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 35\n  - distance_km: 6\n  - avg_hr_z
  one: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nEasy conversational pace
  . Z2 ceiling — slower is fine.
-DTSTART:20260804T070000
-DTEND:20260804T073500
+DTSTART:20260804T060000
+DTEND:20260804T063500
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-08-05_wed_strength@trainingplan.local
-DTSTAMP:20260710T063151Z
+UID:2026-08-04_tue_strength@trainingplan.local
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Strength] strength · 40m
-DESCRIPTION:Session: 2026-08-05_wed_strength\nType: strength  ·  Status: p
+DESCRIPTION:Session: 2026-08-04_tue_strength\nType: strength  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 40\n\nNotes:\nStrength: hips\, glute
  s\, calves\, core. Single-leg RDLs\, step-ups\, calf raises\, Copenhagen p
  lanks. Masters athletes keep strength or lose it (Friel\, Fast After 50) 
- — this is injury armor for the running build.
-DTSTART:20260805T070000
-DTEND:20260805T074000
+ — this is injury armor for the running build. Evening slot: the morning 
+ run is done\, so quality stays on quality days and easy days stay easy.
+DTSTART:20260804T180000
+DTEND:20260804T184000
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-08-05_wed_easy-spin@trainingplan.local
+DTSTAMP:20260710T064913Z
+STATUS:CONFIRMED
+SUMMARY:[Bike] easy endurance · 40m · Z2
+DESCRIPTION:Session: 2026-08-05_wed_easy-spin\nType: easy_endurance  ·  St
+ atus: planned\n\nTargets:\n  - duration_min: 40\n  - avg_hr_zone: Z2\n  - 
+ avg_hr_range: [116\, 127]\n\nNotes:\nEasy spin — aerobic volume with zer
+ o impact. Cycling Z2 (116-127). Legs should feel better after than before.
+DTSTART:20260805T060000
+DTEND:20260805T064000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-06_thu_easy-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] easy run · 40m · 7km · Z2
 DESCRIPTION:Session: 2026-08-06_thu_easy-run\nType: easy_run  ·  Status: p
@@ -341,34 +454,38 @@ DESCRIPTION:Session: 2026-08-06_thu_easy-run\nType: easy_run  ·  Status: p
  one: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nEasy conversational pace
  . Z2 ceiling — slower is fine. Finish with 4 x 20 s strides (fast but re
  laxed\, full recovery) — neuromuscular sharpness\, not fatigue.
-DTSTART:20260806T070000
-DTEND:20260806T074000
+DTSTART:20260806T060000
+DTEND:20260806T064000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-07_fri_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-08-07_fri_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260807
 DTEND;VALUE=DATE:20260808
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-08_sat_recovery-walk@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Walk] recovery · 45m
 DESCRIPTION:Session: 2026-08-08_sat_recovery-walk\nType: recovery  ·  Stat
  us: planned\n\nTargets:\n  - duration_min: 45\n\nNotes:\nEasy walk only 
  — active recovery.
-DTSTART:20260808T070000
-DTEND:20260808T074500
+DTSTART:20260808T060000
+DTEND:20260808T064500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-09_sun_long-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] long endurance · 1h · 10km · Z2
 DESCRIPTION:Session: 2026-08-09_sun_long-run\nType: long_endurance  ·  Sta
@@ -376,166 +493,230 @@ DESCRIPTION:Session: 2026-08-09_sun_long-run\nType: long_endurance  ·  Sta
  vg_hr_zone: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nCutback long run 
  — 10 km\, genuinely easy. Absorption week: the fitness from weeks 1-3 la
  nds now.
-DTSTART:20260809T070000
-DTEND:20260809T080000
+DTSTART:20260809T060000
+DTEND:20260809T070000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-10_mon_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-08-10_mon_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260810
 DTEND;VALUE=DATE:20260811
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-11_tue_tempo@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] tempo · 50m · 9km · Z3
 DESCRIPTION:Session: 2026-08-11_tue_tempo\nType: tempo  ·  Status: planned
  \n\nTargets:\n  - duration_min: 50\n  - distance_km: 9\n  - avg_hr_zone: Z
  3\n\nNotes:\n3 x 10 min at Z3 with 4 min easy between. Even effort across 
  all three — the third rep should feel like the first.
-DTSTART:20260811T070000
-DTEND:20260811T075000
+DTSTART:20260811T060000
+DTEND:20260811T065000
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-08-12_wed_strength@trainingplan.local
-DTSTAMP:20260710T063151Z
+UID:2026-08-11_tue_strength@trainingplan.local
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Strength] strength · 40m
-DESCRIPTION:Session: 2026-08-12_wed_strength\nType: strength  ·  Status: p
+DESCRIPTION:Session: 2026-08-11_tue_strength\nType: strength  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 40\n\nNotes:\nStrength: hips\, glute
  s\, calves\, core. Single-leg RDLs\, step-ups\, calf raises\, Copenhagen p
  lanks. Masters athletes keep strength or lose it (Friel\, Fast After 50) 
- — this is injury armor for the running build.
-DTSTART:20260812T070000
-DTEND:20260812T074000
+ — this is injury armor for the running build. Evening slot: the morning 
+ run is done\, so quality stays on quality days and easy days stay easy.
+DTSTART:20260811T180000
+DTEND:20260811T184000
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-08-12_wed_easy-spin@trainingplan.local
+DTSTAMP:20260710T064913Z
+STATUS:CONFIRMED
+SUMMARY:[Bike] easy endurance · 40m · Z2
+DESCRIPTION:Session: 2026-08-12_wed_easy-spin\nType: easy_endurance  ·  St
+ atus: planned\n\nTargets:\n  - duration_min: 40\n  - avg_hr_zone: Z2\n  - 
+ avg_hr_range: [116\, 127]\n\nNotes:\nEasy spin — aerobic volume with zer
+ o impact. Cycling Z2 (116-127). Legs should feel better after than before.
+DTSTART:20260812T060000
+DTEND:20260812T064000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-13_thu_easy-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] easy run · 40m · 7km · Z2
 DESCRIPTION:Session: 2026-08-13_thu_easy-run\nType: easy_run  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 40\n  - distance_km: 7\n  - avg_hr_z
  one: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nEasy conversational pace
  . Z2 ceiling — slower is fine.
-DTSTART:20260813T070000
-DTEND:20260813T074000
+DTSTART:20260813T060000
+DTEND:20260813T064000
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-08-13_thu_recovery-walk@trainingplan.local
+DTSTAMP:20260710T064913Z
+STATUS:CONFIRMED
+SUMMARY:[Walk] recovery · 30m
+DESCRIPTION:Session: 2026-08-13_thu_recovery-walk\nType: recovery  ·  Stat
+ us: planned\n\nTargets:\n  - duration_min: 30\n\nNotes:\nEasy walk only 
+ — active recovery.
+DTSTART:20260813T180000
+DTEND:20260813T183000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-14_fri_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-08-14_fri_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260814
 DTEND;VALUE=DATE:20260815
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-15_sat_easy-spin@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Bike] easy endurance · 1h · Z2
 DESCRIPTION:Session: 2026-08-15_sat_easy-spin\nType: easy_endurance  ·  St
  atus: planned\n\nTargets:\n  - duration_min: 60\n  - avg_hr_zone: Z2\n  - 
  avg_hr_range: [116\, 127]\n\nNotes:\nEasy spin — aerobic volume with zer
  o impact. Cycling Z2 (116-127). Legs should feel better after than before.
-DTSTART:20260815T070000
-DTEND:20260815T080000
+DTSTART:20260815T060000
+DTEND:20260815T070000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-16_sun_long-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] long endurance · 1h25m · 14km · Z2
 DESCRIPTION:Session: 2026-08-16_sun_long-run\nType: long_endurance  ·  Sta
  tus: planned\n\nTargets:\n  - duration_min: 85\n  - distance_km: 14\n  - a
  vg_hr_zone: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nLong run 14 km. R
  elaxed Z2 — 5:50-6:10/km territory. Fuel if over 90 min (gel at 45 min).
-DTSTART:20260816T070000
-DTEND:20260816T082500
+DTSTART:20260816T060000
+DTEND:20260816T072500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-17_mon_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-08-17_mon_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260817
 DTEND;VALUE=DATE:20260818
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-18_tue_tempo@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] tempo · 55m · 10km · Z3
 DESCRIPTION:Session: 2026-08-18_tue_tempo\nType: tempo  ·  Status: planned
  \n\nTargets:\n  - duration_min: 55\n  - distance_km: 10\n  - avg_hr_zone: 
  Z3\n\nNotes:\n2 x 15 min at goal half-marathon effort (~5:27/km\, HR high 
  Z3) with 5 min easy between. First proper rehearsal of race rhythm.
-DTSTART:20260818T070000
-DTEND:20260818T075500
+DTSTART:20260818T060000
+DTEND:20260818T065500
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-08-19_wed_strength@trainingplan.local
-DTSTAMP:20260710T063151Z
+UID:2026-08-18_tue_strength@trainingplan.local
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Strength] strength · 40m
-DESCRIPTION:Session: 2026-08-19_wed_strength\nType: strength  ·  Status: p
+DESCRIPTION:Session: 2026-08-18_tue_strength\nType: strength  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 40\n\nNotes:\nStrength: hips\, glute
  s\, calves\, core. Single-leg RDLs\, step-ups\, calf raises\, Copenhagen p
  lanks. Masters athletes keep strength or lose it (Friel\, Fast After 50) 
- — this is injury armor for the running build.
-DTSTART:20260819T070000
-DTEND:20260819T074000
+ — this is injury armor for the running build. Evening slot: the morning 
+ run is done\, so quality stays on quality days and easy days stay easy.
+DTSTART:20260818T180000
+DTEND:20260818T184000
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-08-19_wed_easy-spin@trainingplan.local
+DTSTAMP:20260710T064913Z
+STATUS:CONFIRMED
+SUMMARY:[Bike] easy endurance · 40m · Z2
+DESCRIPTION:Session: 2026-08-19_wed_easy-spin\nType: easy_endurance  ·  St
+ atus: planned\n\nTargets:\n  - duration_min: 40\n  - avg_hr_zone: Z2\n  - 
+ avg_hr_range: [116\, 127]\n\nNotes:\nEasy spin — aerobic volume with zer
+ o impact. Cycling Z2 (116-127). Legs should feel better after than before.
+DTSTART:20260819T060000
+DTEND:20260819T064000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-20_thu_easy-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] easy run · 40m · 7km · Z2
 DESCRIPTION:Session: 2026-08-20_thu_easy-run\nType: easy_run  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 40\n  - distance_km: 7\n  - avg_hr_z
  one: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nEasy conversational pace
  . Z2 ceiling — slower is fine.
-DTSTART:20260820T070000
-DTEND:20260820T074000
+DTSTART:20260820T060000
+DTEND:20260820T064000
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-08-20_thu_recovery-walk@trainingplan.local
+DTSTAMP:20260710T064913Z
+STATUS:CONFIRMED
+SUMMARY:[Walk] recovery · 30m
+DESCRIPTION:Session: 2026-08-20_thu_recovery-walk\nType: recovery  ·  Stat
+ us: planned\n\nTargets:\n  - duration_min: 30\n\nNotes:\nEasy walk only 
+ — active recovery.
+DTSTART:20260820T180000
+DTEND:20260820T183000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-21_fri_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-08-21_fri_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260821
 DTEND;VALUE=DATE:20260822
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-22_sat_easy-spin@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Bike] easy endurance · 1h · Z2
 DESCRIPTION:Session: 2026-08-22_sat_easy-spin\nType: easy_endurance  ·  St
  atus: planned\n\nTargets:\n  - duration_min: 60\n  - avg_hr_zone: Z2\n  - 
  avg_hr_range: [116\, 127]\n\nNotes:\nEasy spin — aerobic volume with zer
  o impact. Cycling Z2 (116-127). Legs should feel better after than before.
-DTSTART:20260822T070000
-DTEND:20260822T080000
+DTSTART:20260822T060000
+DTEND:20260822T070000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-23_sun_long-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] long endurance · 1h40m · 16km · Z2
 DESCRIPTION:Session: 2026-08-23_sun_long-run\nType: long_endurance  ·  Sta
@@ -545,83 +726,115 @@ DESCRIPTION:Session: 2026-08-23_sun_long-run\nType: long_endurance  ·  Sta
  . Last 3 km at goal half pace (~5:27/km\, HR drifting into Z3 is expected)
  . Practicing race pace on tired legs is the single most race-specific stim
  ulus in the plan.
-DTSTART:20260823T070000
-DTEND:20260823T084000
+DTSTART:20260823T060000
+DTEND:20260823T074000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-24_mon_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-08-24_mon_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260824
 DTEND;VALUE=DATE:20260825
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-25_tue_tempo@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] tempo · 50m · 9km · Z3
 DESCRIPTION:Session: 2026-08-25_tue_tempo\nType: tempo  ·  Status: planned
  \n\nTargets:\n  - duration_min: 50\n  - distance_km: 9\n  - avg_hr_zone: Z
  3\n\nNotes:\n25 min continuous at Z3. One block\, steady effort — mental
   rehearsal for holding pace when it stops feeling fresh.
-DTSTART:20260825T070000
-DTEND:20260825T075000
+DTSTART:20260825T060000
+DTEND:20260825T065000
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-08-26_wed_strength@trainingplan.local
-DTSTAMP:20260710T063151Z
+UID:2026-08-25_tue_strength@trainingplan.local
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Strength] strength · 40m
-DESCRIPTION:Session: 2026-08-26_wed_strength\nType: strength  ·  Status: p
+DESCRIPTION:Session: 2026-08-25_tue_strength\nType: strength  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 40\n\nNotes:\nStrength: hips\, glute
  s\, calves\, core. Single-leg RDLs\, step-ups\, calf raises\, Copenhagen p
  lanks. Masters athletes keep strength or lose it (Friel\, Fast After 50) 
- — this is injury armor for the running build.
-DTSTART:20260826T070000
-DTEND:20260826T074000
+ — this is injury armor for the running build. Evening slot: the morning 
+ run is done\, so quality stays on quality days and easy days stay easy.
+DTSTART:20260825T180000
+DTEND:20260825T184000
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-08-26_wed_easy-spin@trainingplan.local
+DTSTAMP:20260710T064913Z
+STATUS:CONFIRMED
+SUMMARY:[Bike] easy endurance · 40m · Z2
+DESCRIPTION:Session: 2026-08-26_wed_easy-spin\nType: easy_endurance  ·  St
+ atus: planned\n\nTargets:\n  - duration_min: 40\n  - avg_hr_zone: Z2\n  - 
+ avg_hr_range: [116\, 127]\n\nNotes:\nEasy spin — aerobic volume with zer
+ o impact. Cycling Z2 (116-127). Legs should feel better after than before.
+DTSTART:20260826T060000
+DTEND:20260826T064000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-27_thu_easy-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] easy run · 45m · 8km · Z2
 DESCRIPTION:Session: 2026-08-27_thu_easy-run\nType: easy_run  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 45\n  - distance_km: 8\n  - avg_hr_z
  one: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nEasy conversational pace
  . Z2 ceiling — slower is fine.
-DTSTART:20260827T070000
-DTEND:20260827T074500
+DTSTART:20260827T060000
+DTEND:20260827T064500
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-08-27_thu_recovery-walk@trainingplan.local
+DTSTAMP:20260710T064913Z
+STATUS:CONFIRMED
+SUMMARY:[Walk] recovery · 30m
+DESCRIPTION:Session: 2026-08-27_thu_recovery-walk\nType: recovery  ·  Stat
+ us: planned\n\nTargets:\n  - duration_min: 30\n\nNotes:\nEasy walk only 
+ — active recovery.
+DTSTART:20260827T180000
+DTEND:20260827T183000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-28_fri_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-08-28_fri_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260828
 DTEND;VALUE=DATE:20260829
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-29_sat_easy-spin@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Bike] easy endurance · 1h · Z2
 DESCRIPTION:Session: 2026-08-29_sat_easy-spin\nType: easy_endurance  ·  St
  atus: planned\n\nTargets:\n  - duration_min: 60\n  - avg_hr_zone: Z2\n  - 
  avg_hr_range: [116\, 127]\n\nNotes:\nEasy spin — aerobic volume with zer
  o impact. Cycling Z2 (116-127). Legs should feel better after than before.
-DTSTART:20260829T070000
-DTEND:20260829T080000
+DTSTART:20260829T060000
+DTEND:20260829T070000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-30_sun_long-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] long endurance · 1h45m · 17km · Z2
 DESCRIPTION:Session: 2026-08-30_sun_long-run\nType: long_endurance  ·  Sta
@@ -631,23 +844,27 @@ DESCRIPTION:Session: 2026-08-30_sun_long-run\nType: long_endurance  ·  Sta
  . Last 4 km at goal half pace (~5:27/km\, HR drifting into Z3 is expected)
  . Practicing race pace on tired legs is the single most race-specific stim
  ulus in the plan.
-DTSTART:20260830T070000
-DTEND:20260830T084500
+DTSTART:20260830T060000
+DTEND:20260830T074500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-08-31_mon_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-08-31_mon_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260831
 DTEND;VALUE=DATE:20260901
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-01_tue_intervals@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] intervals · 1h · 11km · Z3
 DESCRIPTION:Session: 2026-09-01_tue_intervals\nType: intervals  ·  Status:
@@ -656,59 +873,87 @@ DESCRIPTION:Session: 2026-09-01_tue_intervals\nType: intervals  ·  Status:
   jog between. The fitness check: if these feel controlled\, sub-1:55 is on
  . If they're a fight\, adjust race target to 5:35/km (1:58) — a strong f
  inish beats a brave blowup.
-DTSTART:20260901T070000
-DTEND:20260901T080000
+DTSTART:20260901T060000
+DTEND:20260901T070000
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-09-02_wed_strength@trainingplan.local
-DTSTAMP:20260710T063151Z
+UID:2026-09-01_tue_strength@trainingplan.local
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Strength] strength · 40m
-DESCRIPTION:Session: 2026-09-02_wed_strength\nType: strength  ·  Status: p
+DESCRIPTION:Session: 2026-09-01_tue_strength\nType: strength  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 40\n\nNotes:\nStrength: hips\, glute
  s\, calves\, core. Single-leg RDLs\, step-ups\, calf raises\, Copenhagen p
  lanks. Masters athletes keep strength or lose it (Friel\, Fast After 50) 
- — this is injury armor for the running build.
-DTSTART:20260902T070000
-DTEND:20260902T074000
+ — this is injury armor for the running build. Evening slot: the morning 
+ run is done\, so quality stays on quality days and easy days stay easy.
+DTSTART:20260901T180000
+DTEND:20260901T184000
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-09-02_wed_easy-spin@trainingplan.local
+DTSTAMP:20260710T064913Z
+STATUS:CONFIRMED
+SUMMARY:[Bike] easy endurance · 40m · Z2
+DESCRIPTION:Session: 2026-09-02_wed_easy-spin\nType: easy_endurance  ·  St
+ atus: planned\n\nTargets:\n  - duration_min: 40\n  - avg_hr_zone: Z2\n  - 
+ avg_hr_range: [116\, 127]\n\nNotes:\nEasy spin — aerobic volume with zer
+ o impact. Cycling Z2 (116-127). Legs should feel better after than before.
+DTSTART:20260902T060000
+DTEND:20260902T064000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-03_thu_easy-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] easy run · 40m · 7km · Z2
 DESCRIPTION:Session: 2026-09-03_thu_easy-run\nType: easy_run  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 40\n  - distance_km: 7\n  - avg_hr_z
  one: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nEasy conversational pace
  . Z2 ceiling — slower is fine.
-DTSTART:20260903T070000
-DTEND:20260903T074000
+DTSTART:20260903T060000
+DTEND:20260903T064000
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-09-03_thu_recovery-walk@trainingplan.local
+DTSTAMP:20260710T064913Z
+STATUS:CONFIRMED
+SUMMARY:[Walk] recovery · 30m
+DESCRIPTION:Session: 2026-09-03_thu_recovery-walk\nType: recovery  ·  Stat
+ us: planned\n\nTargets:\n  - duration_min: 30\n\nNotes:\nEasy walk only 
+ — active recovery.
+DTSTART:20260903T180000
+DTEND:20260903T183000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-04_fri_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-09-04_fri_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260904
 DTEND;VALUE=DATE:20260905
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-05_sat_recovery-walk@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Walk] recovery · 30m
 DESCRIPTION:Session: 2026-09-05_sat_recovery-walk\nType: recovery  ·  Stat
  us: planned\n\nTargets:\n  - duration_min: 30\n\nNotes:\nEasy walk only 
  — active recovery.
-DTSTART:20260905T070000
-DTEND:20260905T073000
+DTSTART:20260905T060000
+DTEND:20260905T063000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-06_sun_long-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] long endurance · 1h50m · 18km · Z2
 DESCRIPTION:Session: 2026-09-06_sun_long-run\nType: long_endurance  ·  Sta
@@ -716,23 +961,27 @@ DESCRIPTION:Session: 2026-09-06_sun_long-run\nType: long_endurance  ·  Sta
  avg_hr_zone: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nPeak long run 
  — 18 km relaxed Z2\, fuel like race day (gel at 45 and 90 min). Longest 
  run of the block\; after today the hay is in the barn.
-DTSTART:20260906T070000
-DTEND:20260906T085000
+DTSTART:20260906T060000
+DTEND:20260906T075000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-07_mon_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-09-07_mon_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260907
 DTEND;VALUE=DATE:20260908
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-08_tue_tempo@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] tempo · 45m · 8km · Z3
 DESCRIPTION:Session: 2026-09-08_tue_tempo\nType: tempo  ·  Status: planned
@@ -740,59 +989,75 @@ DESCRIPTION:Session: 2026-09-08_tue_tempo\nType: tempo  ·  Status: planned
  3\n\nNotes:\n2 x 10 min at goal half pace\, 5 min easy between. Volume dro
  ps in taper\; intensity stays — that's what preserves race sharpness (Bo
  squet 2007\, Mujika & Padilla 2003).
-DTSTART:20260908T070000
-DTEND:20260908T074500
+DTSTART:20260908T060000
+DTEND:20260908T064500
 END:VEVENT
 BEGIN:VEVENT
-UID:2026-09-09_wed_strength@trainingplan.local
-DTSTAMP:20260710T063151Z
+UID:2026-09-08_tue_strength@trainingplan.local
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Strength] strength · 30m
-DESCRIPTION:Session: 2026-09-09_wed_strength\nType: strength  ·  Status: p
+DESCRIPTION:Session: 2026-09-08_tue_strength\nType: strength  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 30\n\nNotes:\nLight maintenance only
  : core\, glute bridges\, calf raises. Nothing that creates soreness — ta
  per protects freshness.
-DTSTART:20260909T070000
-DTEND:20260909T073000
+DTSTART:20260908T180000
+DTEND:20260908T183000
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-09-09_wed_easy-spin@trainingplan.local
+DTSTAMP:20260710T064913Z
+STATUS:CONFIRMED
+SUMMARY:[Bike] easy endurance · 30m · Z2
+DESCRIPTION:Session: 2026-09-09_wed_easy-spin\nType: easy_endurance  ·  St
+ atus: planned\n\nTargets:\n  - duration_min: 30\n  - avg_hr_zone: Z2\n  - 
+ avg_hr_range: [116\, 127]\n\nNotes:\nEasy spin — aerobic volume with zer
+ o impact. Cycling Z2 (116-127). Legs should feel better after than before.
+DTSTART:20260909T060000
+DTEND:20260909T063000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-10_thu_easy-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] easy run · 35m · 6km · Z2
 DESCRIPTION:Session: 2026-09-10_thu_easy-run\nType: easy_run  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 35\n  - distance_km: 6\n  - avg_hr_z
  one: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nEasy conversational pace
  . Z2 ceiling — slower is fine.
-DTSTART:20260910T070000
-DTEND:20260910T073500
+DTSTART:20260910T060000
+DTEND:20260910T063500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-11_fri_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-09-11_fri_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260911
 DTEND;VALUE=DATE:20260912
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-12_sat_easy-spin@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Bike] easy endurance · 45m · Z2
 DESCRIPTION:Session: 2026-09-12_sat_easy-spin\nType: easy_endurance  ·  St
  atus: planned\n\nTargets:\n  - duration_min: 45\n  - avg_hr_zone: Z2\n  - 
  avg_hr_range: [116\, 127]\n\nNotes:\nEasy spin — aerobic volume with zer
  o impact. Cycling Z2 (116-127). Legs should feel better after than before.
-DTSTART:20260912T070000
-DTEND:20260912T074500
+DTSTART:20260912T060000
+DTEND:20260912T064500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-13_sun_long-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] long endurance · 1h15m · 12km · Z2
 DESCRIPTION:Session: 2026-09-13_sun_long-run\nType: long_endurance  ·  Sta
@@ -800,23 +1065,27 @@ DESCRIPTION:Session: 2026-09-13_sun_long-run\nType: long_endurance  ·  Sta
  vg_hr_zone: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nTaper long run 
  — 12 km easy. No pace work. Rehearse race-morning routine: same breakfas
  t\, same start time if possible.
-DTSTART:20260913T070000
-DTEND:20260913T081500
+DTSTART:20260913T060000
+DTEND:20260913T071500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-14_mon_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-09-14_mon_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260914
 DTEND;VALUE=DATE:20260915
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-15_tue_easy-run@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] easy run · 30m · 5km · Z2
 DESCRIPTION:Session: 2026-09-15_tue_easy-run\nType: easy_run  ·  Status: p
@@ -824,23 +1093,27 @@ DESCRIPTION:Session: 2026-09-15_tue_easy-run\nType: easy_run  ·  Status: p
  one: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\nEasy 5 km. Strides at ra
  ce pace — rhythm check\, nothing more. Finish with 4 x 20 s strides (fas
  t but relaxed\, full recovery) — neuromuscular sharpness\, not fatigue.
-DTSTART:20260915T070000
-DTEND:20260915T073000
+DTSTART:20260915T060000
+DTEND:20260915T063000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-16_wed_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-09-16_wed_rest\nType: rest  ·  Status: planned\n
- \nNotes:\nFull rest.
+ \nNotes:\nFull rest is the default — sleep and food do the work today. I
+ f you get restless\, pick ONE and keep it genuinely easy:\n  - 30-45 min w
+ alk\n  - 20-30 min very easy spin (HR under 116 — cycling Z1)\n  - 15-20
+  min mobility / stretching\nNothing that touches Z2. Optional movement mus
+ t not cost recovery.
 DTSTART;VALUE=DATE:20260916
 DTEND;VALUE=DATE:20260917
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-17_thu_openers@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] openers · 25m · 4km
 DESCRIPTION:Session: 2026-09-17_thu_openers\nType: openers  ·  Status: pla
@@ -848,12 +1121,12 @@ DESCRIPTION:Session: 2026-09-17_thu_openers\nType: openers  ·  Status: pla
  ers: 15 min easy\, then 3 x 60 s at race effort with 2 min easy between\, 
  5 min easy to finish. Wake up the legs\, don't tire them. You should finis
  h feeling springy.
-DTSTART:20260917T070000
-DTEND:20260917T072500
+DTSTART:20260917T060000
+DTEND:20260917T062500
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-18_fri_rest@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Rest] Rest day
 DESCRIPTION:Session: 2026-09-18_fri_rest\nType: rest  ·  Status: planned\n
@@ -865,19 +1138,19 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-19_sat_shakeout@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Run] easy run · 20m · 3km · Z2
 DESCRIPTION:Session: 2026-09-19_sat_shakeout\nType: easy_run  ·  Status: p
  lanned\n\nTargets:\n  - duration_min: 20\n  - distance_km: 3\n  - avg_hr_z
  one: Z2\n  - avg_hr_range: [121\, 133]\n\nNotes:\n3 km shakeout + 2 stride
  s. Legs itchy is exactly right — save it.
-DTSTART:20260919T070000
-DTEND:20260919T072000
+DTSTART:20260919T060000
+DTEND:20260919T062000
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-20_sun_half-marathon@trainingplan.local
-DTSTAMP:20260710T063151Z
+DTSTAMP:20260710T064913Z
 STATUS:CONFIRMED
 SUMMARY:[Race] Half Marathon · 21km
 DESCRIPTION:Session: 2026-09-20_sun_half-marathon\nType: race  ·  Status: 
@@ -892,7 +1165,7 @@ DESCRIPTION:Session: 2026-09-20_sun_half-marathon\nType: race  ·  Status:
   > 150 in the first 5 km → ease off 10 s/km immediately.\n  Side stitch 
  → exhale hard on the opposite foot strike\, shorten stride until it clea
  rs.
-DTSTART:20260920T070000
-DTEND:20260920T085500
+DTSTART:20260920T060000
+DTEND:20260920T075500
 END:VEVENT
 END:VCALENDAR

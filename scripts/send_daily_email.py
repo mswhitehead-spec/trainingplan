@@ -49,6 +49,7 @@ from trainingplan import state as state_mod
 from trainingplan.email_sender import (
     _latest_pending_proposal,
     render_daily_email,
+    render_daily_email_html,
     send_email,
 )
 from trainingplan.state import email_already_sent_today, stamp_email
@@ -107,6 +108,9 @@ def main(dry_run: bool, today: str | None, force: bool) -> None:
         plan, today=today_d, state=state, pending_proposal=pending,
         activities=activities,
     )
+    html_body = render_daily_email_html(
+        plan, today=today_d, state=state, activities=activities,
+    )
 
     if dry_run:
         click.echo(f"=== Subject ===\n{subject}\n")
@@ -120,6 +124,7 @@ def main(dry_run: bool, today: str | None, force: bool) -> None:
         to_addr=to_addr,
         smtp_host=email_cfg.get("smtp_host", "smtp.gmail.com"),
         smtp_port=int(email_cfg.get("smtp_port", 587)),
+        html_body=html_body,
     )
     # Record that today's email was sent so subsequent cron runs skip it.
     stamp_email(state, today_str)
