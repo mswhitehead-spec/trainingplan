@@ -44,23 +44,28 @@ events:
   distance_km: 21.1
   priority: A
   target:
-    time: '1:55:00'
-    avg_pace_min_per_km: '5:27'
+    time: '1:40:00'
+    avg_pace_min_per_km: '4:44'
     avg_hr_range: &id003
-    - 138
-    - 148
+    - 144
+    - 154
+    b_goal:
+      time: '1:45:00'
+      avg_pace_min_per_km: '4:58'
+    last_year: '1:49'
 block:
   name: half-marathon-2026
   generated: '2026-07-10'
   start_date: '2026-07-10'
   race_date: '2026-09-20'
   days_in_block: 73
-  goal: sub-1h55
+  goal: sub-1h40
   philosophy: 'Coming off Vätternrundan (315 km completed 2026-06-12, ~11h11m moving) with a rebuilt run
-    habit: 22-33 km/wk at 5:30-6:00/km, HR 117-132. Ten weeks is enough runway to build properly: 3 base
-    weeks, cutback, 4 build/peak weeks with race-pace work, 2-week taper. Two quality days max per week,
-    strength until taper, long run peaks at 18 km. Target 1:55; the week-8 interval session is the go/no-go
-    check on that number.'
+    habit: 22-33 km/wk at 5:30-6:00/km, HR 117-132. Target sub-1:40 (4:44/km) — ambitious against last
+    year''s 1:49, so the quality progression earns it: threshold intro, threshold volume, 1 km speed reps,
+    goal-pace blocks, then the Sep 1 checkpoint (4x2 km at goal pace) locks the race plan — green: 4:44,
+    amber: 4:58 (sub-1:45, still a 4-min PR). Two quality days max per week, strength until taper, long
+    run peaks at 18 km with goal-pace finishes.'
 sessions:
 - id: 2026-07-10_fri_rest
   date: '2026-07-10'
@@ -226,7 +231,7 @@ sessions:
     distance_km: 11
     avg_hr_zone: Z2
     avg_hr_range: *id001
-  notes: Long run 11 km. Relaxed Z2 — 5:50-6:10/km territory. Fuel if over 90 min (gel at 45 min).
+  notes: Long run 11 km. Relaxed Z2 — 5:40-6:00/km territory. Fuel if over 90 min (gel at 45 min).
   status: planned
   actual: null
   analysis: null
@@ -356,7 +361,7 @@ sessions:
     distance_km: 12
     avg_hr_zone: Z2
     avg_hr_range: *id001
-  notes: Long run 12 km. Relaxed Z2 — 5:50-6:10/km territory. Fuel if over 90 min (gel at 45 min).
+  notes: Long run 12 km. Relaxed Z2 — 5:40-6:00/km territory. Fuel if over 90 min (gel at 45 min).
   status: planned
   actual: null
   analysis: null
@@ -383,8 +388,9 @@ sessions:
     duration_min: 45
     distance_km: 8
     avg_hr_zone: Z3
-  notes: 'Tempo intro: 15 min easy, then 2 x 10 min at Z3 (133-144) with 5 min easy between, 5 min easy
-    to finish. Comfortably hard — you could speak in short phrases, not sentences.'
+  notes: 'Threshold intro: 15 min easy, then 2 x 10 min at 4:55-5:00/km (HR drifting to ~145) with 5 min
+    easy between, 5 min easy to finish. Comfortably hard — short phrases, not sentences. This is last
+    year''s race pace; it should feel manageable.'
   status: planned
   actual: null
   analysis: null
@@ -484,7 +490,7 @@ sessions:
     distance_km: 13
     avg_hr_zone: Z2
     avg_hr_range: *id001
-  notes: Long run 13 km. Relaxed Z2 — 5:50-6:10/km territory. Fuel if over 90 min (gel at 45 min).
+  notes: Long run 13 km. Relaxed Z2 — 5:40-6:00/km territory. Fuel if over 90 min (gel at 45 min).
   status: planned
   actual: null
   analysis: null
@@ -626,8 +632,8 @@ sessions:
     duration_min: 50
     distance_km: 9
     avg_hr_zone: Z3
-  notes: 3 x 10 min at Z3 with 4 min easy between. Even effort across all three — the third rep should
-    feel like the first.
+  notes: 3 x 10 min at 4:50-4:55/km with 4 min easy between. Even effort across all three — the third
+    rep should feel like the first. Threshold volume is what moves the 1:40 needle.
   status: planned
   actual: null
   analysis: null
@@ -727,7 +733,7 @@ sessions:
     distance_km: 14
     avg_hr_zone: Z2
     avg_hr_range: *id001
-  notes: Long run 14 km. Relaxed Z2 — 5:50-6:10/km territory. Fuel if over 90 min (gel at 45 min).
+  notes: Long run 14 km. Relaxed Z2 — 5:40-6:00/km territory. Fuel if over 90 min (gel at 45 min).
   status: planned
   actual: null
   analysis: null
@@ -746,16 +752,17 @@ sessions:
   actual: null
   analysis: null
   adaptations: []
-- id: 2026-08-18_tue_tempo
+- id: 2026-08-18_tue_intervals
   date: '2026-08-18'
   discipline: running
-  type: tempo
+  type: intervals
   targets:
     duration_min: 55
     distance_km: 10
-    avg_hr_zone: Z3
-  notes: 2 x 15 min at goal half-marathon effort (~5:27/km, HR high Z3) with 5 min easy between. First
-    proper rehearsal of race rhythm.
+    avg_hr_zone: Z4
+  notes: 'Speed: 5 x 1 km at 4:30-4:35/km with 400 m jog between. Faster than race pace on purpose — it
+    makes 4:44 feel like cruising. Full warmup (15 min + 4 strides) before rep 1. Stop at 4 reps if form
+    falls apart; quality over count.'
   status: planned
   actual: null
   analysis: null
@@ -855,9 +862,9 @@ sessions:
     distance_km: 16
     avg_hr_zone: Z2
     avg_hr_range: *id001
-  notes: Long run 16 km. Relaxed Z2 — 5:50-6:10/km territory. Fuel if over 90 min (gel at 45 min). Last
-    3 km at goal half pace (~5:27/km, HR drifting into Z3 is expected). Practicing race pace on tired
-    legs is the single most race-specific stimulus in the plan.
+  notes: Long run 16 km. Relaxed Z2 — 5:40-6:00/km territory. Fuel if over 90 min (gel at 45 min). Last
+    3 km at goal half pace (4:44/km — HR will climb into Z4; that's the point). Practicing race pace on
+    tired legs is the single most race-specific stimulus in the plan.
   status: planned
   actual: null
   analysis: null
@@ -881,11 +888,12 @@ sessions:
   discipline: running
   type: tempo
   targets:
-    duration_min: 50
-    distance_km: 9
+    duration_min: 55
+    distance_km: 10
     avg_hr_zone: Z3
-  notes: 25 min continuous at Z3. One block, steady effort — mental rehearsal for holding pace when it
-    stops feeling fresh.
+  notes: 2 x 15 min at goal pace (4:44/km, HR settling around 144-150) with 5 min easy between. First
+    proper rehearsal of race rhythm — learn what 4:44 feels like when fresh so you can find it by feel
+    at km 10.
   status: planned
   actual: null
   analysis: null
@@ -985,9 +993,9 @@ sessions:
     distance_km: 17
     avg_hr_zone: Z2
     avg_hr_range: *id001
-  notes: Long run 17 km. Relaxed Z2 — 5:50-6:10/km territory. Fuel if over 90 min (gel at 45 min). Last
-    4 km at goal half pace (~5:27/km, HR drifting into Z3 is expected). Practicing race pace on tired
-    legs is the single most race-specific stimulus in the plan.
+  notes: Long run 17 km. Relaxed Z2 — 5:40-6:00/km territory. Fuel if over 90 min (gel at 45 min). Last
+    4 km at goal half pace (4:44/km — HR will climb into Z4; that's the point). Practicing race pace on
+    tired legs is the single most race-specific stimulus in the plan.
   status: planned
   actual: null
   analysis: null
@@ -1013,10 +1021,10 @@ sessions:
   targets:
     duration_min: 60
     distance_km: 11
-    avg_hr_zone: Z3
-  notes: '4 x 2 km at goal half pace (5:25-5:30/km) with 2 min jog between. The fitness check: if these
-    feel controlled, sub-1:55 is on. If they''re a fight, adjust race target to 5:35/km (1:58) — a strong
-    finish beats a brave blowup.'
+    avg_hr_zone: Z4
+  notes: '*** CHECKPOINT *** 4 x 2 km at 4:40-4:44/km with 2 min jog between. This decides the race plan:
+    controlled and repeatable → race at 4:44 (sub-1:40). A fight → race at 4:58 (sub-1:45, still a 4-min
+    PR). A strong finish beats a brave blowup — decide today, not at km 16.'
   status: planned
   actual: null
   analysis: null
@@ -1141,8 +1149,9 @@ sessions:
     duration_min: 45
     distance_km: 8
     avg_hr_zone: Z3
-  notes: 2 x 10 min at goal half pace, 5 min easy between. Volume drops in taper; intensity stays — that's
-    what preserves race sharpness (Bosquet 2007, Mujika & Padilla 2003).
+  notes: '2 x 10 min at race pace (per the Sep 1 decision: 4:44 or 4:58), 5 min easy between. Volume drops
+    in taper; intensity stays — that''s what preserves race sharpness (Bosquet 2007, Mujika & Padilla
+    2003).'
   status: planned
   actual: null
   analysis: null
@@ -1321,16 +1330,19 @@ sessions:
   discipline: running
   type: race
   targets:
-    duration_min: 115
+    duration_min: 100
     distance_km: 21.1
     avg_hr_range: *id003
-    avg_pace_min_per_km: '5:27'
-  notes: "*** RACE *** Half marathon — 21.1 km. Sub-1:55 target (5:27/km).\n\nPacing\n  Km 1-3: AT goal\
-    \ pace, not under it. It must feel easy.\n  Km 4-15: settle at 5:25-5:30, HR 138-148. Lock in.\n \
-    \ Km 16-21: whatever is left. This is where the taper pays out.\n\nFueling\n  Breakfast 2.5-3 h out,\
-    \ familiar carbs.\n  1 gel ~15 min before start, 1 gel around km 10-12.\n  Water at stations — a few\
-    \ sips each, don't skip.\n\nIf the day goes sideways\n  HR > 150 in the first 5 km → ease off 10 s/km\
-    \ immediately.\n  Side stitch → exhale hard on the opposite foot strike, shorten stride until it clears."
+    avg_pace_min_per_km: '4:44'
+  notes: "*** RACE *** Half marathon — 21.1 km. Sub-1:40 target (4:44/km). Last year: 1:49 — this is the\
+    \ A-goal; B-goal is sub-1:45 (4:58/km), still a 4-min PR.\n\nPacing\n  Km 1-3: 4:44, never faster.\
+    \ Banked seconds cost minutes later.\n  Km 4-15: lock in 4:42-4:46, HR 144-154. Rhythm over heroics.\n\
+    \  Km 16-21: race. Empty it in the last 3 km, not at 16.\n\nDecision gate (set after the Sep 1 checkpoint\
+    \ session)\n  Green: 4x2km @ 4:40-4:44 felt controlled → race at 4:44.\n  Amber: it was a fight →\
+    \ race at 4:58 and negative-split.\n\nFueling\n  Breakfast 2.5-3 h out, familiar carbs.\n  1 gel ~15\
+    \ min before start, 1 gel around km 10-12.\n  Water at stations — a few sips each, don't skip.\n\n\
+    If the day goes sideways\n  HR > 156 in the first 5 km → ease off 10 s/km immediately.\n  Side stitch\
+    \ → exhale hard on the opposite foot strike, shorten stride until it clears."
   status: planned
   actual: null
   analysis: null

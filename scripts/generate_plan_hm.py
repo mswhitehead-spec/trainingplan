@@ -8,15 +8,17 @@ Design (block: 2026-07-10 → 2026-09-20, 73 days):
   - Base from current fitness: 22-33 km/wk running at 5:30-6:00/km, HR 117-132.
   - Classic build: 3 base weeks -> cutback -> 4 build/peak weeks -> 2-week taper.
   - Masters-athlete bias (Friel, Fast After 50): max 2 quality days/week,
-    strength twice weekly until taper, strides for neuromuscular retention,
+    strength until taper, strides for neuromuscular retention,
     hard days hard / easy days genuinely easy.
-  - Long run peaks at 18 km two weeks out; race-pace segments appear from
-    week 6 so goal pace is rehearsed, not discovered.
-  - Bike stays as easy cross-training on Saturdays — aerobic volume without
-    running-specific impact load.
+  - Long run peaks at 18 km two weeks out; goal-pace segments from week 6.
+  - Bike stays as easy cross-training — aerobic volume without impact load.
 
-Target: sub-1:55 (5:27/km, HR ~138-148 = high Z3). Derived from current easy
-pace 5:35-5:45/km at HR ~125; reassess after the week-8 interval session.
+Target: sub-1:40 (4:44/km, HR ~144-154 = Z4). AMBITIOUS by design — last
+year's half was 1:49 (5:10/km), so this asks for ~9 min in one build. The
+quality progression carries it: threshold intro -> threshold volume ->
+1 km speed reps -> goal-pace blocks -> the week-8 checkpoint (4 x 2 km at
+goal pace). If that session is a fight, the race plan drops to 4:58/km
+(~1:45) — still a 4-min PR. Decide then, not on race morning.
 
 Usage:
   venv\\Scripts\\python scripts\\generate_plan_hm.py
@@ -45,8 +47,10 @@ from trainingplan.plan import save, validate  # noqa: E402
 RACE_NAME = "Half marathon"
 RACE_DATE = date(2026, 9, 20)
 RACE_DISTANCE_KM = 21.1
-RACE_TARGET_MIN = 115           # 1:55:00 -> 5:27/km
-RACE_HR_RANGE = [138, 148]      # high Z3 / low Z4 for max=168, rest=50
+RACE_TARGET_MIN = 100           # 1:40:00 -> 4:44/km (last year: 1:49 = 5:10/km)
+RACE_HR_RANGE = [144, 154]      # Z4 band — ~87-92% of max 168, right for a 100-min race
+GOAL_PACE = "4:44"              # A-goal pace per km
+B_GOAL_PACE = "4:58"            # fallback -> 1:45 if the week-8 check says no
 
 BLOCK_START = date(2026, 7, 10)
 
@@ -141,20 +145,20 @@ def tempo(d: date, km: float, dur: int, notes: str) -> dict:
 def intervals(d: date, km: float, dur: int, notes: str) -> dict:
     return _base(d, "intervals", "running", "intervals",
                  {"duration_min": dur, "distance_km": km,
-                  "avg_hr_zone": "Z3"}, notes)
+                  "avg_hr_zone": "Z4"}, notes)
 
 
 def long_run(d: date, km: float, pace_finish_km: int = 0,
              notes: str | None = None) -> dict:
     dur = int(round(km * 6.1 / 5) * 5)
     if notes is None:
-        notes = (f"Long run {km:g} km. Relaxed Z2 — 5:50-6:10/km territory. "
+        notes = (f"Long run {km:g} km. Relaxed Z2 — 5:40-6:00/km territory. "
                  f"Fuel if over 90 min (gel at 45 min).")
         if pace_finish_km:
             notes += (f" Last {pace_finish_km} km at goal half pace "
-                      f"(~5:27/km, HR drifting into Z3 is expected). "
-                      f"Practicing race pace on tired legs is the single "
-                      f"most race-specific stimulus in the plan.")
+                      f"({GOAL_PACE}/km — HR will climb into Z4; that's the "
+                      f"point). Practicing race pace on tired legs is the "
+                      f"single most race-specific stimulus in the plan.")
     return _base(d, "long-run", "running", "long_endurance",
                  {"duration_min": dur, "distance_km": km,
                   "avg_hr_zone": "Z2", "avg_hr_range": Z_RUN["Z2"]}, notes)
@@ -188,20 +192,27 @@ def race(d: date) -> dict:
                  {"duration_min": RACE_TARGET_MIN,
                   "distance_km": RACE_DISTANCE_KM,
                   "avg_hr_range": RACE_HR_RANGE,
-                  "avg_pace_min_per_km": "5:27"},
-                 "*** RACE *** Half marathon — 21.1 km. Sub-1:55 target "
-                 "(5:27/km).\n\n"
+                  "avg_pace_min_per_km": GOAL_PACE},
+                 "*** RACE *** Half marathon — 21.1 km. Sub-1:40 target "
+                 f"({GOAL_PACE}/km). Last year: 1:49 — this is the A-goal; "
+                 f"B-goal is sub-1:45 ({B_GOAL_PACE}/km), still a 4-min PR.\n\n"
                  "Pacing\n"
-                 "  Km 1-3: AT goal pace, not under it. It must feel easy.\n"
-                 "  Km 4-15: settle at 5:25-5:30, HR 138-148. Lock in.\n"
-                 "  Km 16-21: whatever is left. This is where the taper "
-                 "pays out.\n\n"
+                 f"  Km 1-3: {GOAL_PACE}, never faster. Banked seconds cost "
+                 "minutes later.\n"
+                 f"  Km 4-15: lock in 4:42-4:46, HR 144-154. Rhythm over "
+                 "heroics.\n"
+                 "  Km 16-21: race. Empty it in the last 3 km, not at 16.\n\n"
+                 "Decision gate (set after the Sep 1 checkpoint session)\n"
+                 f"  Green: 4x2km @ 4:40-4:44 felt controlled → race at "
+                 f"{GOAL_PACE}.\n"
+                 f"  Amber: it was a fight → race at {B_GOAL_PACE} and "
+                 "negative-split.\n\n"
                  "Fueling\n"
                  "  Breakfast 2.5-3 h out, familiar carbs.\n"
                  "  1 gel ~15 min before start, 1 gel around km 10-12.\n"
                  "  Water at stations — a few sips each, don't skip.\n\n"
                  "If the day goes sideways\n"
-                 "  HR > 150 in the first 5 km → ease off 10 s/km "
+                 "  HR > 156 in the first 5 km → ease off 10 s/km "
                  "immediately.\n"
                  "  Side stitch → exhale hard on the opposite foot strike, "
                  "shorten stride until it clears.")
@@ -262,9 +273,10 @@ def build_sessions() -> list[dict]:
     # W3: first quality
     week(w + timedelta(weeks=2),
          tue_am=lambda d: tempo(d, 8, 45,
-             "Tempo intro: 15 min easy, then 2 x 10 min at Z3 (133-144) "
-             "with 5 min easy between, 5 min easy to finish. Comfortably "
-             "hard — you could speak in short phrases, not sentences."),
+             "Threshold intro: 15 min easy, then 2 x 10 min at 4:55-5:00/km "
+             "(HR drifting to ~145) with 5 min easy between, 5 min easy to "
+             "finish. Comfortably hard — short phrases, not sentences. This "
+             "is last year's race pace; it should feel manageable."),
          tue_pm=pm_strength,
          wed=am_spin,
          thu_am=lambda d: easy_run(d, 6),
@@ -286,8 +298,9 @@ def build_sessions() -> list[dict]:
     # W5-7: build
     week(w + timedelta(weeks=4),
          tue_am=lambda d: tempo(d, 9, 50,
-             "3 x 10 min at Z3 with 4 min easy between. Even effort across "
-             "all three — the third rep should feel like the first."),
+             "3 x 10 min at 4:50-4:55/km with 4 min easy between. Even "
+             "effort across all three — the third rep should feel like the "
+             "first. Threshold volume is what moves the 1:40 needle."),
          tue_pm=pm_strength,
          wed=am_spin,
          thu_am=lambda d: easy_run(d, 7),
@@ -295,10 +308,11 @@ def build_sessions() -> list[dict]:
          sat=lambda d: bike(d, 60),
          sun=lambda d: long_run(d, 14))
     week(w + timedelta(weeks=5),
-         tue_am=lambda d: tempo(d, 10, 55,
-             "2 x 15 min at goal half-marathon effort (~5:27/km, HR high "
-             "Z3) with 5 min easy between. First proper rehearsal of race "
-             "rhythm."),
+         tue_am=lambda d: intervals(d, 10, 55,
+             "Speed: 5 x 1 km at 4:30-4:35/km with 400 m jog between. "
+             "Faster than race pace on purpose — it makes 4:44 feel like "
+             "cruising. Full warmup (15 min + 4 strides) before rep 1. "
+             "Stop at 4 reps if form falls apart; quality over count."),
          tue_pm=pm_strength,
          wed=am_spin,
          thu_am=lambda d: easy_run(d, 7),
@@ -306,9 +320,11 @@ def build_sessions() -> list[dict]:
          sat=lambda d: bike(d, 60),
          sun=lambda d: long_run(d, 16, pace_finish_km=3))
     week(w + timedelta(weeks=6),
-         tue_am=lambda d: tempo(d, 9, 50,
-             "25 min continuous at Z3. One block, steady effort — mental "
-             "rehearsal for holding pace when it stops feeling fresh."),
+         tue_am=lambda d: tempo(d, 10, 55,
+             f"2 x 15 min at goal pace ({GOAL_PACE}/km, HR settling around "
+             "144-150) with 5 min easy between. First proper rehearsal of "
+             "race rhythm — learn what 4:44 feels like when fresh so you "
+             "can find it by feel at km 10."),
          tue_pm=pm_strength,
          wed=am_spin,
          thu_am=lambda d: easy_run(d, 8),
@@ -319,10 +335,11 @@ def build_sessions() -> list[dict]:
     # W8: peak
     week(w + timedelta(weeks=7),
          tue_am=lambda d: intervals(d, 11, 60,
-             "4 x 2 km at goal half pace (5:25-5:30/km) with 2 min jog "
-             "between. The fitness check: if these feel controlled, "
-             "sub-1:55 is on. If they're a fight, adjust race target to "
-             "5:35/km (1:58) — a strong finish beats a brave blowup."),
+             "*** CHECKPOINT *** 4 x 2 km at 4:40-4:44/km with 2 min jog "
+             "between. This decides the race plan: controlled and "
+             f"repeatable → race at {GOAL_PACE} (sub-1:40). A fight → race "
+             f"at {B_GOAL_PACE} (sub-1:45, still a 4-min PR). A strong "
+             "finish beats a brave blowup — decide today, not at km 16."),
          tue_pm=pm_strength,
          wed=am_spin,
          thu_am=lambda d: easy_run(d, 7),
@@ -337,9 +354,10 @@ def build_sessions() -> list[dict]:
     # second bike). Intensity stays (Bosquet 2007).
     week(w + timedelta(weeks=8),
          tue_am=lambda d: tempo(d, 8, 45,
-             "2 x 10 min at goal half pace, 5 min easy between. Volume "
-             "drops in taper; intensity stays — that's what preserves "
-             "race sharpness (Bosquet 2007, Mujika & Padilla 2003)."),
+             f"2 x 10 min at race pace (per the Sep 1 decision: {GOAL_PACE} "
+             f"or {B_GOAL_PACE}), 5 min easy between. Volume drops in "
+             "taper; intensity stays — that's what preserves race "
+             "sharpness (Bosquet 2007, Mujika & Padilla 2003)."),
          tue_pm=lambda d: strength(d, 30, light=True),
          wed=lambda d: bike(d, 30),
          thu_am=lambda d: easy_run(d, 6),
@@ -388,9 +406,11 @@ def build_plan(today: date) -> dict:
             "distance_km": RACE_DISTANCE_KM,
             "priority": "A",
             "target": {
-                "time": "1:55:00",
-                "avg_pace_min_per_km": "5:27",
+                "time": "1:40:00",
+                "avg_pace_min_per_km": GOAL_PACE,
                 "avg_hr_range": RACE_HR_RANGE,
+                "b_goal": {"time": "1:45:00", "avg_pace_min_per_km": B_GOAL_PACE},
+                "last_year": "1:49",
             },
         }],
         "block": {
@@ -399,16 +419,18 @@ def build_plan(today: date) -> dict:
             "start_date": BLOCK_START.isoformat(),
             "race_date": RACE_DATE.isoformat(),
             "days_in_block": (RACE_DATE - BLOCK_START).days + 1,
-            "goal": "sub-1h55",
+            "goal": "sub-1h40",
             "philosophy": (
                 "Coming off Vätternrundan (315 km completed 2026-06-12, "
                 "~11h11m moving) with a rebuilt run habit: 22-33 km/wk at "
-                "5:30-6:00/km, HR 117-132. Ten weeks is enough runway to "
-                "build properly: 3 base weeks, cutback, 4 build/peak weeks "
-                "with race-pace work, 2-week taper. Two quality days max "
-                "per week, strength until taper, long run peaks at 18 km. "
-                "Target 1:55; the week-8 interval session is the go/no-go "
-                "check on that number."
+                "5:30-6:00/km, HR 117-132. Target sub-1:40 (4:44/km) — "
+                "ambitious against last year's 1:49, so the quality "
+                "progression earns it: threshold intro, threshold volume, "
+                "1 km speed reps, goal-pace blocks, then the Sep 1 "
+                "checkpoint (4x2 km at goal pace) locks the race plan — "
+                "green: 4:44, amber: 4:58 (sub-1:45, still a 4-min PR). "
+                "Two quality days max per week, strength until taper, "
+                "long run peaks at 18 km with goal-pace finishes."
             ),
         },
         "sessions": build_sessions(),
