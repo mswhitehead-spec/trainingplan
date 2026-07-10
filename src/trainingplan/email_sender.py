@@ -96,6 +96,15 @@ def _sessions_between(plan: dict, lo: date, hi: date) -> list[dict]:
     )
 
 
+def _next_a_event(plan: dict, today: date) -> dict | None:
+    """The nearest upcoming priority-A event, or None."""
+    evs = [
+        e for e in plan.get("events", [])
+        if e.get("priority", "A") == "A" and e.get("date", "") >= today.isoformat()
+    ]
+    return min(evs, key=lambda e: e["date"]) if evs else None
+
+
 def _coaching_note(
     today_sessions: list[dict],
     recent_sessions: list[dict],
@@ -173,6 +182,13 @@ def _coaching_note(
     # find next key upcoming session (long ride or race)
     all_sessions = plan.get("sessions", [])
     today_str = today_sessions[0].get("date", "") if today_sessions else date.today().isoformat()
+
+    # Event context — every race-referencing bullet reads from the plan's
+    # events list so the text follows whatever the current A-event is.
+    ev = _next_a_event(plan, date.fromisoformat(today_str))
+    ev_name = (ev or {}).get("name", "your race")
+    ev_dist = (ev or {}).get("distance_km")
+    ev_label = f"{ev_name} ({ev_dist:g} km)" if ev_dist else ev_name
     next_key = next(
         (s for s in all_sessions
          if s.get("date", "") > today_str
@@ -204,23 +220,26 @@ def _coaching_note(
                 "after a hard session (Friel, CTB Ch. 6). Easy days protect that window."
             )
     elif stype == "long_endurance":
-        dur_h = int((targets.get("duration_min") or 180) // 60)
-        dist = targets.get("distance_km", 80)
+        dur_min = int(targets.get("duration_min") or 90)
+        dist = targets.get("distance_km")
+        what = "run" if sdisc == "running" else "ride"
+        dist_txt = f"{dist:g} km " if dist else ""
         ceiling = z2[1]
         bullets.append(
-            f"KEY SESSION — {dur_h}h Z2 endurance. Start the first 30 min feeling "
-            f"almost too easy; HR should settle into {z2[0]}–{ceiling} bpm on flat "
-            f"terrain. If it creeps above {ceiling + 5} on a climb, back off cadence "
-            f"before speed — at 315 km race distance, pacing discipline is worth more "
-            f"than any single extra watt today."
+            f"KEY SESSION — {dist_txt}long {what} (~{_fmt_duration_min(dur_min)}) "
+            f"in Z2 ({z2[0]}–{ceiling} bpm). Start feeling almost too easy and let "
+            f"HR settle; if it creeps above {ceiling + 5}, slow down before you "
+            f"speed up — with {ev_label} ahead, pacing discipline is worth more "
+            f"than any extra speed today."
         )
-        bullets.append(
-            f"Practice race fueling: 60–80 g carbohydrate per hour starting at minute 20 "
-            f"(gels, bars, or liquid — whatever you'll use on June 12). "
-            f"Your gut needs rehearsal; don't discover GI intolerance on race day. "
-            f"At 65 g/hr that's {dur_h * 65} g total over {dur_h}h — roughly "
-            f"{dur_h * 65 // 25} standard gels (Burke & Hawley, 2002)."
-        )
+        if dur_min >= 90:
+            carb = "60–80" if sdisc == "cycling" else "30–60"
+            bullets.append(
+                f"Fuel it like race day: {carb} g carbohydrate per hour from "
+                f"minute 40 (gels or drink mix — whatever you'll use at {ev_name}). "
+                f"Your gut needs rehearsal; don't discover GI intolerance on race "
+                f"day (Burke & Hawley, 2002)."
+            )
     elif stype in {"easy_endurance", "endurance_z2"}:
         if recent_hrs:
             avg_hr = round(sum(recent_hrs) / len(recent_hrs))
@@ -235,7 +254,7 @@ def _coaching_note(
             bullets.append(
                 f"Z2 target: {z2[0]}–{z2[1]} bpm. This builds mitochondrial density and "
                 f"fat oxidation without accumulating lactate — the aerobic foundation for "
-                f"a 315 km effort (Seiler, 2010 — polarised training model). "
+                f"{ev_label} (Seiler, 2010 — polarised training model). "
                 f"Talk-test pace throughout."
             )
     elif stype == "easy_run":
@@ -246,20 +265,25 @@ def _coaching_note(
             f"Target: conversational, well below {z2[1]} bpm."
         )
     elif stype == "strength":
-        bullets.append(
-            "Strength focus today: hip stability and core, not load. "
-            "Glute bridges, single-leg Romanian deadlifts, Copenhagen planks — "
-            "these directly improve power transfer on the bike and reduce lower-back "
-            "fatigue at 4+ hour efforts (Rønnestad & Mujika, 2014). "
-            "Skip anything that creates DOMS; with 15 days to the race you don't have "
-            "time to absorb new muscle damage."
+        base = (
+            "Strength today: hips, glutes, calves, core — single-leg work "
+            "(RDLs, step-ups, Copenhagen planks) beats machines for endurance "
+            "athletes (Rønnestad & Mujika, 2014: concurrent strength training "
+            "improves economy and performance). "
         )
+        if taper and dte is not None:
+            base += (f"With {dte} days to the race: maintenance only — skip "
+                     f"anything that creates soreness.")
+        else:
+            base += ("This far from the race, progressive load is welcome — "
+                     "soreness now buys durability for the build weeks.")
+        bullets.append(base)
     elif stype == "tempo":
         bullets.append(
-            "Tempo: upper Z3 / lower Z4 — comfortably hard, not all-out. "
-            f"Rough HR target: {z2[1] + 5}–{int(max_hr * 0.88)} bpm. "
-            "If you feel flat after the warmup, dial back to Z2 — pre-race taper "
-            "responses are individual, and a conservative tempo day beats a forced one "
+            "Tempo: comfortably hard, not all-out. "
+            f"Rough HR target: {z2[1] + 5}–{int(max_hr * 0.88)} bpm — short "
+            "phrases, not full sentences. If you feel flat after the warmup, "
+            "dial back to Z2: a conservative quality day beats a forced one "
             "that generates lingering fatigue."
         )
     elif stype == "openers":
@@ -270,13 +294,22 @@ def _coaching_note(
             "for race day (Mujika & Padilla, 2003 — peaking protocols)."
         )
     elif stype == "race":
-        bullets.append(
-            f"Race day — Vätternrundan 315 km. First 2 hours: stay patient, "
-            f"HR ≤ {z2[1]} bpm, let the fast starters go. "
-            f"Fuel every 20–30 min regardless of hunger. "
-            f"The riders you'll pass at km 200 are the ones going hard now. "
-            f"You've done the work — trust it."
-        )
+        rr = targets.get("avg_hr_range")
+        hr_txt = f"HR {rr[0]}–{rr[1]}" if rr else f"HR near {z2[1]}"
+        if sdisc == "running":
+            bullets.append(
+                f"Race day — {ev_label}. Go out AT goal pace, never under it: "
+                f"time banked early is borrowed from the final kilometers at "
+                f"brutal interest. Settle into {hr_txt} and lock in. "
+                f"The runners you pass late are the ones who went out hard. "
+                f"You've done the work — trust it."
+            )
+        else:
+            bullets.append(
+                f"Race day — {ev_label}. Start patient, {hr_txt}, let the fast "
+                f"starters go. Fuel every 20–30 min regardless of hunger. "
+                f"You've done the work — trust it."
+            )
 
     # ---- bullet 2: aerobic trend from recent data --------------------------
     # For the trend bullet, derive the Z2 reference from the RECENT sessions'
@@ -295,8 +328,8 @@ def _coaching_note(
                 f"Aerobic control looks good: {below_zone_count} of your last "
                 f"{len(completed)} session(s) held HR below Z2 "
                 f"(average {avg_hr} bpm vs. your Z2 floor of {trend_z2[0]}). "
-                f"That level of aerobic headroom is exactly right for a 315 km event — "
-                f"you can sustain output for hours without cardiac drift."
+                f"That aerobic headroom is the base you'll race {ev_name} off — "
+                f"sustained effort without cardiac drift."
             )
         elif recent_drifts:
             avg_drift = sum(recent_drifts) / len(recent_drifts)
@@ -328,12 +361,12 @@ def _coaching_note(
             bullets.append(
                 f"Race week — {dte} day{'s' if dte != 1 else ''} out. "
                 f"Fitness is fixed; the only remaining variable is freshness. "
-                f"Every unnecessary effort now costs race-day watts. "
+                f"Every unnecessary effort now costs you on race day. "
                 f"Sleep, hydration, and carbohydrate intake are the performance levers."
             )
         else:
             bullets.append(
-                f"{dte} days to Vätternrundan. Physiological adaptation from today's "
+                f"{dte} days to {ev_name}. Physiological adaptation from today's "
                 f"training won't arrive in time — full adaptation takes 10–14 days "
                 f"(Bosquet et al., 2007). The job now is to arrive at the start line "
                 f"feeling fresh, not fitter."
@@ -347,14 +380,15 @@ def _coaching_note(
         key_dur = _fmt_duration_min(key_targets.get("duration_min"))
         if next_key.get("type") == "race":
             bullets.append(
-                f"Vätternrundan is {days_away} day{'s' if days_away != 1 else ''} away "
+                f"{ev_name} is {days_away} day{'s' if days_away != 1 else ''} away "
                 f"({key_d.strftime('%a %b %d')}). "
                 f"Everything between now and then is about showing up fresh."
             )
         elif key_dur:
+            key_what = "long run" if next_key.get("discipline") == "running" else "long ride"
             bullets.append(
                 f"Next key session: {_DOW[key_d.weekday()]} {key_d.strftime('%b %d')} — "
-                f"{key_dur} long ride ({days_away} day{'s' if days_away != 1 else ''} away). "
+                f"{key_dur} {key_what} ({days_away} day{'s' if days_away != 1 else ''} away). "
                 f"Today's job is to arrive at that session with legs ready."
             )
 

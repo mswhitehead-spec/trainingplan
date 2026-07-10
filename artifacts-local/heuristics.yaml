@@ -35,11 +35,10 @@ rules:
       In the 7 days before an A-event, demote any tempo/intervals session
       to easy_endurance. Openers are exempt (short, neuromuscular only).
       NOTE: this is MORE conservative than the 2023 meta-analysis (Bouzid),
-      which recommends maintaining intensity through the taper. The
-      conservative bias is deliberate given (a) the event is 315 km
-      ultra-endurance where completion > performance, and (b) the athlete's
-      recent volume is well short of race distance. Revisit for post-race
-      goals where peak performance is the objective.
+      which recommends maintaining intensity through the taper. For the
+      half-marathon block the plan itself keeps race week to easy runs +
+      strides + openers, so this rule is a backstop rather than active
+      policy — it only fires if a quality session drifts into race week.
     params: {}
     citations:
       - "Bouzid et al. 2023 — meta-analysis: intensity should be maintained, not reduced (SMD -0.55 vs 0.25). Rule overrides this for ultra-distance context. See literature/README.md §3."
@@ -53,7 +52,7 @@ rules:
       `max_long_duration_min`. Race-day session itself is exempt.
     params:
       window_days: 14
-      max_long_duration_min: 180   # 3 h cap inside the 2-week window
+      max_long_duration_min: 120   # 2 h cap — running longs (was 180 for the bike block)
     citations:
       - "Bouzid et al. 2023 (PMC10171681) — 8-14 d taper window optimal, 41-60% volume reduction. See literature/README.md §3."
       - "Mujika & Padilla 2003 (PMID 12840640) — progressive nonlinear taper outperforms step taper."

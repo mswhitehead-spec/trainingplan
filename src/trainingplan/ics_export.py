@@ -172,19 +172,16 @@ def _fold(line: str) -> str:
         return line
     chunks: list[bytes] = []
     pos = 0
-    # First chunk: 75 octets. Subsequent: 74 (to leave room for the leading
-    # CRLF + space that we'll join with).
-    chunks.append(encoded[pos:pos + 75])
-    pos += 75
+    limit = 75   # first line 75 octets; continuations 74 (leading space uses one)
     while pos < len(encoded):
-        # Don't split a multi-byte UTF-8 char.
-        end = min(pos + 74, len(encoded))
-        # Walk back if we landed in the middle of a code point.
-        while end > pos and (encoded[end - 1] & 0xC0) == 0x80 and end < len(encoded):
-            # Continuation byte at the boundary — leave it for the next chunk.
+        end = min(pos + limit, len(encoded))
+        # If the byte AT the split point is a UTF-8 continuation byte we'd be
+        # cutting a multi-byte character in half — walk back to the char start.
+        while end < len(encoded) and (encoded[end] & 0xC0) == 0x80:
             end -= 1
         chunks.append(encoded[pos:end])
         pos = end
+        limit = 74
     return "\r\n ".join(c.decode("utf-8") for c in chunks)
 
 

@@ -84,13 +84,13 @@ def test_race_day_header(mini_plan):
     assert "315km" in subject
 
 
-def test_yesterdays_verdict_appears(mini_plan):
-    """Mark yesterday completed; the email should surface the verdict."""
+def test_recent_completed_verdict_appears(mini_plan):
+    """Mark yesterday completed; the Last-5-days section surfaces the verdict."""
     yest = mini_plan["sessions"][0]
     yest["status"] = "completed"
     yest["analysis"] = {"verdict": "on target."}
     _, body = render_daily_email(mini_plan, today=date(2026, 5, 26))
-    assert "Yesterday:" in body
+    assert "Last 5 days:" in body
     assert "on target" in body
 
 
@@ -101,37 +101,27 @@ def test_missed_yesterday_noted(mini_plan):
     assert "missed" in body.lower()
 
 
-def test_pending_proposal_callout(mini_plan, tmp_path):
-    """When pending_proposal is set, the email tells the user to apply it."""
+def test_pending_proposal_param_is_ignored(mini_plan, tmp_path):
+    """Proposals auto-apply now; the pending_proposal arg is accepted for
+    call-site compatibility but produces no callout."""
     fake = tmp_path / "2026-06-02T07-14.md"
     fake.write_text("dummy")
     _, body = render_daily_email(
         mini_plan, today=date(2026, 5, 25),
         pending_proposal=fake,
     )
-    assert "Pending adaptation proposal" in body
-    assert "apply_proposal.py" in body
+    assert "Pending adaptation proposal" not in body
+    assert "apply_proposal.py" not in body
 
 
-# ----- pending-proposal discovery -----------------------------------------
+# ----- pending-proposal discovery (stubbed since auto-apply) ---------------
 
-def test_latest_pending_proposal_picks_newest_unaccepted(tmp_path):
+def test_latest_pending_proposal_always_none(tmp_path):
+    """Auto-apply made pending proposals obsolete — the helper is a stub."""
     art = tmp_path
     (art / "proposals").mkdir()
-    (art / "proposals" / "2026-05-30T07-00.md").write_text("old")
     (art / "proposals" / "2026-06-02T07-14.md").write_text("new")
-    state = {"applied_adaptations": [{"proposal_id": "2026-05-30T07-00"}]}
-    result = _latest_pending_proposal(art, state)
-    assert result is not None
-    assert result.name == "2026-06-02T07-14.md"
-
-
-def test_latest_pending_proposal_returns_none_when_all_applied(tmp_path):
-    art = tmp_path
-    (art / "proposals").mkdir()
-    (art / "proposals" / "2026-05-30T07-00.md").write_text("x")
-    state = {"applied_adaptations": [{"proposal_id": "2026-05-30T07-00"}]}
-    assert _latest_pending_proposal(art, state) is None
+    assert _latest_pending_proposal(art, {}) is None
 
 
 # ----- send_email — mocked SMTP --------------------------------------------

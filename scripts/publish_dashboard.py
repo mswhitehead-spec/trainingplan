@@ -143,7 +143,7 @@ _HTML = """\
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vätternrundan Training Dashboard</title>
+<title>{event_name} Training Dashboard</title>
 <style>
   :root {{
     --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3e;
@@ -199,7 +199,7 @@ _HTML = """\
 </style>
 </head>
 <body>
-<h1>🚴 Vätternrundan Training</h1>
+<h1>{event_emoji} {event_name} Training</h1>
 <p class="meta">Generated {generated} · Plan: {plan_name} · <a href="plan.ics">📅 Subscribe (.ics)</a></p>
 
 <div class="kpi-row">
@@ -207,7 +207,7 @@ _HTML = """\
     <div class="value {dte_cls}">{dte}</div></div>
   <div class="kpi"><div class="label">Sessions done</div>
     <div class="value ok">{done} / {total}</div></div>
-  <div class="kpi"><div class="label">Total km (bike)</div>
+  <div class="kpi"><div class="label">Total km ({km_label})</div>
     <div class="value">{total_km:.0f} km</div></div>
   <div class="kpi"><div class="label">Total time</div>
     <div class="value">{total_h:.1f} h</div></div>
@@ -362,11 +362,20 @@ def main() -> None:
     total = len([s for s in sessions if s.get("type") != "race"])
     done = len(completed)
 
+    # Event context — title, emoji, and the km KPI follow the A-event's
+    # discipline so the dashboard survives block pivots (bike race → run race).
+    a_events = [e for e in plan.get("events", []) if e.get("priority", "A") == "A"]
+    event = min(a_events, key=lambda e: e["date"]) if a_events else {}
+    event_name = event.get("name", "Training")
+    event_disc = event.get("discipline", "cycling")
+    event_emoji = {"running": "🏃", "cycling": "🚴", "swimming": "🏊"}.get(event_disc, "🏋")
+    km_label = {"running": "run", "cycling": "bike"}.get(event_disc, event_disc)
+
     # KPI aggregates
     total_km = sum(
         (s.get("actual") or {}).get("distance_km") or 0
         for s in completed
-        if s.get("discipline") == "cycling"
+        if s.get("discipline") == event_disc
     )
     total_min = sum(
         (s.get("actual") or {}).get("duration_min") or 0
@@ -397,6 +406,9 @@ def main() -> None:
     html = _HTML.format(
         generated=today.isoformat(),
         plan_name=plan_name,
+        event_name=event_name,
+        event_emoji=event_emoji,
+        km_label=km_label,
         dte=dte_str,
         dte_cls=dte_cls,
         done=done,
@@ -420,7 +432,7 @@ def main() -> None:
         shutil.copy2(ics_src, DOCS_DIR / "plan.ics")
 
     print(f"Dashboard written to {out_path}")
-    print(f"  Sessions: {done}/{total} completed, {total_km:.0f} km bike, "
+    print(f"  Sessions: {done}/{total} completed, {total_km:.0f} km {km_label}, "
           f"{total_min/60:.1f} h total")
 
 
