@@ -90,9 +90,42 @@ sessions:
     - '5:40'
     - '6:10'
   notes: Easy conversational pace. Z2 ceiling — slower is fine.
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '19264711555'
+    name: Morning Run
+    start_time_local: '2026-07-11T08:50:13'
+    date: '2026-07-11'
+    sport: running
+    duration_min: 38.9
+    distance_km: 6.52
+    avg_hr: 122
+    max_hr: 148
+    avg_pace_sec_per_km: 358.4
+    elevation_gain_m: 19.0
+    avg_power_w: 380.3
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-07-11T08:43:52'
+    duration_delta_min: 3.9
+    duration_pct: 111.1
+    distance_delta_km: 0.52
+    distance_pct: 108.7
+    hr_zone_status: in_zone
+    hr_avg_actual: 122
+    hr_avg_target:
+    - 121
+    - 133
+    pace_status: in_range
+    pace_avg_actual: '5:58'
+    pace_target:
+    - '5:40'
+    - '6:10'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags: []
+    verdict: on target.
   adaptations: []
   time_of_day: morning
 - id: 2026-07-12_sun_long-run
