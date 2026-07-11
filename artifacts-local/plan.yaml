@@ -73,7 +73,7 @@ sessions:
   type: rest
   targets: {}
   notes: Rest — you ran yesterday. Block starts with fresh legs.
-  status: planned
+  status: missed
   actual: null
   analysis: null
   adaptations: []
