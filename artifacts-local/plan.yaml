@@ -141,7 +141,7 @@ sessions:
     - '5:30'
     - '6:00'
   notes: 'First long run of the block: 10 km relaxed Z2. Sets the baseline the next ten weeks build on.'
-  status: planned
+  status: missed
   actual: null
   analysis: null
   adaptations: []
