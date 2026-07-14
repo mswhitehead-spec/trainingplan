@@ -1207,7 +1207,7 @@ sessions:
 - id: 2026-09-01_tue_intervals
   date: '2026-09-01'
   discipline: running
-  type: intervals
+  type: easy_endurance
   targets:
     duration_min: 60
     distance_km: 11
@@ -1218,10 +1218,16 @@ sessions:
   notes: '*** CHECKPOINT *** 4 x 2 km at 4:40-4:44/km with 2 min jog between. This decides the race plan:
     controlled and repeatable → race at 4:44 (sub-1:40). A fight → race at 4:58 (sub-1:45, still a 4-min
     PR). A strong finish beats a brave blowup — decide today, not at km 16.'
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: frequent_missed_sessions
+    field: type
+    from: intervals
+    to: easy_endurance
+    reason: 3 sessions missed in the last 7 days — prioritize consistency over intensity until rhythm
+      returns (Friel CTB Ch. 9).
   time_of_day: morning
 - id: 2026-09-01_tue_strength
   date: '2026-09-01'
