@@ -1061,7 +1061,7 @@ sessions:
 - id: 2026-08-25_tue_tempo
   date: '2026-08-25'
   discipline: running
-  type: tempo
+  type: easy_endurance
   targets:
     duration_min: 55
     distance_km: 10
@@ -1072,10 +1072,16 @@ sessions:
   notes: 2 x 15 min at goal pace (4:44/km, HR settling around 144-150) with 5 min easy between. First
     proper rehearsal of race rhythm — learn what 4:44 feels like when fresh so you can find it by feel
     at km 10.
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: frequent_missed_sessions
+    field: type
+    from: tempo
+    to: easy_endurance
+    reason: 3 sessions missed in the last 7 days — prioritize consistency over intensity until rhythm
+      returns (Friel CTB Ch. 9).
   time_of_day: morning
 - id: 2026-08-25_tue_strength
   date: '2026-08-25'

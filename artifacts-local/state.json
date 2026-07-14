@@ -1,6 +1,6 @@
 {
-  "last_sync_at": "2026-07-14T12:19:14",
-  "last_proposal_id": "2026-07-14T12-19",
+  "last_sync_at": "2026-07-14T16:08:03",
+  "last_proposal_id": "2026-07-14T16-08",
   "applied_adaptations": [
     {
       "proposal_id": "2026-05-26T21-00",
@@ -172,6 +172,20 @@
           "session_id": "2026-08-18_tue_intervals",
           "field_path": "type",
           "old_value": "intervals",
+          "new_value": "easy_endurance",
+          "rule_id": "frequent_missed_sessions",
+          "reason": "3 sessions missed in the last 7 days — prioritize consistency over intensity until rhythm returns (Friel CTB Ch. 9)."
+        }
+      ]
+    },
+    {
+      "proposal_id": "2026-07-14T16-08",
+      "accepted_at": "2026-07-14T16:08:03",
+      "changes": [
+        {
+          "session_id": "2026-08-25_tue_tempo",
+          "field_path": "type",
+          "old_value": "tempo",
           "new_value": "easy_endurance",
           "rule_id": "frequent_missed_sessions",
           "reason": "3 sessions missed in the last 7 days — prioritize consistency over intensity until rhythm returns (Friel CTB Ch. 9)."
