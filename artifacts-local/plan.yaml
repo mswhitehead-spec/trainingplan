@@ -738,7 +738,7 @@ sessions:
 - id: 2026-08-11_tue_tempo
   date: '2026-08-11'
   discipline: running
-  type: tempo
+  type: easy_endurance
   targets:
     duration_min: 50
     distance_km: 9
@@ -748,10 +748,16 @@ sessions:
     - '4:55'
   notes: 3 x 10 min at 4:50-4:55/km with 4 min easy between. Even effort across all three — the third
     rep should feel like the first. Threshold volume is what moves the 1:40 needle.
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: frequent_missed_sessions
+    field: type
+    from: tempo
+    to: easy_endurance
+    reason: 3 sessions missed in the last 7 days — prioritize consistency over intensity until rhythm
+      returns (Friel CTB Ch. 9).
   time_of_day: morning
 - id: 2026-08-11_tue_strength
   date: '2026-08-11'
