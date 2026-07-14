@@ -155,7 +155,7 @@ sessions:
     \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
     \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
     \ recovery."
-  status: planned
+  status: missed
   actual: null
   analysis: null
   adaptations: []
@@ -470,7 +470,7 @@ sessions:
 - id: 2026-07-28_tue_tempo
   date: '2026-07-28'
   discipline: running
-  type: tempo
+  type: easy_endurance
   targets:
     duration_min: 45
     distance_km: 8
@@ -481,10 +481,16 @@ sessions:
   notes: 'Threshold intro: 15 min easy, then 2 x 10 min at 4:55-5:00/km (HR drifting to ~145) with 5 min
     easy between, 5 min easy to finish. Comfortably hard — short phrases, not sentences. This is last
     year''s race pace; it should feel manageable.'
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: frequent_missed_sessions
+    field: type
+    from: tempo
+    to: easy_endurance
+    reason: 3 sessions missed in the last 7 days — prioritize consistency over intensity until rhythm
+      returns (Friel CTB Ch. 9).
   time_of_day: morning
 - id: 2026-07-28_tue_strength
   date: '2026-07-28'

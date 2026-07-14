@@ -1,6 +1,6 @@
 {
-  "last_sync_at": "2026-07-13T20:18:58",
-  "last_proposal_id": "2026-06-11T07-22",
+  "last_sync_at": "2026-07-14T05:21:18",
+  "last_proposal_id": "2026-07-14T05-21",
   "applied_adaptations": [
     {
       "proposal_id": "2026-05-26T21-00",
@@ -135,7 +135,21 @@
           "reason": "last session (2026-06-07) overreached planned duration by 115% — supercompensation needs a recovery day (Friel CTB Ch. 6)."
         }
       ]
+    },
+    {
+      "proposal_id": "2026-07-14T05-21",
+      "accepted_at": "2026-07-14T05:21:19",
+      "changes": [
+        {
+          "session_id": "2026-07-28_tue_tempo",
+          "field_path": "type",
+          "old_value": "tempo",
+          "new_value": "easy_endurance",
+          "rule_id": "frequent_missed_sessions",
+          "reason": "3 sessions missed in the last 7 days — prioritize consistency over intensity until rhythm returns (Friel CTB Ch. 9)."
+        }
+      ]
     }
   ],
-  "last_email_date": "2026-07-13"
+  "last_email_date": "2026-07-14"
 }
