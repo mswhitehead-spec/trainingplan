@@ -173,9 +173,43 @@ sessions:
     - '6:10'
   notes: Easy conversational pace. Z2 ceiling — slower is fine. Finish with 4 x 20 s strides (fast but
     relaxed, full recovery) — neuromuscular sharpness, not fatigue.
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '19306420257'
+    name: Lunch Run
+    start_time_local: '2026-07-14T11:27:16'
+    date: '2026-07-14'
+    sport: running
+    duration_min: 30.0
+    distance_km: 5.42
+    avg_hr: 130
+    max_hr: 149
+    avg_pace_sec_per_km: 332.3
+    elevation_gain_m: 28.0
+    avg_power_w: 399.0
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-07-14T12:19:14'
+    duration_delta_min: -5.0
+    duration_pct: 85.7
+    distance_delta_km: -0.58
+    distance_pct: 90.3
+    hr_zone_status: in_zone
+    hr_avg_actual: 130
+    hr_avg_target:
+    - 121
+    - 133
+    pace_status: faster
+    pace_avg_actual: '5:32'
+    pace_target:
+    - '5:40'
+    - '6:10'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - pace_fast
+    verdict: faster than the target pace range — easy days protect the quality days; save it for Tuesday.
   adaptations: []
   time_of_day: morning
 - id: 2026-07-14_tue_strength
@@ -881,7 +915,7 @@ sessions:
 - id: 2026-08-18_tue_intervals
   date: '2026-08-18'
   discipline: running
-  type: intervals
+  type: easy_endurance
   targets:
     duration_min: 55
     distance_km: 10
@@ -892,10 +926,16 @@ sessions:
   notes: 'Speed: 5 x 1 km at 4:30-4:35/km with 400 m jog between. Faster than race pace on purpose — it
     makes 4:44 feel like cruising. Full warmup (15 min + 4 strides) before rep 1. Stop at 4 reps if form
     falls apart; quality over count.'
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: frequent_missed_sessions
+    field: type
+    from: intervals
+    to: easy_endurance
+    reason: 3 sessions missed in the last 7 days — prioritize consistency over intensity until rhythm
+      returns (Friel CTB Ch. 9).
   time_of_day: morning
 - id: 2026-08-18_tue_strength
   date: '2026-08-18'

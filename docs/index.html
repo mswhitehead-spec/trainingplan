@@ -66,13 +66,13 @@
   <div class="kpi"><div class="label">Days to race</div>
     <div class="value ok">68</div></div>
   <div class="kpi"><div class="label">Sessions done</div>
-    <div class="value ok">2 / 88</div></div>
+    <div class="value ok">3 / 88</div></div>
   <div class="kpi"><div class="label">Total km (run)</div>
-    <div class="value">7 km</div></div>
+    <div class="value">12 km</div></div>
   <div class="kpi"><div class="label">Total time</div>
-    <div class="value">1.1 h</div></div>
+    <div class="value">1.6 h</div></div>
   <div class="kpi"><div class="label">Last sync</div>
-    <div class="value" style="font-size:0.9rem;margin-top:4px">2026-07-14 09:01</div></div>
+    <div class="value" style="font-size:0.9rem;margin-top:4px">2026-07-14 12:19</div></div>
 </div>
 
 <h2>Activity (all completed sessions)</h2>
@@ -143,17 +143,17 @@
           <td class="verdict"> </td>
         </tr>
 
-        <tr class="row-planned">
+        <tr class="row-completed">
           <td class="date-cell">Tue 14 Jul</td>
-          <td>🏃 easy run</td>
-          <td><span class="badge plan">planned</span></td>
-          <td>35m → —</td>
-          <td>6 km → —</td>
-          <td>— <span class="dim">(Z2)</span></td>
+          <td>🏃 Lunch Run</td>
+          <td><span class="badge done">✓ done</span></td>
+          <td>35m → 30m</td>
+          <td>6 km → 5.4 km</td>
+          <td>130 <span class="dim">(Z2)</span></td>
           <td>—</td>
-          <td>—</td>
-          <td>—</td>
-          <td class="verdict"> </td>
+          <td>28 m</td>
+          <td>399 W</td>
+          <td class="verdict">faster than the target pace range — easy days protect the quality days; save it for Tuesday. <span class="flag">pace_fast</span></td>
         </tr>
 
         <tr class="row-completed">
@@ -715,10 +715,10 @@
           <td class="verdict"> </td>
         </tr>
 
-        <tr class="row-planned">
+        <tr class="row-adjusted">
           <td class="date-cell">Tue 18 Aug</td>
-          <td>🏃 intervals</td>
-          <td><span class="badge plan">planned</span></td>
+          <td>🏃 easy endurance</td>
+          <td><span class="badge adj">adjusted</span></td>
           <td>55m → —</td>
           <td>10 km → —</td>
           <td>— <span class="dim">(Z4)</span></td>
@@ -1257,13 +1257,13 @@
 <thead><tr><th>Week</th><th>Sessions</th><th>Total km</th><th>Total time</th></tr></thead>
 <tbody>
 <tr><td>W27 (Jul 11)</td><td>1</td><td>7 km</td><td>39m</td></tr>
-<tr><td>W28 (Jul 14)</td><td>1</td><td>0 km</td><td>30m</td></tr>
+<tr><td>W28 (Jul 14)</td><td>2</td><td>5 km</td><td>1h00m</td></tr>
 </tbody>
 </table>
 </div>
 
 <script>
-const data = {"labels": ["2026-07-11", "2026-07-14"], "hr": [122, 53], "dist": [6.52, null], "dur": [0.65, 0.5]};
+const data = {"labels": ["2026-07-11", "2026-07-14", "2026-07-14"], "hr": [122, 130, 53], "dist": [6.52, 5.42, null], "dur": [0.65, 0.5, 0.5]};
 const ctx = document.getElementById('chart').getContext('2d');
 
 // Inline minimal Chart.js — drawn with Canvas API directly (no CDN dependency).
