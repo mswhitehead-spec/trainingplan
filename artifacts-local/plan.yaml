@@ -267,9 +267,44 @@ sessions:
     avg_hr_range: *id002
   notes: Easy spin — aerobic volume with zero impact. Cycling Z2 (116-127). Legs should feel better after
     than before.
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '19328359866'
+    name: Night Yoga
+    start_time_local: '2026-07-15T21:25:10'
+    date: '2026-07-15'
+    sport: strength
+    duration_min: 37.0
+    distance_km: 0.0
+    avg_hr: 56
+    max_hr: 82
+    avg_pace_sec_per_km: null
+    elevation_gain_m: 0
+    avg_power_w: null
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-07-16T05:31:31'
+    duration_delta_min: -3.0
+    duration_pct: 92.5
+    distance_delta_km: null
+    distance_pct: null
+    hr_zone_status: below
+    hr_avg_actual: 56
+    hr_avg_target:
+    - 116
+    - 127
+    pace_status: unknown
+    pace_avg_actual: null
+    pace_target: null
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - substitute
+    - hr_below
+    substitute_sport: strength
+    planned_discipline: cycling
+    verdict: substituted strength for cycling — counts as training, but not the planned stimulus.
   adaptations: []
   time_of_day: morning
 - id: 2026-07-16_thu_steady-z2
