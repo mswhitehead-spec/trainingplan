@@ -66,13 +66,13 @@
   <div class="kpi"><div class="label">Days to race</div>
     <div class="value ok">66</div></div>
   <div class="kpi"><div class="label">Sessions done</div>
-    <div class="value ok">4 / 88</div></div>
+    <div class="value ok">6 / 88</div></div>
   <div class="kpi"><div class="label">Total km (run)</div>
-    <div class="value">12 km</div></div>
+    <div class="value">20 km</div></div>
   <div class="kpi"><div class="label">Total time</div>
-    <div class="value">2.3 h</div></div>
+    <div class="value">3.6 h</div></div>
   <div class="kpi"><div class="label">Last sync</div>
-    <div class="value" style="font-size:0.9rem;margin-top:4px">2026-07-16 16:10</div></div>
+    <div class="value" style="font-size:0.9rem;margin-top:4px">2026-07-16 20:04</div></div>
 </div>
 
 <h2>Activity (all completed sessions)</h2>
@@ -182,30 +182,30 @@
           <td class="verdict">substituted strength for cycling — counts as training, but not the planned stimulus. <span class="flag">substitute</span> <span class="flag">hr_below</span></td>
         </tr>
 
-        <tr class="row-planned">
+        <tr class="row-completed">
           <td class="date-cell">Thu 16 Jul</td>
-          <td>🏃 endurance z2</td>
-          <td><span class="badge plan">planned</span></td>
-          <td>40m → —</td>
-          <td>7 km → —</td>
-          <td>— <span class="dim">(Z2)</span></td>
+          <td>🏃 Evening Run</td>
+          <td><span class="badge done">✓ done</span></td>
+          <td>40m → 47m</td>
+          <td>7 km → 8.1 km</td>
+          <td>124 <span class="dim">(Z2)</span></td>
           <td>—</td>
-          <td>—</td>
-          <td>—</td>
-          <td class="verdict"> </td>
+          <td>26 m</td>
+          <td>389 W</td>
+          <td class="verdict">on target. <span class="flag">pace_slow</span></td>
         </tr>
 
-        <tr class="row-planned">
+        <tr class="row-completed">
           <td class="date-cell">Thu 16 Jul</td>
-          <td>🚶 recovery</td>
-          <td><span class="badge plan">planned</span></td>
-          <td>30m → —</td>
+          <td>🚶 Night Yoga</td>
+          <td><span class="badge done">✓ done</span></td>
+          <td>30m → 32m</td>
           <td>— → —</td>
-          <td>— <span class="dim">(—)</span></td>
+          <td>71 <span class="dim">(—)</span></td>
           <td>—</td>
           <td>—</td>
           <td>—</td>
-          <td class="verdict"> </td>
+          <td class="verdict">substituted strength for walking — counts as training, but not the planned stimulus. <span class="flag">substitute</span></td>
         </tr>
 
         <tr class="row-planned">
@@ -1259,12 +1259,13 @@
 <tr><td>W27 (Jul 11)</td><td>1</td><td>7 km</td><td>39m</td></tr>
 <tr><td>W28 (Jul 14)</td><td>2</td><td>5 km</td><td>1h00m</td></tr>
 <tr><td>W28 (Jul 15)</td><td>1</td><td>0 km</td><td>37m</td></tr>
+<tr><td>W28 (Jul 16)</td><td>2</td><td>8 km</td><td>1h19m</td></tr>
 </tbody>
 </table>
 </div>
 
 <script>
-const data = {"labels": ["2026-07-11", "2026-07-14", "2026-07-14", "2026-07-15"], "hr": [122, 130, 53, 56], "dist": [6.52, 5.42, null, null], "dur": [0.65, 0.5, 0.5, 0.62]};
+const data = {"labels": ["2026-07-11", "2026-07-14", "2026-07-14", "2026-07-15", "2026-07-16", "2026-07-16"], "hr": [122, 130, 53, 56, 124, 71], "dist": [6.52, 5.42, null, null, 8.1, null], "dur": [0.65, 0.5, 0.5, 0.62, 0.78, 0.53]};
 const ctx = document.getElementById('chart').getContext('2d');
 
 // Inline minimal Chart.js — drawn with Canvas API directly (no CDN dependency).

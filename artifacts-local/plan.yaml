@@ -321,9 +321,43 @@ sessions:
     - '5:45'
   notes: Steady Z2, upper half of the zone ok. Smooth and even — this is aerobic base, the engine for
     the half.
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '19340224324'
+    name: Evening Run
+    start_time_local: '2026-07-16T19:26:24'
+    date: '2026-07-16'
+    sport: running
+    duration_min: 47.0
+    distance_km: 8.1
+    avg_hr: 124
+    max_hr: 144
+    avg_pace_sec_per_km: 348.2
+    elevation_gain_m: 26.0
+    avg_power_w: 389.2
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-07-16T20:04:32'
+    duration_delta_min: 7.0
+    duration_pct: 117.5
+    distance_delta_km: 1.1
+    distance_pct: 115.7
+    hr_zone_status: in_zone
+    hr_avg_actual: 124
+    hr_avg_target:
+    - 121
+    - 133
+    pace_status: slower
+    pace_avg_actual: '5:48'
+    pace_target:
+    - '5:20'
+    - '5:45'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - pace_slow
+    verdict: on target.
   adaptations: []
   time_of_day: morning
 - id: 2026-07-16_thu_recovery-walk
@@ -333,9 +367,41 @@ sessions:
   targets:
     duration_min: 30
   notes: Easy walk only — active recovery.
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '19341173271'
+    name: Night Yoga
+    start_time_local: '2026-07-16T21:00:05'
+    date: '2026-07-16'
+    sport: strength
+    duration_min: 31.8
+    distance_km: 0.0
+    avg_hr: 71
+    max_hr: 102
+    avg_pace_sec_per_km: null
+    elevation_gain_m: 0
+    avg_power_w: null
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-07-16T20:04:32'
+    duration_delta_min: 1.8
+    duration_pct: 106.0
+    distance_delta_km: null
+    distance_pct: null
+    hr_zone_status: unknown
+    hr_avg_actual: 71
+    hr_avg_target: null
+    pace_status: unknown
+    pace_avg_actual: null
+    pace_target: null
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - substitute
+    substitute_sport: strength
+    planned_discipline: walking
+    verdict: substituted strength for walking — counts as training, but not the planned stimulus.
   adaptations: []
   time_of_day: evening
 - id: 2026-07-17_fri_rest
