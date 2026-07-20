@@ -510,9 +510,43 @@ sessions:
     - '6:10'
   notes: Easy conversational pace. Z2 ceiling — slower is fine. Finish with 4 x 20 s strides (fast but
     relaxed, full recovery) — neuromuscular sharpness, not fatigue.
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '19390424867'
+    name: Afternoon Run
+    start_time_local: '2026-07-20T17:12:27'
+    date: '2026-07-20'
+    sport: running
+    duration_min: 38.6
+    distance_km: 7.01
+    avg_hr: 126
+    max_hr: 143
+    avg_pace_sec_per_km: 330.4
+    elevation_gain_m: 44.0
+    avg_power_w: 379.8
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-07-20T16:19:28'
+    duration_delta_min: -1.4
+    duration_pct: 96.5
+    distance_delta_km: 0.01
+    distance_pct: 100.1
+    hr_zone_status: in_zone
+    hr_avg_actual: 126
+    hr_avg_target:
+    - 121
+    - 133
+    pace_status: faster
+    pace_avg_actual: '5:30'
+    pace_target:
+    - '5:40'
+    - '6:10'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - pace_fast
+    verdict: faster than the target pace range — easy days protect the quality days; save it for Tuesday.
   adaptations: []
   time_of_day: morning
 - id: 2026-07-21_tue_strength
