@@ -559,9 +559,39 @@ sessions:
     Masters athletes keep strength or lose it (Friel, Fast After 50) — this is injury armor for the running
     build. Evening slot: the morning run is done, so quality stays on quality days and easy days stay
     easy.'
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '19393331903'
+    name: Evening Yoga
+    start_time_local: '2026-07-20T20:59:32'
+    date: '2026-07-20'
+    sport: strength
+    duration_min: 31.2
+    distance_km: 0.0
+    avg_hr: 55
+    max_hr: 74
+    avg_pace_sec_per_km: null
+    elevation_gain_m: 0
+    avg_power_w: null
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-07-20T20:24:30'
+    duration_delta_min: -8.8
+    duration_pct: 78.0
+    distance_delta_km: null
+    distance_pct: null
+    hr_zone_status: unknown
+    hr_avg_actual: 55
+    hr_avg_target: null
+    pace_status: unknown
+    pace_avg_actual: null
+    pace_target: null
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - duration_short
+    verdict: session cut short of target duration.
   adaptations: []
   time_of_day: evening
 - id: 2026-07-22_wed_easy-spin
