@@ -659,7 +659,7 @@ sessions:
     - '5:45'
   notes: Steady Z2, upper half of the zone ok. Smooth and even — this is aerobic base, the engine for
     the half.
-  status: planned
+  status: missed
   actual: null
   analysis: null
   adaptations: []
@@ -671,7 +671,7 @@ sessions:
   targets:
     duration_min: 30
   notes: Easy walk only — active recovery.
-  status: planned
+  status: missed
   actual: null
   analysis: null
   adaptations: []
