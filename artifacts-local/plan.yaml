@@ -717,9 +717,48 @@ sessions:
     - '5:30'
     - '6:00'
   notes: Long run 12 km. Relaxed Z2 — 5:40-6:00/km territory. Fuel if over 90 min (gel at 45 min).
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '19473789031'
+    name: Afternoon Walk
+    start_time_local: '2026-07-26T13:25:49'
+    date: '2026-07-26'
+    sport: walking
+    duration_min: 109.1
+    distance_km: 6.74
+    avg_hr: 64
+    max_hr: 91
+    avg_pace_sec_per_km: 970.9
+    elevation_gain_m: 176.0
+    avg_power_w: null
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-07-26T15:55:26'
+    duration_delta_min: 34.1
+    duration_pct: 145.5
+    distance_delta_km: -5.26
+    distance_pct: 56.2
+    hr_zone_status: below
+    hr_avg_actual: 64
+    hr_avg_target:
+    - 121
+    - 133
+    pace_status: slower
+    pace_avg_actual: '16:11'
+    pace_target:
+    - '5:30'
+    - '6:00'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - substitute
+    - duration_long
+    - hr_below
+    - pace_slow
+    substitute_sport: walking
+    planned_discipline: running
+    verdict: substituted walking for running — counts as training, but not the planned stimulus.
   adaptations: []
   time_of_day: morning
 - id: 2026-07-27_mon_rest
