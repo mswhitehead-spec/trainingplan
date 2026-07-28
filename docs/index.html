@@ -66,13 +66,13 @@
   <div class="kpi"><div class="label">Days to race</div>
     <div class="value ok">54</div></div>
   <div class="kpi"><div class="label">Sessions done</div>
-    <div class="value ok">11 / 88</div></div>
+    <div class="value ok">12 / 88</div></div>
   <div class="kpi"><div class="label">Total km (run)</div>
     <div class="value">46 km</div></div>
   <div class="kpi"><div class="label">Total time</div>
-    <div class="value">8.2 h</div></div>
+    <div class="value">9.2 h</div></div>
   <div class="kpi"><div class="label">Last sync</div>
-    <div class="value" style="font-size:0.9rem;margin-top:4px">2026-07-28 09:33</div></div>
+    <div class="value" style="font-size:0.9rem;margin-top:4px">2026-07-28 12:57</div></div>
 </div>
 
 <h2>Activity (all completed sessions)</h2>
@@ -390,17 +390,17 @@
           <td class="verdict"> </td>
         </tr>
 
-        <tr class="row-planned">
+        <tr class="row-completed">
           <td class="date-cell">Tue 28 Jul</td>
-          <td>💪 strength</td>
-          <td><span class="badge plan">planned</span></td>
-          <td>40m → —</td>
-          <td>— → —</td>
-          <td>— <span class="dim">(—)</span></td>
+          <td>💪 Lunch Walk</td>
+          <td><span class="badge done">✓ done</span></td>
+          <td>40m → 56m</td>
+          <td>— → 3.9 km</td>
+          <td>61 <span class="dim">(—)</span></td>
           <td>—</td>
+          <td>44 m</td>
           <td>—</td>
-          <td>—</td>
-          <td class="verdict"> </td>
+          <td class="verdict">substituted walking for strength — counts as training, but not the planned stimulus. <span class="flag">substitute</span> <span class="flag">duration_long</span></td>
         </tr>
 
         <tr class="row-planned">
@@ -1264,12 +1264,13 @@
 <tr><td>W29 (Jul 21)</td><td>2</td><td>7 km</td><td>1h10m</td></tr>
 <tr><td>W29 (Jul 22)</td><td>1</td><td>0 km</td><td>30m</td></tr>
 <tr><td>W29 (Jul 26)</td><td>1</td><td>7 km</td><td>1h49m</td></tr>
+<tr><td>W30 (Jul 28)</td><td>1</td><td>4 km</td><td>56m</td></tr>
 </tbody>
 </table>
 </div>
 
 <script>
-const data = {"labels": ["2026-07-11", "2026-07-14", "2026-07-14", "2026-07-15", "2026-07-16", "2026-07-16", "2026-07-19", "2026-07-21", "2026-07-21", "2026-07-22", "2026-07-26"], "hr": [122, 130, 53, 56, 124, 71, 125, 126, 55, 59, 64], "dist": [6.52, 5.42, null, null, 8.1, null, 12.01, 7.01, null, null, 6.74], "dur": [0.65, 0.5, 0.5, 0.62, 0.78, 0.53, 1.16, 0.64, 0.52, 0.5, 1.82]};
+const data = {"labels": ["2026-07-11", "2026-07-14", "2026-07-14", "2026-07-15", "2026-07-16", "2026-07-16", "2026-07-19", "2026-07-21", "2026-07-21", "2026-07-22", "2026-07-26", "2026-07-28"], "hr": [122, 130, 53, 56, 124, 71, 125, 126, 55, 59, 64, 61], "dist": [6.52, 5.42, null, null, 8.1, null, 12.01, 7.01, null, null, 6.74, 3.87], "dur": [0.65, 0.5, 0.5, 0.62, 0.78, 0.53, 1.16, 0.64, 0.52, 0.5, 1.82, 0.94]};
 const ctx = document.getElementById('chart').getContext('2d');
 
 // Inline minimal Chart.js — drawn with Canvas API directly (no CDN dependency).

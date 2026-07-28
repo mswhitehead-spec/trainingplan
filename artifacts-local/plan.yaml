@@ -809,9 +809,42 @@ sessions:
     Masters athletes keep strength or lose it (Friel, Fast After 50) — this is injury armor for the running
     build. Evening slot: the morning run is done, so quality stays on quality days and easy days stay
     easy.'
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '19498274359'
+    name: Lunch Walk
+    start_time_local: '2026-07-28T11:05:20'
+    date: '2026-07-28'
+    sport: walking
+    duration_min: 56.3
+    distance_km: 3.87
+    avg_hr: 61
+    max_hr: 85
+    avg_pace_sec_per_km: 874.1
+    elevation_gain_m: 44.0
+    avg_power_w: null
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-07-28T12:57:33'
+    duration_delta_min: 16.3
+    duration_pct: 140.8
+    distance_delta_km: null
+    distance_pct: null
+    hr_zone_status: unknown
+    hr_avg_actual: 61
+    hr_avg_target: null
+    pace_status: unknown
+    pace_avg_actual: '14:34'
+    pace_target: null
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - substitute
+    - duration_long
+    substitute_sport: walking
+    planned_discipline: strength
+    verdict: substituted walking for strength — counts as training, but not the planned stimulus.
   adaptations: []
   time_of_day: evening
 - id: 2026-07-29_wed_easy-spin
