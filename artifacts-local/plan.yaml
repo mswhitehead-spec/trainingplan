@@ -788,9 +788,41 @@ sessions:
   notes: 'Threshold intro: 15 min easy, then 2 x 10 min at 4:55-5:00/km (HR drifting to ~145) with 5 min
     easy between, 5 min easy to finish. Comfortably hard — short phrases, not sentences. This is last
     year''s race pace; it should feel manageable.'
-  status: missed
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '19518785408'
+    name: Evening Run
+    start_time_local: '2026-07-29T19:43:51'
+    date: '2026-07-29'
+    sport: running
+    duration_min: 44.4
+    distance_km: 7.21
+    avg_hr: 128
+    max_hr: 147
+    avg_pace_sec_per_km: 369.4
+    elevation_gain_m: 58.0
+    avg_power_w: 374.7
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-07-29T20:14:34'
+    duration_delta_min: -0.6
+    duration_pct: 98.7
+    distance_delta_km: -0.79
+    distance_pct: 90.1
+    hr_zone_status: unknown
+    hr_avg_actual: 128
+    hr_avg_target: null
+    pace_status: slower
+    pace_avg_actual: '6:09'
+    pace_target:
+    - '4:55'
+    - '5:00'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - pace_slow
+    verdict: on target.
   adaptations:
   - rule_id: frequent_missed_sessions
     field: type
