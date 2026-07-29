@@ -887,9 +887,39 @@ sessions:
   targets:
     duration_min: 30
   notes: Easy walk only — active recovery.
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '19514253971'
+    name: Lunch Walk
+    start_time_local: '2026-07-29T11:52:24'
+    date: '2026-07-29'
+    sport: walking
+    duration_min: 96.2
+    distance_km: 5.61
+    avg_hr: 72
+    max_hr: 113
+    avg_pace_sec_per_km: 1028.8
+    elevation_gain_m: 125.0
+    avg_power_w: null
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-07-29T13:04:59'
+    duration_delta_min: 66.2
+    duration_pct: 320.7
+    distance_delta_km: null
+    distance_pct: null
+    hr_zone_status: unknown
+    hr_avg_actual: 72
+    hr_avg_target: null
+    pace_status: unknown
+    pace_avg_actual: '17:09'
+    pace_target: null
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - duration_long
+    verdict: exceeded target duration.
   adaptations: []
   time_of_day: evening
 - id: 2026-07-31_fri_rest
