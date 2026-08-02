@@ -995,9 +995,43 @@ sessions:
     - '5:30'
     - '6:00'
   notes: Long run 13 km. Relaxed Z2 — 5:40-6:00/km territory. Fuel if over 90 min (gel at 45 min).
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '19566351795'
+    name: Morning Run
+    start_time_local: '2026-08-02T10:34:15'
+    date: '2026-08-02'
+    sport: running
+    duration_min: 33.5
+    distance_km: 6.02
+    avg_hr: 124
+    max_hr: 146
+    avg_pace_sec_per_km: 333.7
+    elevation_gain_m: 25.0
+    avg_power_w: 402.8
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-08-02T12:09:08'
+    duration_delta_min: -46.5
+    duration_pct: 41.9
+    distance_delta_km: -6.98
+    distance_pct: 46.3
+    hr_zone_status: in_zone
+    hr_avg_actual: 124
+    hr_avg_target:
+    - 121
+    - 133
+    pace_status: in_range
+    pace_avg_actual: '5:34'
+    pace_target:
+    - '5:30'
+    - '6:00'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - duration_short
+    verdict: session cut short of target duration.
   adaptations: []
   time_of_day: morning
 - id: 2026-08-03_mon_rest
