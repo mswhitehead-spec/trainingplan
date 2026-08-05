@@ -1144,9 +1144,44 @@ sessions:
     - '6:10'
   notes: Easy conversational pace. Z2 ceiling — slower is fine. Finish with 4 x 20 s strides (fast but
     relaxed, full recovery) — neuromuscular sharpness, not fatigue.
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '19607619027'
+    name: Morning Run
+    start_time_local: '2026-08-05T07:09:01'
+    date: '2026-08-05'
+    sport: running
+    duration_min: 30.6
+    distance_km: 5.75
+    avg_hr: 132
+    max_hr: 150
+    avg_pace_sec_per_km: 319.1
+    elevation_gain_m: 45.0
+    avg_power_w: 433.1
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-08-05T09:33:09'
+    duration_delta_min: -9.4
+    duration_pct: 76.5
+    distance_delta_km: -1.25
+    distance_pct: 82.1
+    hr_zone_status: in_zone
+    hr_avg_actual: 132
+    hr_avg_target:
+    - 121
+    - 133
+    pace_status: faster
+    pace_avg_actual: '5:19'
+    pace_target:
+    - '5:40'
+    - '6:10'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - duration_short
+    - pace_fast
+    verdict: session cut short of target duration.
   adaptations: []
   time_of_day: morning
 - id: 2026-08-07_fri_rest
