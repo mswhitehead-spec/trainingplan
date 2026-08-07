@@ -14,11 +14,16 @@ sources:
 athlete:
   name: Michael
   age: 51
-  max_hr: 168
+  # Measured, not age-derived. Highest HR in four months of Strava (Apr-Aug
+  # 2026) is 154; best 20-min sustained is 144. The old 168 came from 220-age
+  # and made Z5 unreachable. Keep in sync with config.yaml (gitignored).
+  max_hr: 158
+  lthr: 146                # threshold HR — the anchor for the running zones
+  max_hr_cycling: 150      # bike max runs ~8 bpm under run max
   vo2max: 50
   resting_hr: 50
-  primary_sport: cycling
-  secondary_sport: running
+  primary_sport: running   # the sport of the current A-event (half, 2026-09-20)
+  secondary_sport: cycling
 
 zone_method: karvonen
 
