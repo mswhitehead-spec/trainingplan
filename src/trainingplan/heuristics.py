@@ -291,6 +291,12 @@ def rule_frequent_missed_sessions(ctx: RuleContext, params: dict) -> list[Propos
     count toward the missed total — those represent training that did happen,
     just not the planned discipline.
 
+    Missed REST days don't count either. A rest session flips to "missed"
+    whenever the athlete trains on it, which is the opposite of the
+    under-recovery signal this rule looks for. Over Jul-Aug 2026 rest days
+    ran 0/8 adherence, so counting them fired the rule nearly every week and
+    quietly demoted the block's quality sessions.
+
     Sources: Foster 1998 (monotony / strain); Friel CTB Ch. 9 (consistency
     as the foundation of progress); common coaching practice on illness/
     travel returns.
@@ -303,6 +309,7 @@ def rule_frequent_missed_sessions(ctx: RuleContext, params: dict) -> list[Propos
     recent_misses = [
         s for s in ctx.missed_recent
         if date.fromisoformat(s["date"]).toordinal() >= cutoff
+        and s.get("discipline") != "rest"
     ]
     if len(recent_misses) < threshold:
         return []

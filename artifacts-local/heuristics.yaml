@@ -95,6 +95,10 @@ rules:
       to easy_endurance. Repeated missed sessions usually signal illness,
       stress, or travel; adding intensity into that context is risky.
       Substituted sessions (cross-sport completed) don't count as misses.
+      Neither do missed REST days — a rest session is marked missed when the
+      athlete trains on it, which means more training, not less. Counting
+      them made this rule fire nearly every week (rest adherence was 0/8 over
+      Jul-Aug 2026) and strip the intensity out of the block.
     params:
       missed_threshold: 3
       lookback_days: 7

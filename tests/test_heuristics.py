@@ -276,6 +276,50 @@ def test_frequent_missed_no_fire_below_threshold():
     assert changes == []
 
 
+def test_frequent_missed_ignores_missed_rest_days():
+    """A missed rest day is the opposite of an under-recovery signal.
+
+    Status flips to 'missed' whenever the athlete trains on a planned rest
+    day, so counting those means the rule fires on weeks he trained MORE
+    than planned and demotes the next quality session as a reward.
+    """
+    plan = _plan(
+        _session("r1", "2026-06-01", discipline="rest", type_="rest",
+                 status="missed"),
+        _session("r2", "2026-06-03", discipline="rest", type_="rest",
+                 status="missed"),
+        _session("r3", "2026-06-05", discipline="rest", type_="rest",
+                 status="missed"),
+        _session("s_tempo", "2026-06-08", type_="tempo", duration_min=60),
+        _session("s_race", RACE_DATE, type_="race"),
+    )
+    ctx = build_context(plan, today=date(2026, 6, 7))
+    changes = rule_frequent_missed_sessions(
+        ctx, {"missed_threshold": 3, "lookback_days": 7}
+    )
+    assert changes == []
+
+
+def test_frequent_missed_counts_real_sessions_alongside_rest():
+    """Rest days are excluded, but genuine misses still push it over."""
+    plan = _plan(
+        _session("r1", "2026-06-01", discipline="rest", type_="rest",
+                 status="missed"),
+        _session("m1", "2026-06-02", status="missed"),
+        _session("m2", "2026-06-03", status="missed"),
+        _session("m3", "2026-06-05", status="missed"),
+        _session("s_tempo", "2026-06-08", type_="tempo", duration_min=60),
+        _session("s_race", RACE_DATE, type_="race"),
+    )
+    ctx = build_context(plan, today=date(2026, 6, 7))
+    changes = rule_frequent_missed_sessions(
+        ctx, {"missed_threshold": 3, "lookback_days": 7}
+    )
+    assert len(changes) == 1
+    assert changes[0].session_id == "s_tempo"
+    assert "3 sessions missed" in changes[0].reason
+
+
 def test_frequent_missed_ignores_old_misses_outside_lookback():
     plan = _plan(
         # Three misses but all before the 7-day lookback window.
