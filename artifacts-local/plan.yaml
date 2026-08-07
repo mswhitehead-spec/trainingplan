@@ -1561,7 +1561,7 @@ sessions:
 - id: 2026-08-25_tue_intervals
   date: '2026-08-25'
   discipline: running
-  type: intervals
+  type: easy_endurance
   targets:
     duration_min: 55
     distance_km: 10
@@ -1572,10 +1572,16 @@ sessions:
   notes: 'Speed: 4 x 1 km at 4:55-5:05/km with 400 m jog between. Faster than race pace on purpose — it
     makes 5:18 feel like cruising. Full warmup (15 min + 4 strides) before rep 1. Stop at 3 reps if form
     falls apart; quality over count.'
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: frequent_missed_sessions
+    field: type
+    from: intervals
+    to: easy_endurance
+    reason: 3 sessions missed in the last 7 days — prioritize consistency over intensity until rhythm
+      returns (Friel CTB Ch. 9).
   time_of_day: morning
 - id: 2026-08-25_tue_strength
   date: '2026-08-25'
