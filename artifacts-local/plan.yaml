@@ -1236,9 +1236,44 @@ sessions:
     - '6:20'
   notes: Long run 9 km, easy at 5:50-6:20/km. First step back to real long-run volume — deliberately modest
     because the back is three weeks old and last week was 16 km total. Nothing to prove today.
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '19658875580'
+    name: Evening Run
+    start_time_local: '2026-08-08T20:06:20'
+    date: '2026-08-08'
+    sport: running
+    duration_min: 35.1
+    distance_km: 5.78
+    avg_hr: 116
+    max_hr: 130
+    avg_pace_sec_per_km: 365.1
+    elevation_gain_m: 14.0
+    avg_power_w: 392.4
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-08-08T19:33:36'
+    duration_delta_min: -19.9
+    duration_pct: 63.8
+    distance_delta_km: -3.22
+    distance_pct: 64.2
+    hr_zone_status: below
+    hr_avg_actual: 116
+    hr_avg_target:
+    - 120
+    - 132
+    pace_status: in_range
+    pace_avg_actual: '6:05'
+    pace_target:
+    - '5:50'
+    - '6:20'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - duration_short
+    - hr_below
+    verdict: session cut short of target duration.
   adaptations: []
   time_of_day: morning
 - id: 2026-08-10_mon_rest
