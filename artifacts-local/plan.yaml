@@ -1204,7 +1204,7 @@ sessions:
     \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 116 — cycling\
     \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
     \ recovery."
-  status: planned
+  status: missed
   actual: null
   analysis: null
   adaptations: []
@@ -1712,7 +1712,7 @@ sessions:
 - id: 2026-09-01_tue_intervals
   date: '2026-09-01'
   discipline: running
-  type: intervals
+  type: easy_endurance
   targets:
     duration_min: 55
     distance_km: 10
@@ -1723,10 +1723,16 @@ sessions:
   notes: '*** CHECKPOINT *** 3 x 2 km at 5:15-5:19/km with 2 min jog between. This decides the race plan.
     Controlled and repeatable → race at 5:18 (1:52); if it felt genuinely easy, 5:12 and a PR are on.
     A fight → race at 5:30 (1:56). Decide today, not at km 16.'
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: frequent_missed_sessions
+    field: type
+    from: intervals
+    to: easy_endurance
+    reason: 3 sessions missed in the last 7 days — prioritize consistency over intensity until rhythm
+      returns (Friel CTB Ch. 9).
   time_of_day: morning
 - id: 2026-09-01_tue_strength
   date: '2026-09-01'
