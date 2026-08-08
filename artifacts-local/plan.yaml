@@ -1864,7 +1864,7 @@ sessions:
 - id: 2026-09-08_tue_tempo
   date: '2026-09-08'
   discipline: running
-  type: tempo
+  type: easy_endurance
   targets:
     duration_min: 45
     distance_km: 8
@@ -1874,10 +1874,16 @@ sessions:
     - '5:22'
   notes: '2 x 10 min at race pace (per the Sep 1 decision: 5:18 or 5:30), 5 min easy between. Volume drops
     in taper; intensity stays — that is what preserves sharpness.'
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: frequent_missed_sessions
+    field: type
+    from: tempo
+    to: easy_endurance
+    reason: 3 sessions missed in the last 7 days — prioritize consistency over intensity until rhythm
+      returns (Friel CTB Ch. 9).
   time_of_day: morning
 - id: 2026-09-08_tue_strength
   date: '2026-09-08'
