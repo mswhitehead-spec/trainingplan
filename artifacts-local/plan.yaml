@@ -1303,9 +1303,41 @@ sessions:
   notes: 'Threshold intro: 15 min easy, then 2 x 8 min at 5:10-5:20/km with 4 min easy between, 8 min
     easy to finish. Comfortably hard — short phrases, not sentences. HR will settle around 142-146. First
     real quality since the back; if anything twinges, stop at one rep.'
-  status: adjusted
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '19690337363'
+    name: Morning Run
+    start_time_local: '2026-08-11T06:05:10'
+    date: '2026-08-11'
+    sport: running
+    duration_min: 38.9
+    distance_km: 6.53
+    avg_hr: 123
+    max_hr: 136
+    avg_pace_sec_per_km: 357.4
+    elevation_gain_m: 27.0
+    avg_power_w: 343.7
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-08-11T08:06:47'
+    duration_delta_min: -6.1
+    duration_pct: 86.4
+    distance_delta_km: -1.47
+    distance_pct: 81.6
+    hr_zone_status: unknown
+    hr_avg_actual: 123
+    hr_avg_target: null
+    pace_status: slower
+    pace_avg_actual: '5:57'
+    pace_target:
+    - '5:10'
+    - '5:20'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - pace_slow
+    verdict: on target.
   adaptations:
   - rule_id: frequent_missed_sessions
     field: type
