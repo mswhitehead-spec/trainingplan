@@ -1431,7 +1431,7 @@ sessions:
     that is the point. Easy runs at 5:45 sit only ~30 s/km off threshold, so they cost recovery without
     adding base. HR ceiling 132 (Z2). Finish with 4 x 20 s strides (fast but relaxed, full recovery) —
     neuromuscular sharpness, not fatigue.
-  status: planned
+  status: missed
   actual: null
   analysis: null
   adaptations: []
@@ -1445,7 +1445,7 @@ sessions:
   notes: Yoga / mobility — hips, hamstrings, thoracic spine. You built a nine-session habit 13-21 Jul
     and it stopped when the back locked up. Restarting it is cheap insurance on the only thing that can
     end this block.
-  status: planned
+  status: missed
   actual: null
   analysis: null
   adaptations: []
