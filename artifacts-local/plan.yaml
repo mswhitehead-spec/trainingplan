@@ -1859,7 +1859,7 @@ sessions:
 - id: 2026-08-30_sun_long-run
   date: '2026-08-30'
   discipline: running
-  type: long_endurance
+  type: easy_endurance
   targets:
     duration_min: 100
     distance_km: 16
@@ -1870,10 +1870,15 @@ sessions:
     - '6:20'
   notes: Long run 16 km, relaxed at 5:50-6:20/km. Fuel if over 90 min (gel at 45 min). This is the session
     the whole rebuild turns on — you have run over 10 km exactly twice since April.
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: two_hot_sessions
+    field: type
+    from: long_endurance
+    to: easy_endurance
+    reason: last two sessions both ran hot — back off one cycle.
   time_of_day: morning
 - id: 2026-08-31_mon_rest
   date: '2026-08-31'
