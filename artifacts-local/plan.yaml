@@ -2015,7 +2015,7 @@ sessions:
 - id: 2026-09-06_sun_long-run
   date: '2026-09-06'
   discipline: running
-  type: long_endurance
+  type: easy_endurance
   targets:
     duration_min: 105
     distance_km: 17
@@ -2027,10 +2027,15 @@ sessions:
   notes: 'Peak long run — 17 km. Easy at 5:50-6:20/km for the first 14, then last 3 km at goal pace (5:18).
     Fuel like race day: gel at 45 and 90 min. Longest run of the block; after today the hay is in the
     barn.'
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: two_hot_sessions
+    field: type
+    from: long_endurance
+    to: easy_endurance
+    reason: last two sessions both ran hot — back off one cycle.
   time_of_day: morning
 - id: 2026-09-07_mon_rest
   date: '2026-09-07'
