@@ -2171,7 +2171,7 @@ sessions:
 - id: 2026-09-13_sun_long-run
   date: '2026-09-13'
   discipline: running
-  type: long_endurance
+  type: easy_endurance
   targets:
     duration_min: 60
     distance_km: 10
@@ -2182,10 +2182,15 @@ sessions:
     - '6:20'
   notes: 'Taper long run — 10 km easy, no pace work. Rehearse the race-morning routine: same breakfast,
     same start time if you can.'
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: two_hot_sessions
+    field: type
+    from: long_endurance
+    to: easy_endurance
+    reason: last two sessions both ran hot — back off one cycle.
   time_of_day: morning
 - id: 2026-09-14_mon_rest
   date: '2026-09-14'

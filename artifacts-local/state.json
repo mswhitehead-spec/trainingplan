@@ -1,6 +1,6 @@
 {
-  "last_sync_at": "2026-08-15T19:24:34",
-  "last_proposal_id": "2026-08-15T19-24",
+  "last_sync_at": "2026-08-16T03:39:32",
+  "last_proposal_id": "2026-08-16T03-39",
   "applied_adaptations": [
     {
       "proposal_id": "2026-05-26T21-00",
@@ -317,7 +317,21 @@
           "reason": "last two sessions both ran hot — back off one cycle."
         }
       ]
+    },
+    {
+      "proposal_id": "2026-08-16T03-39",
+      "accepted_at": "2026-08-16T03:39:33",
+      "changes": [
+        {
+          "session_id": "2026-09-13_sun_long-run",
+          "field_path": "type",
+          "old_value": "long_endurance",
+          "new_value": "easy_endurance",
+          "rule_id": "two_hot_sessions",
+          "reason": "last two sessions both ran hot — back off one cycle."
+        }
+      ]
     }
   ],
-  "last_email_date": "2026-08-15"
+  "last_email_date": "2026-08-16"
 }
