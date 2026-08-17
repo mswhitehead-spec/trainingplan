@@ -1595,9 +1595,42 @@ sessions:
     - '5:20'
   notes: 3 x 8 min at 5:10-5:20/km with 3 min easy between. Even effort across all three — the third rep
     should feel like the first. Threshold volume is what moves race pace.
-  status: adjusted
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '19774582730'
+    name: Morning Run
+    start_time_local: '2026-08-17T06:04:43'
+    date: '2026-08-17'
+    sport: running
+    duration_min: 21.7
+    distance_km: 3.32
+    avg_hr: 100
+    max_hr: 119
+    avg_pace_sec_per_km: 392.8
+    elevation_gain_m: 7.0
+    avg_power_w: 294.9
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-08-17T07:48:11'
+    duration_delta_min: -28.3
+    duration_pct: 43.4
+    distance_delta_km: -5.68
+    distance_pct: 36.9
+    hr_zone_status: unknown
+    hr_avg_actual: 100
+    hr_avg_target: null
+    pace_status: slower
+    pace_avg_actual: '6:33'
+    pace_target:
+    - '5:10'
+    - '5:20'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - duration_short
+    - pace_slow
+    verdict: session cut short of target duration.
   adaptations:
   - rule_id: frequent_missed_sessions
     field: type
