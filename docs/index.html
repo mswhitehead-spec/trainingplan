@@ -66,13 +66,13 @@
   <div class="kpi"><div class="label">Days to race</div>
     <div class="value ok">31</div></div>
   <div class="kpi"><div class="label">Sessions done</div>
-    <div class="value ok">24 / 89</div></div>
+    <div class="value ok">25 / 89</div></div>
   <div class="kpi"><div class="label">Total km (run)</div>
-    <div class="value">101 km</div></div>
+    <div class="value">106 km</div></div>
   <div class="kpi"><div class="label">Total time</div>
-    <div class="value">17.3 h</div></div>
+    <div class="value">17.7 h</div></div>
   <div class="kpi"><div class="label">Last sync</div>
-    <div class="value" style="font-size:0.9rem;margin-top:4px">2026-08-20 03:38</div></div>
+    <div class="value" style="font-size:0.9rem;margin-top:4px">2026-08-20 07:36</div></div>
 </div>
 
 <h2>Activity (all completed sessions)</h2>
@@ -741,17 +741,17 @@
           <td class="verdict">on target. </td>
         </tr>
 
-        <tr class="row-missed">
+        <tr class="row-completed">
           <td class="date-cell">Wed 19 Aug</td>
-          <td>🏃 easy run</td>
-          <td><span class="badge miss">✗ missed</span></td>
-          <td>35m → —</td>
-          <td>6 km → —</td>
-          <td>— <span class="dim">(Z2)</span></td>
+          <td>🏃 Morning Run</td>
+          <td><span class="badge done">✓ done</span></td>
+          <td>35m → 27m</td>
+          <td>6 km → 4.6 km</td>
+          <td>116 <span class="dim">(Z2)</span></td>
           <td>—</td>
-          <td>—</td>
-          <td>—</td>
-          <td class="verdict"> </td>
+          <td>25 m</td>
+          <td>335 W</td>
+          <td class="verdict">session cut short of target duration. <span class="flag">duration_short</span> <span class="flag">hr_below</span> <span class="flag">pace_fast</span></td>
         </tr>
 
         <tr class="row-planned">
@@ -1288,12 +1288,13 @@
 <tr><td>W32 (Aug 15)</td><td>1</td><td>4 km</td><td>25m</td></tr>
 <tr><td>W32 (Aug 16)</td><td>1</td><td>8 km</td><td>49m</td></tr>
 <tr><td>W33 (Aug 18)</td><td>2</td><td>3 km</td><td>1h03m</td></tr>
+<tr><td>W33 (Aug 19)</td><td>1</td><td>5 km</td><td>27m</td></tr>
 </tbody>
 </table>
 </div>
 
 <script>
-const data = {"labels": ["2026-07-11", "2026-07-14", "2026-07-14", "2026-07-15", "2026-07-16", "2026-07-16", "2026-07-19", "2026-07-21", "2026-07-21", "2026-07-22", "2026-07-26", "2026-07-28", "2026-07-28", "2026-07-30", "2026-08-02", "2026-08-04", "2026-08-06", "2026-08-09", "2026-08-11", "2026-08-12", "2026-08-15", "2026-08-16", "2026-08-18", "2026-08-18"], "hr": [122, 130, 55, 56, 124, 71, 125, 126, 55, 59, 64, 128, 61, 72, 124, 110, 132, 116, 123, 127, 132, 134, 100, 78], "dist": [6.52, 5.42, null, null, 8.1, null, 12.01, 7.01, null, null, 6.74, 7.21, 3.87, 5.61, 6.02, 3.85, 5.75, 5.78, 6.53, 8.53, 4.13, 8.49, 3.32, null], "dur": [0.65, 0.5, 0.61, 0.62, 0.78, 0.53, 1.16, 0.64, 0.44, 0.5, 1.82, 0.74, 0.94, 1.6, 0.56, 0.38, 0.51, 0.59, 0.65, 0.79, 0.42, 0.82, 0.36, 0.69]};
+const data = {"labels": ["2026-07-11", "2026-07-14", "2026-07-14", "2026-07-15", "2026-07-16", "2026-07-16", "2026-07-19", "2026-07-21", "2026-07-21", "2026-07-22", "2026-07-26", "2026-07-28", "2026-07-28", "2026-07-30", "2026-08-02", "2026-08-04", "2026-08-06", "2026-08-09", "2026-08-11", "2026-08-12", "2026-08-15", "2026-08-16", "2026-08-18", "2026-08-18", "2026-08-19"], "hr": [122, 130, 55, 56, 124, 71, 125, 126, 55, 59, 64, 128, 61, 72, 124, 110, 132, 116, 123, 127, 132, 134, 100, 78, 116], "dist": [6.52, 5.42, null, null, 8.1, null, 12.01, 7.01, null, null, 6.74, 7.21, 3.87, 5.61, 6.02, 3.85, 5.75, 5.78, 6.53, 8.53, 4.13, 8.49, 3.32, null, 4.56], "dur": [0.65, 0.5, 0.61, 0.62, 0.78, 0.53, 1.16, 0.64, 0.44, 0.5, 1.82, 0.74, 0.94, 1.6, 0.56, 0.38, 0.51, 0.59, 0.65, 0.79, 0.42, 0.82, 0.36, 0.69, 0.45]};
 const ctx = document.getElementById('chart').getContext('2d');
 
 // Inline minimal Chart.js — drawn with Canvas API directly (no CDN dependency).
