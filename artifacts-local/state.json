@@ -1,5 +1,5 @@
 {
-  "last_sync_at": "2026-08-26T21:42:51",
+  "last_sync_at": "2026-08-27T13:20:56",
   "last_proposal_id": "2026-08-16T03-39",
   "applied_adaptations": [
     {
@@ -333,5 +333,5 @@
       ]
     }
   ],
-  "last_email_date": "2026-08-26"
+  "last_email_date": "2026-08-27"
 }
