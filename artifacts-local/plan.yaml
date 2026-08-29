@@ -2107,9 +2107,44 @@ sessions:
     - '6:20'
   notes: Long run 16 km, relaxed at 5:50-6:20/km. Fuel if over 90 min (gel at 45 min). This is the session
     the whole rebuild turns on — you have run over 10 km exactly twice since April.
-  status: adjusted
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '19946339996'
+    name: Lunch Run
+    start_time_local: '2026-08-29T11:11:26'
+    date: '2026-08-29'
+    sport: running
+    duration_min: 37.5
+    distance_km: 6.65
+    avg_hr: 130
+    max_hr: 144
+    avg_pace_sec_per_km: 338.5
+    elevation_gain_m: 24.0
+    avg_power_w: 403.0
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-08-29T12:56:03'
+    duration_delta_min: -62.5
+    duration_pct: 37.5
+    distance_delta_km: -9.35
+    distance_pct: 41.6
+    hr_zone_status: in_zone
+    hr_avg_actual: 130
+    hr_avg_target:
+    - 120
+    - 132
+    pace_status: faster
+    pace_avg_actual: '5:38'
+    pace_target:
+    - '5:50'
+    - '6:20'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - duration_short
+    - pace_fast
+    verdict: session cut short of target duration.
   adaptations:
   - rule_id: two_hot_sessions
     field: type
