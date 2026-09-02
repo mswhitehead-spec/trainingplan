@@ -2252,9 +2252,44 @@ sessions:
   notes: Easy conversational pace, 6:00-6:30/km. This is slower than you have been running easy days —
     that is the point. Easy runs at 5:45 sit only ~30 s/km off threshold, so they cost recovery without
     adding base. HR ceiling 132 (Z2).
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '20001716980'
+    name: Morning Run
+    start_time_local: '2026-09-02T08:38:11'
+    date: '2026-09-02'
+    sport: running
+    duration_min: 30.9
+    distance_km: 5.19
+    avg_hr: 117
+    max_hr: 128
+    avg_pace_sec_per_km: 357.3
+    elevation_gain_m: 14.0
+    avg_power_w: 381.4
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-09-02T11:55:17'
+    duration_delta_min: 0.9
+    duration_pct: 103.0
+    distance_delta_km: 0.19
+    distance_pct: 103.8
+    hr_zone_status: below
+    hr_avg_actual: 117
+    hr_avg_target:
+    - 120
+    - 132
+    pace_status: faster
+    pace_avg_actual: '5:57'
+    pace_target:
+    - '6:00'
+    - '6:30'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - hr_below
+    - pace_fast
+    verdict: faster than the target pace range — easy days protect the quality days; save it for Tuesday.
   adaptations: []
   time_of_day: morning
 - id: 2026-09-03_thu_easy-run
