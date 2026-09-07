@@ -2473,9 +2473,42 @@ sessions:
     - '5:22'
   notes: '2 x 10 min at race pace (per the Sep 1 decision: 5:18 or 5:30), 5 min easy between. Volume drops
     in taper; intensity stays — that is what preserves sharpness.'
-  status: adjusted
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '20078218723'
+    name: Evening Run
+    start_time_local: '2026-09-07T19:53:17'
+    date: '2026-09-07'
+    sport: running
+    duration_min: 30.4
+    distance_km: 4.61
+    avg_hr: 115
+    max_hr: 126
+    avg_pace_sec_per_km: 396.2
+    elevation_gain_m: 14.0
+    avg_power_w: 304.0
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-09-07T18:55:36'
+    duration_delta_min: -14.6
+    duration_pct: 67.6
+    distance_delta_km: -3.39
+    distance_pct: 57.6
+    hr_zone_status: unknown
+    hr_avg_actual: 115
+    hr_avg_target: null
+    pace_status: slower
+    pace_avg_actual: '6:36'
+    pace_target:
+    - '5:15'
+    - '5:22'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - duration_short
+    - pace_slow
+    verdict: session cut short of target duration.
   adaptations:
   - rule_id: frequent_missed_sessions
     field: type
