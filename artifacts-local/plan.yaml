@@ -2599,9 +2599,44 @@ sessions:
     that is the point. Easy runs at 5:45 sit only ~30 s/km off threshold, so they cost recovery without
     adding base. HR ceiling 132 (Z2). Finish with 4 x 20 s strides (fast but relaxed, full recovery) —
     neuromuscular sharpness, not fatigue.
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '20111801760'
+    name: Morning Run
+    start_time_local: '2026-09-10T06:04:31'
+    date: '2026-09-10'
+    sport: running
+    duration_min: 20.2
+    distance_km: 3.33
+    avg_hr: 110
+    max_hr: 127
+    avg_pace_sec_per_km: 362.8
+    elevation_gain_m: 10.0
+    avg_power_w: 386.9
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-09-10T07:38:23'
+    duration_delta_min: -9.8
+    duration_pct: 67.3
+    distance_delta_km: -1.67
+    distance_pct: 66.6
+    hr_zone_status: below
+    hr_avg_actual: 110
+    hr_avg_target:
+    - 120
+    - 132
+    pace_status: in_range
+    pace_avg_actual: '6:03'
+    pace_target:
+    - '6:00'
+    - '6:30'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - duration_short
+    - hr_below
+    verdict: session cut short of target duration.
   adaptations: []
   time_of_day: morning
 - id: 2026-09-10_thu_mobility
