@@ -1,6 +1,6 @@
 {
-  "last_sync_at": "2026-09-10T14:56:36",
-  "last_proposal_id": "2026-08-16T03-39",
+  "last_sync_at": "2026-09-10T17:57:35",
+  "last_proposal_id": "2026-09-10T17-57",
   "applied_adaptations": [
     {
       "proposal_id": "2026-05-26T21-00",
@@ -329,6 +329,20 @@
           "new_value": "easy_endurance",
           "rule_id": "two_hot_sessions",
           "reason": "last two sessions both ran hot — back off one cycle."
+        }
+      ]
+    },
+    {
+      "proposal_id": "2026-09-10T17-57",
+      "accepted_at": "2026-09-10T17:57:36",
+      "changes": [
+        {
+          "session_id": "2026-09-11_fri_rest",
+          "field_path": "type",
+          "old_value": "rest",
+          "new_value": "recovery",
+          "rule_id": "duration_overreach",
+          "reason": "last session (2026-09-10) overreached planned duration by 206% — supercompensation needs a recovery day (Friel CTB Ch. 6)."
         }
       ]
     }
