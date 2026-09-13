@@ -2714,7 +2714,7 @@ sessions:
     \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 110 — cycling\
     \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
     \ recovery."
-  status: adjusted
+  status: missed
   actual: null
   analysis: null
   adaptations:
@@ -2727,7 +2727,7 @@ sessions:
 - id: 2026-09-13_sun_long-run
   date: '2026-09-13'
   discipline: running
-  type: easy_endurance
+  type: recovery
   targets:
     duration_min: 60
     distance_km: 10
@@ -2747,6 +2747,12 @@ sessions:
     from: long_endurance
     to: easy_endurance
     reason: last two sessions both ran hot — back off one cycle.
+  - rule_id: duration_overreach
+    field: type
+    from: easy_endurance
+    to: recovery
+    reason: last session (2026-09-10) overreached planned duration by 206% — supercompensation needs a
+      recovery day (Friel CTB Ch. 6).
   time_of_day: morning
 - id: 2026-09-14_mon_rest
   date: '2026-09-14'

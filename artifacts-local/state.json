@@ -1,6 +1,6 @@
 {
-  "last_sync_at": "2026-09-12T21:19:22",
-  "last_proposal_id": "2026-09-12T07-27",
+  "last_sync_at": "2026-09-13T07:47:04",
+  "last_proposal_id": "2026-09-13T07-47",
   "applied_adaptations": [
     {
       "proposal_id": "2026-05-26T21-00",
@@ -359,7 +359,21 @@
           "reason": "last session (2026-09-10) overreached planned duration by 206% — supercompensation needs a recovery day (Friel CTB Ch. 6)."
         }
       ]
+    },
+    {
+      "proposal_id": "2026-09-13T07-47",
+      "accepted_at": "2026-09-13T07:47:05",
+      "changes": [
+        {
+          "session_id": "2026-09-13_sun_long-run",
+          "field_path": "type",
+          "old_value": "easy_endurance",
+          "new_value": "recovery",
+          "rule_id": "duration_overreach",
+          "reason": "last session (2026-09-10) overreached planned duration by 206% — supercompensation needs a recovery day (Friel CTB Ch. 6)."
+        }
+      ]
     }
   ],
-  "last_email_date": "2026-09-12"
+  "last_email_date": "2026-09-13"
 }
