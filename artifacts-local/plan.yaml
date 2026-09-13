@@ -2738,9 +2738,45 @@ sessions:
     - '6:20'
   notes: 'Taper long run — 10 km easy, no pace work. Rehearse the race-morning routine: same breakfast,
     same start time if you can.'
-  status: adjusted
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '20159390310'
+    name: Afternoon Run
+    start_time_local: '2026-09-13T15:01:18'
+    date: '2026-09-13'
+    sport: running
+    duration_min: 81.7
+    distance_km: 14.17
+    avg_hr: 133
+    max_hr: 151
+    avg_pace_sec_per_km: 346.0
+    elevation_gain_m: 103.0
+    avg_power_w: 413.1
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-09-13T14:53:17'
+    duration_delta_min: 21.7
+    duration_pct: 136.2
+    distance_delta_km: 4.17
+    distance_pct: 141.7
+    hr_zone_status: above
+    hr_avg_actual: 133
+    hr_avg_target:
+    - 120
+    - 132
+    pace_status: faster
+    pace_avg_actual: '5:46'
+    pace_target:
+    - '5:50'
+    - '6:20'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - duration_long
+    - hr_above
+    - pace_fast
+    verdict: exceeded target duration.
   adaptations:
   - rule_id: two_hot_sessions
     field: type
