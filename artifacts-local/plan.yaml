@@ -2866,7 +2866,7 @@ sessions:
     \ keep it genuinely easy:\n  - 30-45 min walk\n  - 20-30 min very easy spin (HR under 110 — cycling\
     \ Z1)\n  - 15-20 min mobility / stretching\nNothing that touches Z2. Optional movement must not cost\
     \ recovery."
-  status: planned
+  status: missed
   actual: null
   analysis: null
   adaptations: []
@@ -2882,21 +2882,59 @@ sessions:
     - '5:20'
   notes: 'Openers: 15 min easy, then 3 x 60 s at race effort (5:10-5:20/km) with 2 min easy between, 5
     min easy to finish. Wake the legs up, don''t tire them. You should finish feeling springy.'
-  status: planned
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '20209507600'
+    name: Morning Run - intervals
+    start_time_local: '2026-09-17T06:58:29'
+    date: '2026-09-17'
+    sport: running
+    duration_min: 58.5
+    distance_km: 10.37
+    avg_hr: 129
+    max_hr: 150
+    avg_pace_sec_per_km: 338.9
+    elevation_gain_m: 28.0
+    avg_power_w: 362.1
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-09-17T08:10:29'
+    duration_delta_min: 33.5
+    duration_pct: 234.0
+    distance_delta_km: 6.37
+    distance_pct: 259.2
+    hr_zone_status: unknown
+    hr_avg_actual: 129
+    hr_avg_target: null
+    pace_status: unknown
+    pace_avg_actual: '5:39'
+    pace_target:
+    - '5:10'
+    - '5:20'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - duration_long
+    verdict: exceeded target duration.
   adaptations: []
   time_of_day: morning
 - id: 2026-09-18_fri_rest
   date: '2026-09-18'
   discipline: rest
-  type: rest
+  type: recovery
   targets: {}
   notes: Rest. Carb intake up, hydrate, sleep is the workout. Lay out race kit tonight.
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: duration_overreach
+    field: type
+    from: rest
+    to: recovery
+    reason: last session (2026-09-17) overreached planned duration by 134% — supercompensation needs a
+      recovery day (Friel CTB Ch. 6).
 - id: 2026-09-19_sat_shakeout
   date: '2026-09-19'
   discipline: running
