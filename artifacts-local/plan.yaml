@@ -2925,7 +2925,7 @@ sessions:
   type: recovery
   targets: {}
   notes: Rest. Carb intake up, hydrate, sleep is the workout. Lay out race kit tonight.
-  status: adjusted
+  status: missed
   actual: null
   analysis: null
   adaptations:
@@ -2938,7 +2938,7 @@ sessions:
 - id: 2026-09-19_sat_shakeout
   date: '2026-09-19'
   discipline: running
-  type: easy_run
+  type: recovery
   targets:
     duration_min: 20
     distance_km: 3
@@ -2948,10 +2948,16 @@ sessions:
     - '6:00'
     - '6:30'
   notes: 3 km shakeout + 2 strides. Legs itchy is exactly right — save it.
-  status: planned
+  status: adjusted
   actual: null
   analysis: null
-  adaptations: []
+  adaptations:
+  - rule_id: duration_overreach
+    field: type
+    from: easy_run
+    to: recovery
+    reason: last session (2026-09-17) overreached planned duration by 134% — supercompensation needs a
+      recovery day (Friel CTB Ch. 6).
   time_of_day: morning
 - id: 2026-09-20_sun_half-marathon
   date: '2026-09-20'
