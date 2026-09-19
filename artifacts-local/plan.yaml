@@ -2948,9 +2948,44 @@ sessions:
     - '6:00'
     - '6:30'
   notes: 3 km shakeout + 2 strides. Legs itchy is exactly right — save it.
-  status: adjusted
-  actual: null
-  analysis: null
+  status: completed
+  actual:
+    source: strava_api
+    source_id: '20236332149'
+    name: Morning Run
+    start_time_local: '2026-09-19T08:34:58'
+    date: '2026-09-19'
+    sport: running
+    duration_min: 89.2
+    distance_km: 15.63
+    avg_hr: 132
+    max_hr: 142
+    avg_pace_sec_per_km: 342.6
+    elevation_gain_m: 67.0
+    avg_power_w: 412.2
+    perceived_effort: null
+  analysis:
+    computed_at: '2026-09-19T11:45:15'
+    duration_delta_min: 69.2
+    duration_pct: 446.0
+    distance_delta_km: 12.63
+    distance_pct: 521.0
+    hr_zone_status: in_zone
+    hr_avg_actual: 132
+    hr_avg_target:
+    - 120
+    - 132
+    pace_status: faster
+    pace_avg_actual: '5:43'
+    pace_target:
+    - '6:00'
+    - '6:30'
+    elevation_delta_m: null
+    hr_drift_pct: null
+    flags:
+    - duration_long
+    - pace_fast
+    verdict: exceeded target duration.
   adaptations:
   - rule_id: duration_overreach
     field: type
